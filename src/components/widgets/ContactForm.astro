@@ -1,0 +1,253 @@
+---
+// Contact section with the GoHighLevel form embed. The iframe is injected on
+// approach (IntersectionObserver), then form_embed.js is loaded to auto-resize
+// it. Injecting-then-loading (rather than native loading="lazy") avoids the
+// init race that blanks the form, and keeps GHL's third-party code off the
+// critical path for a clean Best-Practices score.
+import { site } from "@data/site";
+import Icon from "@components/ui/Icon.astro";
+
+interface Props {
+  id?: string;
+  heading?: string;
+  description?: string;
+  cardTitle?: string;
+  cardSub?: string;
+  formName?: string;
+  trustItems?: string[];
+  /** Override the GHL form embed (e.g. the dedicated contact page's form). */
+  formSrc?: string;
+  formId?: string;
+}
+const {
+  id = "contact",
+  heading = "Get Your Free Estimate",
+  description = "Call or text for a fast response, or send us the details below and we'll get right back to you. For a tree that's already down, call anytime — we're on 24/7.",
+  cardTitle = "Request a Free Estimate",
+  cardSub = "No cost, no pressure. We'll get right back to you.",
+  formName = "Contact",
+  trustItems = [
+    "Free, no-pressure on-site estimates",
+    "We answer 24/7 for storm & ice emergencies",
+    "Fully insured on every job",
+    "Careful work near homes & power lines",
+    "Complete cleanup and haul-away included",
+  ],
+  formSrc = site.ghlFormSrc,
+  formId = site.ghlFormId,
+} = Astro.props;
+---
+
+<section id={id} class="cpr-section contact">
+  <div class="cpr-section-inner contact__inner">
+    <div class="contact__intro">
+      <h2 class="contact__heading">{heading}</h2>
+      <p class="contact__desc">{description}</p>
+
+      <a href={site.phoneHref} class="contact__phone">
+        <span class="contact__phone-icon"><Icon name="phone" /></span>
+        <span>
+          <span class="contact__phone-label">{site.hours}</span>
+          <span class="contact__phone-num">{site.phoneDisplay}</span>
+        </span>
+      </a>
+
+      <ul class="contact__trust">
+        {trustItems.map((t) => (<li><Icon name="check" /> <span set:html={t} /></li>))}
+      </ul>
+    </div>
+
+    <div class="contact__card">
+      <h3 class="contact__card-title">{cardTitle}</h3>
+      <p class="contact__card-sub">{cardSub}</p>
+      <!-- GoHighLevel inline form, loaded on approach. The real iframe is
+           injected by IntersectionObserver ~400px before it scrolls into
+           view, then form_embed.js is loaded *after* injection. Order matters:
+           loading the resize helper only once the frame already exists avoids
+           the init race that blanks the form (the failure mode of native
+           loading="lazy"). Keeps GHL's third-party code off the critical path
+           for a clean Best-Practices score, with no click and no layout shift
+           (the mount reserves the height). -->
+      <div
+        class="contact__formmount"
+        data-ghl-form
+        data-src={formSrc}
+        data-form-id={formId}
+        data-form-name={formName}
+      ></div>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    var mounts = document.querySelectorAll("[data-ghl-form]");
+    if (!mounts.length) return;
+
+    var embedRequested = false;
+    function loadEmbedScript() {
+      // form_embed.js drives the iframe auto-resize. Load it once, and only
+      // after a frame exists, so it never races an un-loaded iframe.
+      if (embedRequested) return;
+      embedRequested = true;
+      var s = document.createElement("script");
+      s.src = "https://link.msgsndr.com/js/form_embed.js";
+      document.body.appendChild(s);
+    }
+
+    function activate(mount) {
+      if (mount.dataset.loaded) return;
+      mount.dataset.loaded = "1";
+      var frameId = "inline-" + mount.dataset.formId;
+      var f = document.createElement("iframe");
+      f.src = mount.dataset.src;
+      f.title = mount.dataset.formName || "Contact form";
+      f.id = frameId;
+      f.className = "contact__iframe";
+      // A JS-injected element doesn't carry Astro's scoped-style attribute, so
+      // the scoped `.contact__iframe` CSS won't match it. Set the layout
+      // essentials inline — especially width: an iframe's intrinsic width is
+      // ~300px, which is what rendered the form too narrow.
+      f.style.cssText =
+        "display:block;width:100%;min-height:600px;border:none;border-radius:3px;background:#f8fafc";
+      // Faithful GHL inline-embed attributes (id === data-layout-iframe-id is
+      // the handshake form_embed.js uses to resize the frame to its content).
+      f.setAttribute("data-layout", "{'id':'INLINE'}");
+      f.setAttribute("data-trigger-type", "alwaysShow");
+      f.setAttribute("data-activation-type", "alwaysActivated");
+      f.setAttribute("data-deactivation-type", "neverDeactivate");
+      f.setAttribute("data-form-name", mount.dataset.formName || "");
+      f.setAttribute("data-height", "600");
+      f.setAttribute("data-layout-iframe-id", frameId);
+      f.setAttribute("data-form-id", mount.dataset.formId);
+      mount.appendChild(f);
+      loadEmbedScript();
+    }
+
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              activate(e.target);
+              io.unobserve(e.target);
+            }
+          });
+        },
+        // Start loading ~400px before the form reaches the viewport so it's
+        // ready by the time the visitor scrolls to it.
+        { rootMargin: "400px" }
+      );
+      mounts.forEach(function (m) {
+        io.observe(m);
+      });
+    } else {
+      // No IntersectionObserver: just load them.
+      mounts.forEach(activate);
+    }
+  })();
+</script>
+
+<style>
+  .contact {
+    background: var(--cpr-bg-light);
+  }
+  .contact__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--cpr-space-2xl);
+    align-items: start;
+  }
+  .contact__heading {
+    font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+  }
+  .contact__desc {
+    margin-top: var(--cpr-space-md);
+    font-size: 1.1rem;
+    color: var(--cpr-slate);
+    max-width: 46ch;
+  }
+  .contact__phone {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.85rem;
+    margin-top: var(--cpr-space-xl);
+  }
+  .contact__phone-icon {
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background: var(--cpr-red);
+    color: var(--cpr-white);
+    font-size: 1.35rem;
+  }
+  .contact__phone-label {
+    display: block;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--cpr-slate);
+    font-weight: 600;
+  }
+  .contact__phone-num {
+    display: block;
+    font-size: 1.55rem;
+    font-weight: 800;
+    color: var(--cpr-navy);
+  }
+  .contact__trust {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-top: var(--cpr-space-xl);
+    color: var(--cpr-slate);
+    font-weight: 600;
+  }
+  .contact__trust li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .contact__trust :global(svg) {
+    color: #16a34a;
+  }
+  .contact__card {
+    background: var(--cpr-white);
+    border-radius: var(--cpr-radius-lg);
+    box-shadow: var(--cpr-shadow-md);
+    padding: var(--cpr-space-xl);
+  }
+  .contact__card-title {
+    font-size: 1.4rem;
+  }
+  .contact__card-sub {
+    margin: 0.4rem 0 var(--cpr-space-md);
+    color: var(--cpr-slate-muted);
+  }
+  /* Reserve the form's height before the iframe is injected so loading it
+     causes no layout shift (keeps CLS at 0). */
+  .contact__formmount {
+    min-height: 600px;
+    border-radius: 3px;
+    background: #f8fafc;
+  }
+  .contact__iframe {
+    display: block;
+    width: 100%;
+    /* Reserved height to minimize layout shift; form_embed.js resizes to the
+       real content height once loaded. */
+    height: 600px;
+    min-height: 600px;
+    border: none;
+    border-radius: 3px;
+    background: #f8fafc;
+  }
+  @media (max-width: 860px) {
+    .contact__inner {
+      grid-template-columns: 1fr;
+      gap: var(--cpr-space-xl);
+    }
+  }
+</style>

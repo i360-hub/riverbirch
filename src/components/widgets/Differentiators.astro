@@ -1,0 +1,146 @@
+---
+// Differentiator section (cpr-diff) + the Others-vs-CPR comparison table (cpr-compare).
+// These are one visual unit on the live site, so they live in one component.
+import SectionHeader from "@components/ui/SectionHeader.astro";
+import Icon from "@components/ui/Icon.astro";
+
+type Cell = "yes" | "no" | "sometimes";
+interface Row {
+  feature: string;
+  others: Cell;
+  cpr: Cell;
+}
+interface Props {
+  title?: string;
+  sub?: string;
+  othersLabel?: string;
+  cprLabel?: string;
+  rows?: Row[];
+}
+const {
+  title = "What Sets a Full-Service Restoration Company Apart",
+  sub = "Most companies only do the emergency part — they rip out the wet materials and leave. Then you hire a second contractor for drywall, a third for paint, a fourth for flooring. River Birch Tree Service does the whole job with one crew and one project manager.",
+  othersLabel = "Other Crews",
+  cprLabel = "River Birch",
+  rows = [
+    { feature: "Emergency water extraction", others: "yes", cpr: "yes" },
+    { feature: "Structural drying with daily monitoring", others: "sometimes", cpr: "yes" },
+    { feature: "Drywall, paint, trim & flooring rebuild", others: "no", cpr: "yes" },
+    { feature: "IICRC certified technicians", others: "sometimes", cpr: "yes" },
+    { feature: "Thermal imaging on every job", others: "no", cpr: "yes" },
+    { feature: "Direct insurance billing (Xactimate)", others: "sometimes", cpr: "yes" },
+    { feature: "One dedicated project manager", others: "no", cpr: "yes" },
+    { feature: "Licensed in SC and NC", others: "sometimes", cpr: "yes" },
+    { feature: "Locally owned & operated", others: "sometimes", cpr: "yes" },
+  ],
+} = Astro.props;
+
+const cell = (v: Cell) =>
+  v === "yes"
+    ? { icon: "check", cls: "is-yes", label: "Yes" }
+    : v === "no"
+      ? { icon: "x", cls: "is-no", label: "No" }
+      : { icon: "minus", cls: "is-maybe", label: "Sometimes" };
+---
+
+<section class="cpr-section diff">
+  <div class="cpr-section-inner">
+    <SectionHeader title={title} sub={sub} />
+
+    <div class="diff__tablewrap">
+      <table class="diff__table">
+        <thead>
+          <tr>
+            <th scope="col" class="diff__feat">What you get</th>
+            <th scope="col">{othersLabel}</th>
+            <th scope="col" class="diff__cpr">{cprLabel}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            rows.map((r) => {
+              const o = cell(r.others);
+              const c = cell(r.cpr);
+              return (
+                <tr>
+                  <th scope="row" class="diff__feat" set:html={r.feature} />
+                  <td>
+                    <span class:list={["diff__mark", o.cls]} title={o.label}><Icon name={o.icon} /></span>
+                  </td>
+                  <td class="diff__cpr">
+                    <span class:list={["diff__mark", c.cls]} title={c.label}><Icon name={c.icon} /></span>
+                  </td>
+                </tr>
+              );
+            })
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<style>
+  .diff__tablewrap {
+    max-width: 820px;
+    margin-inline: auto;
+    overflow-x: auto;
+    border-radius: var(--cpr-radius-lg);
+    box-shadow: var(--cpr-shadow-md);
+  }
+  .diff__table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--cpr-white);
+    min-width: 480px;
+  }
+  .diff__table th,
+  .diff__table td {
+    padding: 1rem 1.25rem;
+    text-align: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+  }
+  .diff__table thead th {
+    background: var(--cpr-navy);
+    color: var(--cpr-white);
+    font-size: 0.95rem;
+  }
+  .diff__feat {
+    text-align: left;
+    font-weight: 600;
+    color: var(--cpr-navy);
+  }
+  thead .diff__feat {
+    color: var(--cpr-white);
+  }
+  .diff__cpr {
+    background: rgba(47, 122, 67, 0.06);
+  }
+  thead .diff__cpr {
+    background: var(--cpr-red);
+  }
+  .diff__mark {
+    display: inline-grid;
+    place-items: center;
+    width: 1.9rem;
+    height: 1.9rem;
+    border-radius: 50%;
+    font-size: 0.9rem;
+  }
+  .diff__mark.is-yes {
+    background: rgba(22, 163, 74, 0.12);
+    color: #16a34a;
+  }
+  .diff__mark.is-no {
+    background: rgba(148, 163, 184, 0.18);
+    color: var(--cpr-slate-muted);
+  }
+  .diff__mark.is-maybe {
+    background: rgba(245, 166, 35, 0.15);
+    color: #d18700;
+  }
+  .diff__table tbody tr:last-child th,
+  .diff__table tbody tr:last-child td {
+    border-bottom: none;
+  }
+</style>

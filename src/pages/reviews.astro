@@ -1,0 +1,35 @@
+---
+// Reviews page — 5.0★ Google visual, all testimonials, and the Read / Leave-a-
+// review Google links wired now. Review TEXT is fill-later (see reviews.ts).
+import BaseLayout from "@layouts/BaseLayout.astro";
+import PageHeader from "@components/layout/PageHeader.astro";
+import Reviews from "@components/widgets/Reviews.astro";
+import FinalCta from "@components/widgets/FinalCta.astro";
+import ContactForm from "@components/widgets/ContactForm.astro";
+import { reviews } from "@data/reviews";
+import { site } from "@data/site";
+
+const origin = Astro.site!.toString().replace(/\/$/, "");
+const title = "Reviews | River Birch Tree Service — 5.0★ on Google";
+const description =
+  "River Birch Tree Service is rated 5.0★ on Google by High Country homeowners for tree removal, storm cleanup, and more. Read our Google reviews or leave your own.";
+---
+
+<BaseLayout title={title} description={description} path="/reviews" breadcrumb={[{ name: "Reviews", item: `${origin}/reviews` }]}>
+  <PageHeader
+    eyebrow="5-Star Rated on Google"
+    title="What Our High Country Neighbors Say"
+    subtitle="River Birch Tree Service is proud to hold a 5.0★ rating on Google across Deep Gap, Boone, Blowing Rock, and Watauga County. Read our reviews on Google — or, if we've worked for you, we'd love it if you left one."
+    ctas={[
+      { label: "Read Our Google Reviews", href: site.googleReviewsUrl, variant: "primary" },
+      { label: "Leave a Review", href: site.googleWriteReviewUrl, variant: "outline" },
+    ]}
+  />
+  <Reviews
+    reviews={reviews}
+    title="5.0★ on Google"
+    sub="Real reviews from homeowners across the High Country. New reviews appear on our live Google profile as they come in."
+  />
+  <FinalCta heading="Ready to See Why We're 5-Star Rated? Let's Talk." />
+  <ContactForm formName="Reviews Page Estimate Request" />
+</BaseLayout>

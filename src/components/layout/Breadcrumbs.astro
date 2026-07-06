@@ -1,0 +1,78 @@
+---
+// Visible breadcrumb trail — mirrors the BreadcrumbList JSON-LD emitted by
+// BaseLayout. Home is prepended automatically; the last crumb is the current
+// page (not a link). Hrefs are reduced to path-only so they work on any host.
+interface Props {
+  items: { name: string; item: string }[];
+}
+const { items } = Astro.props;
+const rel = (u: string) => {
+  try {
+    return new URL(u).pathname || "/";
+  } catch {
+    return u;
+  }
+};
+const trail = [{ name: "Home", item: "/" }, ...items];
+---
+
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <ol class="breadcrumbs__list">
+    {
+      trail.map((b, i) => {
+        const last = i === trail.length - 1;
+        return (
+          <li class="breadcrumbs__item">
+            {last ? (
+              <span class="breadcrumbs__current" aria-current="page">{b.name}</span>
+            ) : (
+              <>
+                <a class="breadcrumbs__link" href={rel(b.item)}>{b.name}</a>
+                <span class="breadcrumbs__sep" aria-hidden="true">›</span>
+              </>
+            )}
+          </li>
+        );
+      })
+    }
+  </ol>
+</nav>
+
+<style>
+  .breadcrumbs {
+    background: var(--cpr-bg-light);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  }
+  .breadcrumbs__list {
+    max-width: var(--cpr-max-width);
+    margin: 0 auto;
+    padding: 0.6rem var(--cpr-space-lg);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.15rem 0.4rem;
+    list-style: none;
+    font-size: 0.82rem;
+  }
+  .breadcrumbs__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .breadcrumbs__link {
+    color: var(--cpr-slate);
+    text-decoration: none;
+  }
+  .breadcrumbs__link:hover {
+    color: var(--cpr-red-dark);
+    text-decoration: underline;
+  }
+  .breadcrumbs__sep {
+    color: var(--cpr-slate);
+    opacity: 0.55;
+  }
+  .breadcrumbs__current {
+    color: var(--cpr-ink, #1e293b);
+    font-weight: 600;
+  }
+</style>

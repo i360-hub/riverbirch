@@ -1,0 +1,25 @@
+# Cloudflare Workers (Static Assets) config.
+# This project is a purely static Astro build — no Worker script (no `main`),
+# just the prebuilt `dist/` folder served as static assets at the edge.
+# `_redirects` and `_headers` inside dist/ are honored by Workers Static Assets.
+#
+# Build command:  npm run build   (produces ./dist)
+# Deploy command: npx wrangler deploy
+
+name = "river-birch"
+compatibility_date = "2025-01-01"
+
+# Thin Worker wrapper (worker.js) that adds X-Robots-Tag: noindex ONLY on the
+# *.workers.dev preview host, so the pre-launch preview stays out of search
+# engines while the real domain indexes normally. Remove `main` +
+# `run_worker_first` to go back to pure static-asset serving if ever desired.
+main = "worker.js"
+
+[assets]
+directory = "./dist"
+# not_found_handling serves our styled 404.html for unmatched routes
+not_found_handling = "404-page"
+# Expose assets to the Worker and route every request through it first so the
+# noindex header can be applied to HTML pages (not just Worker-fallback routes).
+binding = "ASSETS"
+run_worker_first = true

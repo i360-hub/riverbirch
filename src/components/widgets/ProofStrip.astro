@@ -1,0 +1,88 @@
+---
+import Icon from "@components/ui/Icon.astro";
+
+interface Item {
+  icon: string;
+  label: string;
+  detail: string;
+}
+interface Props {
+  items?: Item[];
+}
+const {
+  items = [
+    { icon: "star", label: "5.0★ Google Rating", detail: "5-Star Rated by Local Homeowners" },
+    { icon: "shield", label: "Fully Insured", detail: "On Every Job, Every Time" },
+    { icon: "clock", label: "24/7 Emergency", detail: "Storm & Ice Response" },
+    { icon: "pin", label: "Deep Gap & Watauga County", detail: "Boone · Blowing Rock · Vilas & More" },
+  ],
+} = Astro.props;
+---
+
+<section class="proof">
+  <div class="proof__inner">
+    {
+      items.map((it) => (
+        <div class="proof__item">
+          <span class="proof__icon"><Icon name={it.icon} /></span>
+          <span class="proof__text">
+            <span class="proof__label" set:html={it.label} />
+            <span class="proof__detail" set:html={it.detail} />
+          </span>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .proof {
+    background: var(--cpr-navy);
+    color: var(--cpr-white);
+    padding: var(--cpr-space-lg);
+  }
+  .proof__inner {
+    max-width: var(--cpr-max-width);
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--cpr-space-lg);
+  }
+  .proof__item {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+  }
+  .proof__icon {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    background: rgba(200, 153, 46, 0.16);
+    color: var(--cpr-gold);
+    font-size: 1.3rem;
+    flex: none;
+  }
+  .proof__label {
+    display: block;
+    font-weight: 700;
+    font-size: 0.98rem;
+  }
+  .proof__detail {
+    display: block;
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  @media (max-width: 860px) {
+    .proof__inner {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--cpr-space-md);
+    }
+  }
+  @media (max-width: 480px) {
+    .proof__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

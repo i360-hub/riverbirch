@@ -1,0 +1,67 @@
+/*
+  Design tokens — River Birch Tree Service LLC (Deep Gap / Boone, NC).
+  Re-skinned from the Impact 360 "Smart Site" base. Palette per the brand brief:
+    - Deep forest green  #12331E  (nav, footer, headings, dark bands)
+    - Action green       #2F7A43  (primary CTA fill; white text clears WCAG AA)
+    - Gold               #C8992E  (accent — stars, rating badge, map pin, tags)
+    - Birch cream        #F3EBD4  (section backgrounds, cards, hero scrim base)
+    - Warm ink           #14140F  (body text on light)
+  The variable NAMES are inherited from the base (`--cpr-*`) so every widget
+  recolors from this one file; only the VALUES changed. `--cpr-red` is the
+  base's "accent/CTA" slot — mapped to action green here (not literally red).
+  Font is the system stack (fast; matches the Plyler's reference site).
+*/
+:root {
+  /* Brand — primary action (green) */
+  --cpr-red: #2f7a43;        /* primary CTA / accent (action green) */
+  --cpr-red-dark: #245c34;   /* CTA hover */
+  --cpr-navy: #12331e;       /* deep forest green — headings, footer, dark UI */
+  --cpr-dark: #0c2214;       /* near-black green — stat strip, hero scrim */
+
+  /* Gold accent */
+  --cpr-gold: #c8992e;
+  --cpr-gold-dark: #a87e1e;
+
+  /* Neutrals */
+  --cpr-black: #14140f;
+  --cpr-ink: #14140f;
+  --cpr-white: #ffffff;
+  --cpr-bg-light: #f3ebd4;   /* birch cream */
+  --cpr-off-white: #f7f1df;
+
+  /* Slate scale — warmed toward green-gray so it sits with the palette */
+  --cpr-slate: #45564d;
+  --cpr-slate-muted: #64756b;
+  --cpr-slate-light: #a8bcae;
+
+  /* Typography */
+  --cpr-font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Radii */
+  --cpr-radius-sm: 6px;
+  --cpr-radius-md: 8px;
+  --cpr-radius-lg: 14px;
+  --cpr-radius-pill: 999px;
+
+  /* Shadows */
+  --cpr-shadow-sm: 0 2px 8px rgba(18, 51, 30, 0.06);
+  --cpr-shadow-md: 0 4px 15px rgba(18, 51, 30, 0.12);
+  --cpr-shadow-dark: 0 4px 15px rgba(0, 0, 0, 0.2);
+  --cpr-shadow-red: 0 4px 15px rgba(47, 122, 67, 0.28);
+
+  /* Spacing scale */
+  --cpr-space-xs: 0.25rem;
+  --cpr-space-sm: 0.5rem;
+  --cpr-space-md: 1rem;
+  --cpr-space-lg: 1.5rem;
+  --cpr-space-xl: 2.5rem;
+  --cpr-space-2xl: 4rem;
+  --cpr-space-3xl: 6rem;
+
+  /* Layout */
+  --cpr-max-width: 1200px;
+  --cpr-max-width-narrow: 800px;
+
+  /* Header height (for sticky offset) */
+  --cpr-header-h: 76px;
+}

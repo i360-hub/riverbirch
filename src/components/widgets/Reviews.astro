@@ -1,0 +1,160 @@
+---
+import SectionHeader from "@components/ui/SectionHeader.astro";
+import Icon from "@components/ui/Icon.astro";
+import RatingBadge from "@components/widgets/RatingBadge.astro";
+import { featuredReviews } from "@data/reviews";
+import { site } from "@data/site";
+import type { Review } from "@data/reviews";
+
+interface Props {
+  title?: string;
+  sub?: string;
+  reviews?: Review[];
+  light?: boolean;
+}
+const {
+  title = "What Your Neighbors Are Saying",
+  sub = "Real 5-star Google reviews from homeowners across Deep Gap, Boone, and the High Country.",
+  reviews = featuredReviews,
+  light = false,
+} = Astro.props;
+---
+
+<section class:list={["cpr-section", { "cpr-section--light": light }, "reviews"]}>
+  <div class="cpr-section-inner">
+    <SectionHeader title={title} sub={sub} />
+
+    <div class="reviews__badgerow">
+      <RatingBadge light={true} label="Rated on Google" />
+    </div>
+
+    <ul class="reviews__grid" role="list">
+      {
+        reviews.map((r) => (
+          <li class="reviews__card">
+            <span class="reviews__tag">{r.tag}</span>
+            <div class="reviews__stars" role="img" aria-label={`${r.stars} out of 5 stars`}>
+              {Array.from({ length: r.stars }).map(() => (<Icon name="star" />))}
+            </div>
+            {/* PLACEHOLDER review text — replace with the real Google review (see reviews.ts) */}
+            <p class="reviews__text">{r.text}</p>
+            <div class="reviews__author">
+              <span class="reviews__initial" aria-hidden="true">{r.name.charAt(0)}</span>
+              <span>
+                <span class="reviews__name">{r.name}</span>
+                <span class="reviews__source"><Icon name="google" class="reviews__g" /> {r.source}</span>
+              </span>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="reviews__foot">
+      <a href={site.googleReviewsUrl} class="cpr-btn cpr-btn--primary cpr-btn--md" target="_blank" rel="noopener">Read Our Google Reviews <Icon name="arrow" /></a>
+      <a href={site.googleWriteReviewUrl} class="reviews__leave" target="_blank" rel="noopener">Leave a review <Icon name="arrow" /></a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .reviews__badgerow {
+    display: flex;
+    justify-content: center;
+    margin-top: calc(-1 * var(--cpr-space-lg));
+    margin-bottom: var(--cpr-space-xl);
+  }
+  .reviews__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--cpr-space-lg);
+  }
+  .reviews__card {
+    background: var(--cpr-white);
+    border: 1px solid rgba(18, 51, 30, 0.09);
+    border-radius: var(--cpr-radius-lg);
+    box-shadow: var(--cpr-shadow-sm);
+    padding: var(--cpr-space-xl);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .reviews__tag {
+    align-self: flex-start;
+    background: rgba(47, 122, 67, 0.1);
+    color: var(--cpr-red-dark);
+    font-weight: 700;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 0.3rem 0.75rem;
+    border-radius: var(--cpr-radius-pill);
+  }
+  .reviews__stars {
+    display: flex;
+    gap: 0.15rem;
+    color: var(--cpr-gold);
+    font-size: 1.05rem;
+  }
+  .reviews__text {
+    color: var(--cpr-slate);
+    line-height: 1.65;
+  }
+  .reviews__author {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: auto;
+    padding-top: var(--cpr-space-md);
+  }
+  .reviews__initial {
+    display: grid;
+    place-items: center;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 50%;
+    background: var(--cpr-navy);
+    color: var(--cpr-white);
+    font-weight: 700;
+    flex: none;
+  }
+  .reviews__name {
+    display: block;
+    font-weight: 700;
+    color: var(--cpr-navy);
+  }
+  .reviews__source {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.85rem;
+    color: var(--cpr-slate-muted);
+  }
+  .reviews__g {
+    width: 1em;
+    height: 1em;
+  }
+  .reviews__foot {
+    margin-top: var(--cpr-space-xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--cpr-space-lg);
+    flex-wrap: wrap;
+  }
+  .reviews__foot :global(.cpr-btn svg) {
+    width: 1.05em;
+    height: 1.05em;
+  }
+  .reviews__leave {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-weight: 700;
+    color: var(--cpr-red);
+  }
+  .reviews__leave :global(svg) {
+    width: 1em;
+    height: 1em;
+  }
+</style>

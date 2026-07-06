@@ -1,0 +1,166 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import SectionHeader from "@components/ui/SectionHeader.astro";
+import Button from "@components/ui/Button.astro";
+import Icon from "@components/ui/Icon.astro";
+import { site } from "@data/site";
+
+interface Step {
+  title: string;
+  text: string;
+  /** Optional differentiator caption (e.g. the FLIR thermal-imaging callout). */
+  caption?: string;
+  /** Optional proof image for this step (e.g. the FLIR thermal-camera photo). */
+  image?: ImageMetadata;
+  imageAlt?: string;
+}
+interface Props {
+  title?: string;
+  sub?: string;
+  steps?: Step[];
+  ctaLabel?: string;
+  ctaButtonLabel?: string;
+}
+const {
+  title = "How Professional Water Damage Restoration Works",
+  sub = "A clear, five-step process — from the first phone call to the final walkthrough.",
+  ctaLabel,
+  steps = [
+    { title: "Stop the Source First", text: "Before anything else, we shut off the water so no more comes in — then we start extraction." },
+    { title: "Find Every Wet Spot", text: "Thermal imaging finds water behind walls that you can't see, so nothing gets left to rot or grow mold." },
+    { title: "Pull Out the Water and Dry It", text: "Truck-mounted extractors remove standing water; commercial dehumidifiers and air movers dry the structure." },
+    { title: "Daily Checks and Insurance Photos", text: "We log moisture readings every day and document everything with photos your adjuster needs." },
+    { title: "Tear Out, Rebuild, and Verify", text: "We remove what can't be saved, rebuild drywall, paint, trim and flooring, and confirm it's dry before we finish." },
+  ],
+  ctaButtonLabel = `Call Now: ${site.phoneDisplay}`,
+} = Astro.props;
+---
+
+<section class="cpr-section process">
+  <div class="cpr-section-inner">
+    <SectionHeader title={title} sub={sub} />
+
+    <ol class="process__list" role="list">
+      {
+        steps.map((s, i) => (
+          <li class="process__step">
+            <span class="process__num">{i + 1}</span>
+            <div class="process__content">
+              <h3 class="process__title">{s.title}</h3>
+              <p class="process__text">{s.text}</p>
+              {s.caption && (
+                <p class="process__caption">
+                  <Icon name="check" /> <span set:html={s.caption} />
+                </p>
+              )}
+              {s.image && (
+                <Image
+                  class="process__img"
+                  src={s.image}
+                  alt={s.imageAlt ?? ""}
+                  widths={[320, 480]}
+                  sizes="(max-width: 560px) 88vw, 340px"
+                  loading="lazy"
+                />
+              )}
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+
+    <div class="process__cta">
+      {ctaLabel && <p class="process__ctalabel" set:html={ctaLabel} />}
+      <Button href={site.phoneHref} variant="call" size="lg">{ctaButtonLabel}</Button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .process__list {
+    display: grid;
+    gap: var(--cpr-space-lg);
+    max-width: 820px;
+    margin-inline: auto;
+    counter-reset: step;
+  }
+  .process__step {
+    display: flex;
+    gap: var(--cpr-space-lg);
+    align-items: flex-start;
+    background: var(--cpr-white);
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    border-radius: var(--cpr-radius-lg);
+    padding: var(--cpr-space-lg) var(--cpr-space-xl);
+    box-shadow: var(--cpr-shadow-sm);
+  }
+  .process__num {
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background: var(--cpr-red);
+    color: var(--cpr-white);
+    font-weight: 800;
+    font-size: 1.25rem;
+    flex: none;
+  }
+  .process__title {
+    font-size: 1.2rem;
+    margin-bottom: 0.3rem;
+  }
+  .process__text {
+    color: var(--cpr-slate);
+    line-height: 1.6;
+  }
+  .process__caption {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 0.6rem;
+    padding: 0.35rem 0.75rem;
+    background: rgba(47, 122, 67, 0.08);
+    border-radius: var(--cpr-radius-md);
+    color: var(--cpr-red-dark, var(--cpr-red));
+    font-weight: 600;
+    font-size: 0.92rem;
+    line-height: 1.4;
+  }
+  .process__caption :global(svg) {
+    width: 1.05em;
+    height: 1.05em;
+    color: var(--cpr-red);
+    flex: none;
+  }
+  .process__img {
+    display: block;
+    width: 100%;
+    max-width: 340px;
+    height: auto;
+    margin-top: var(--cpr-space-md);
+    border-radius: var(--cpr-radius-md);
+    box-shadow: var(--cpr-shadow-sm);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+  }
+  .process__cta {
+    margin-top: var(--cpr-space-2xl);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--cpr-space-md);
+  }
+  .process__ctalabel {
+    color: var(--cpr-slate);
+    font-weight: 600;
+    max-width: 48ch;
+  }
+  @media (max-width: 560px) {
+    .process__step {
+      padding: var(--cpr-space-md) var(--cpr-space-lg);
+      gap: var(--cpr-space-md);
+    }
+  }
+</style>

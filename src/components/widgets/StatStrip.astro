@@ -1,0 +1,84 @@
+---
+// Tier-2 city stat strip (cpr-stat-strip). Stats are per-city data (rainfall,
+// response time, flood risk, etc.), passed in from locations.ts.
+interface Stat {
+  number: string;
+  label: string;
+}
+interface Props {
+  stats?: Stat[];
+}
+const {
+  stats = [
+    { number: "24/7", label: "Emergency Response" },
+    { number: "25-35 min", label: "Response Time" },
+    { number: "40+", label: "5-Star Reviews" },
+    { number: "SC & NC", label: "Licensed" },
+  ],
+} = Astro.props;
+---
+
+<section class="stat-strip">
+  <div class="stat-strip__inner" style={`--n:${stats.length}`}>
+    {
+      stats.map((s) => (
+        <div class="stat-strip__item">
+          <span class="stat-strip__num">{s.number}</span>
+          <span class="stat-strip__label">{s.label}</span>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  /* Rounded dark "stat callout" card centered in the content column —
+     matches the live site (dark navy card, red numbers, flush dividers). */
+  .stat-strip {
+    padding: 0 var(--cpr-space-lg);
+  }
+  .stat-strip__inner {
+    max-width: var(--cpr-max-width-narrow);
+    margin: 2.5rem auto;
+    display: grid;
+    grid-template-columns: repeat(var(--n, 4), 1fr);
+    background: var(--cpr-dark);
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+  }
+  .stat-strip__item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1.5rem 1rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .stat-strip__item:first-child {
+    border-left: none;
+  }
+  .stat-strip__num {
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    font-weight: 800;
+    color: var(--cpr-gold);
+    line-height: 1.1;
+  }
+  .stat-strip__label {
+    font-size: clamp(0.75rem, 1.5vw, 0.88rem);
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.8);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  @media (max-width: 640px) {
+    .stat-strip__inner {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .stat-strip__item:nth-child(2) {
+      border-left: none;
+    }
+    .stat-strip__item:nth-child(n + 3) {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+  }
+</style>

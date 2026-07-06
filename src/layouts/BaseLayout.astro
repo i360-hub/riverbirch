@@ -1,0 +1,227 @@
+---
+import "@styles/global.css";
+import { site } from "@data/site";
+import Header from "@components/layout/Header.astro";
+import Footer from "@components/layout/Footer.astro";
+import MobileStickyCall from "@components/layout/MobileStickyCall.astro";
+import Breadcrumbs from "@components/layout/Breadcrumbs.astro";
+import Analytics from "@components/layout/Analytics.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  /** Path only, e.g. "/tree-removal". Canonical is built from site. */
+  path?: string;
+  ogImage?: string;
+  /** Extra JSON-LD objects (FAQPage, Service, etc.) merged into the graph. */
+  schema?: object[];
+  /** Breadcrumb trail (excluding Home, which is prepended). Emits BreadcrumbList. */
+  breadcrumb?: { name: string; item: string }[];
+  bodyClass?: string;
+  /** noindex,nofollow — for pages like thank-you that shouldn't be indexed. */
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  path = Astro.url.pathname,
+  ogImage = "/og-default.jpg",
+  schema = [],
+  breadcrumb,
+  bodyClass,
+  noindex = false,
+} = Astro.props;
+
+const canonical = new URL(path.replace(/\/$/, "") || "/", Astro.site).href;
+const ogImageUrl = new URL(ogImage, Astro.site).href;
+
+// Sitewide business entity — a LocalBusiness (Service Area Business) node present
+// on every page. Facts sourced from the verified Google Business Profile
+// (see site.schema). NOTE, per the brand brief:
+//   • NO storefront address — this is a Service Area Business (owner's home is
+//     never published). Only city/region appears, via areaServed.
+//   • NO aggregateRating and NO Review nodes. Google ignores self-serving reviews
+//     on your own site for rich results, and that markup is the one thing that
+//     would leak the review COUNT into the snippet. The live GBP carries the
+//     rating; the site only displays review text as testimonials and links out.
+const s = site.schema;
+const origin = Astro.site?.toString().replace(/\/$/, "") ?? "";
+const business = {
+  "@type": s.type,
+  "@id": `${origin}/#business`,
+  name: site.legalName,
+  legalName: site.legalName,
+  description: s.description,
+  slogan: site.tagline,
+  url: `${origin}/`,
+  telephone: site.phoneHref.replace("tel:", "+1"),
+  email: site.email,
+  founder: { "@type": "Person", name: site.owner },
+  image: `${origin}${s.image}`,
+  logo: { "@type": "ImageObject", url: `${origin}${s.logo}` },
+  priceRange: s.priceRange,
+  currenciesAccepted: "USD",
+  paymentAccepted: "Cash, Check, Credit Card",
+  foundingDate: s.foundingDate,
+  knowsLanguage: s.languages,
+  // Service Area Business: no PostalAddress with a street. We surface only the
+  // general locality so search engines still associate the business with the
+  // region, without publishing the owner's home address.
+  areaServed: [
+    {
+      "@type": "GeoCircle",
+      geoMidpoint: { "@type": "GeoCoordinates", latitude: site.geo.lat, longitude: site.geo.lng },
+      geoRadius: s.serviceRadiusMeters,
+    },
+    ...s.areaServed.map((c) => ({ "@type": "City", name: c.name, ...(c.wiki ? { sameAs: c.wiki } : {}) })),
+  ],
+  geo: { "@type": "GeoCoordinates", latitude: site.geo.lat, longitude: site.geo.lng },
+  hasMap: s.mapUrl,
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      opens: "00:00",
+      closes: "23:59",
+    },
+  ],
+  makesOffer: s.services.map((svc) => ({
+    "@type": "Offer",
+    itemOffered: { "@type": "Service", name: svc },
+  })),
+  knowsAbout: [
+    "Tree removal", "Emergency storm and ice damage tree cleanup", "Technical tree removal near homes and power lines",
+    "Land, lot and driveway clearing", "Tree trimming and pruning", "Stump grinding", "View clearing",
+  ],
+  hasCredential: [
+    { "@type": "EducationalOccupationalCredential", credentialCategory: "insurance", name: "Fully insured tree service" },
+  ],
+  sameAs: [...Object.values(site.socials), s.mapUrl],
+};
+
+// Sitewide WebSite node.
+const website = {
+  "@type": "WebSite",
+  "@id": `${origin}/#website`,
+  url: `${origin}/`,
+  name: site.name,
+  publisher: { "@id": `${origin}/#business` },
+  inLanguage: "en-US",
+};
+
+// Per-page WebPage node — Service pages reference it via mainEntityOfPage.
+const webpage: Record<string, unknown> = {
+  "@type": "WebPage",
+  "@id": `${canonical}#webpage`,
+  url: canonical,
+  name: title,
+  description,
+  isPartOf: { "@id": `${origin}/#website` },
+  about: { "@id": `${origin}/#business` },
+  primaryImageOfPage: ogImageUrl,
+  inLanguage: "en-US",
+};
+
+// Optional BreadcrumbList (Home is always position 1).
+const breadcrumbNode = breadcrumb?.length
+  ? {
+      "@type": "BreadcrumbList",
+      "@id": `${canonical}#breadcrumb`,
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: `${origin}/` },
+        ...breadcrumb.map((b, i) => ({ "@type": "ListItem", position: i + 2, name: b.name, item: b.item })),
+      ],
+    }
+  : null;
+if (breadcrumbNode) webpage.breadcrumb = { "@id": `${canonical}#breadcrumb` };
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [business, website, webpage, ...(breadcrumbNode ? [breadcrumbNode] : []), ...schema],
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <meta name="theme-color" content="#12331e" />
+    <link rel="icon" type="image/png" href="/favicon.png" sizes="512x512" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    <!-- Marketing/analytics tags — production-host only (see Analytics.astro) -->
+    <Analytics />
+  </head>
+  <body class={bodyClass}>
+    <Header />
+    <main id="main">
+      {breadcrumb && breadcrumb.length > 0 && <Breadcrumbs items={breadcrumb} />}
+      <slot />
+    </main>
+    <Footer />
+    <MobileStickyCall />
+
+    <!-- Scroll-reveal: gentle fade + rise on each section as it enters view.
+         transform/opacity only (no layout shift), one-shot, and fully skipped
+         under prefers-reduced-motion. The hero/LCP is never delayed. -->
+    <style is:global>
+      @media (prefers-reduced-motion: no-preference) {
+        .cpr-reveal {
+          opacity: 0;
+          transform: translateY(18px);
+          transition: opacity 0.55s ease, transform 0.55s ease;
+        }
+        .cpr-reveal.cpr-reveal--in {
+          opacity: 1;
+          transform: none;
+        }
+      }
+    </style>
+    <script is:inline>
+      (function () {
+        if (!("IntersectionObserver" in window)) return;
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        var kids = Array.prototype.slice.call(
+          document.querySelectorAll("#main > *")
+        );
+        kids.shift(); // never touch the first block (hero / page header)
+        var vh = window.innerHeight || document.documentElement.clientHeight;
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) {
+                e.target.classList.add("cpr-reveal--in");
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { rootMargin: "0px 0px -8% 0px" }
+        );
+        kids.forEach(function (el) {
+          if (el.getBoundingClientRect().top < vh * 0.85) return;
+          el.classList.add("cpr-reveal");
+          io.observe(el);
+        });
+      })();
+    </script>
+  </body>
+</html>

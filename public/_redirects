@@ -1,0 +1,20 @@
+# Cloudflare Pages redirects for River Birch Tree Service.
+# Format: /source  /destination  [status]   (first match wins)
+
+# --- Home ---
+/home                              /                                       301
+
+# --- Friendly / legacy service slugs -> canonical service URLs ---
+/tree-trimming                     /tree-trimming-pruning                  301
+/pruning                           /tree-trimming-pruning                  301
+/emergency-tree-service            /storm-damage-tree-removal              301
+/storm-cleanup                     /storm-damage-tree-removal              301
+/lot-clearing                      /land-clearing                          301
+/driveway-clearing                 /land-clearing                          301
+/stump-removal                     /stump-grinding                         301
+/view-enhancement                  /view-clearing                          301
+
+# --- Renamed chrome pages ---
+/contact-us                        /contact                                301
+/about                             /about-river-birch-tree-service         301
+/reviews-testimonials              /reviews                                301

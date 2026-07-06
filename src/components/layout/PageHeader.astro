@@ -1,0 +1,90 @@
+---
+// Compact page banner for non-"money" pages (About, Contact, and future
+// Phase-2 pages). Dark navy band with eyebrow + H1 + optional subtitle + CTAs.
+import Button from "@components/ui/Button.astro";
+import { site } from "@data/site";
+
+interface Cta {
+  label: string;
+  href: string;
+  variant?: "primary" | "call" | "outline" | "ghost";
+}
+interface Props {
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
+  ctas?: Cta[];
+}
+const { eyebrow, title, subtitle, ctas = [] } = Astro.props;
+---
+
+<section class="page-header">
+  <div class="page-header__inner">
+    {eyebrow && <p class="page-header__eyebrow">{eyebrow}</p>}
+    <h1 class="page-header__title" set:html={title} />
+    {subtitle && <p class="page-header__sub" set:html={subtitle} />}
+    {
+      ctas.length > 0 && (
+        <div class="page-header__ctas">
+          {ctas.map((c) => (
+            <Button href={c.href} variant={c.variant ?? "primary"} size="lg">
+              {c.label}
+            </Button>
+          ))}
+        </div>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .page-header {
+    position: relative;
+    background:
+      radial-gradient(120% 120% at 15% 0%, rgba(47, 122, 67, 0.14), transparent 55%),
+      var(--cpr-navy);
+    color: var(--cpr-white);
+    padding: clamp(3rem, 8vw, 5.5rem) var(--cpr-space-lg);
+    overflow: hidden;
+  }
+  .page-header::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--cpr-red);
+  }
+  .page-header__inner {
+    max-width: var(--cpr-max-width);
+    margin-inline: auto;
+  }
+  .page-header__eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    font-size: 0.82rem;
+    color: #e0c06a;
+    margin-bottom: 0.7rem;
+  }
+  .page-header__title {
+    color: var(--cpr-white);
+    font-size: clamp(2rem, 5vw, 3rem);
+    max-width: 20ch;
+    text-wrap: balance;
+  }
+  .page-header__sub {
+    margin-top: var(--cpr-space-md);
+    font-size: clamp(1.05rem, 2vw, 1.2rem);
+    color: rgba(255, 255, 255, 0.82);
+    max-width: 60ch;
+    line-height: 1.6;
+  }
+  .page-header__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--cpr-space-md);
+    margin-top: var(--cpr-space-xl);
+  }
+</style>

@@ -1,0 +1,52 @@
+---
+// Repeated header pattern across every widget: eyebrow + title + sub.
+interface Props {
+  eyebrow?: string;
+  title: string;
+  sub?: string;
+  align?: "center" | "left";
+  light?: boolean; // white text for dark sections
+  class?: string;
+}
+const { eyebrow, title, sub, align = "center", light = false, class: className = "" } = Astro.props;
+---
+
+<header class:list={["cpr-shead", `cpr-shead--${align}`, { "cpr-shead--light": light }, className]}>
+  {eyebrow && <p class="cpr-shead__eyebrow">{eyebrow}</p>}
+  <h2 class="cpr-shead__title" set:html={title} />
+  {sub && <p class="cpr-shead__sub" set:html={sub} />}
+</header>
+
+<style>
+  .cpr-shead {
+    max-width: 760px;
+    margin-bottom: var(--cpr-space-2xl);
+  }
+  .cpr-shead--center {
+    margin-inline: auto;
+    text-align: center;
+  }
+  .cpr-shead__eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: var(--cpr-red);
+    margin-bottom: 0.6rem;
+  }
+  .cpr-shead__title {
+    font-size: clamp(1.7rem, 3.5vw, 2.5rem);
+  }
+  .cpr-shead__sub {
+    margin-top: 0.85rem;
+    font-size: 1.075rem;
+    color: var(--cpr-slate);
+    line-height: 1.6;
+  }
+  .cpr-shead--light .cpr-shead__title {
+    color: var(--cpr-white);
+  }
+  .cpr-shead--light .cpr-shead__sub {
+    color: rgba(255, 255, 255, 0.8);
+  }
+</style>

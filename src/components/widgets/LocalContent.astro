@@ -1,0 +1,114 @@
+---
+// Renders the per-city editorial body (rich local-SEO prose) — an ordered list
+// of h2/h3/p blocks extracted from the live page. Inline links are preserved.
+import Icon from "@components/ui/Icon.astro";
+
+interface Block {
+  tag: string;
+  html: string;
+}
+interface Props {
+  blocks: Block[];
+  light?: boolean;
+}
+const { blocks: rawBlocks, light = false } = Astro.props;
+
+// Defensive guard: the Duda export left some inline anchors with an empty
+// target (href="" / href="<>"), which render as dead links. All body prose on
+// the site flows through this single component, so sanitizing here guarantees
+// no empty-href anchor can ever reach the page — real targets are set in the
+// content data; this is the last-resort net so a future export can't regress.
+const blocks = rawBlocks.map((b) => ({
+  ...b,
+  html: b.html.replace(/href=(""|"<>"|'')/g, 'href="/"'),
+}));
+
+// Group consecutive <li> blocks into a single list.
+type Node = { tag: "h2" | "h3" | "p"; html: string } | { tag: "ul"; items: string[] };
+const nodes: Node[] = [];
+for (const b of blocks) {
+  if (b.tag === "li") {
+    const last = nodes[nodes.length - 1];
+    if (last && last.tag === "ul") last.items.push(b.html);
+    else nodes.push({ tag: "ul", items: [b.html] });
+  } else {
+    nodes.push({ tag: b.tag as "h2" | "h3" | "p", html: b.html });
+  }
+}
+---
+
+<section class:list={["cpr-section", "local", { "cpr-section--light": light }]}>
+  <div class="local__inner">
+    {
+      nodes.map((n) =>
+        n.tag === "h2" ? (
+          <h2 class="local__h2" set:html={n.html} />
+        ) : n.tag === "h3" ? (
+          <h3 class="local__h3" set:html={n.html} />
+        ) : n.tag === "ul" ? (
+          <ul class="local__list" role="list">
+            {n.items.map((it) => (
+              <li><Icon name="check" /> <span set:html={it} /></li>
+            ))}
+          </ul>
+        ) : (
+          <p class="local__p" set:html={n.html} />
+        )
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .local__inner {
+    max-width: 820px;
+    margin-inline: auto;
+  }
+  .local__h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    margin-top: var(--cpr-space-2xl);
+    margin-bottom: var(--cpr-space-md);
+  }
+  .local__inner > .local__h2:first-child {
+    margin-top: 0;
+  }
+  .local__h3 {
+    font-size: 1.25rem;
+    color: var(--cpr-navy);
+    margin-top: var(--cpr-space-xl);
+    margin-bottom: 0.5rem;
+  }
+  .local__p {
+    color: var(--cpr-slate);
+    line-height: 1.75;
+    margin-bottom: var(--cpr-space-md);
+    font-size: 1.02rem;
+  }
+  .local__p :global(a) {
+    color: var(--cpr-red);
+    font-weight: 600;
+    text-decoration: underline;
+  }
+  .local__list {
+    display: grid;
+    gap: 0.6rem;
+    margin: var(--cpr-space-md) 0 var(--cpr-space-lg);
+  }
+  .local__list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    color: var(--cpr-slate);
+    line-height: 1.6;
+  }
+  .local__list :global(svg) {
+    color: #16a34a;
+    margin-top: 0.25rem;
+    flex: none;
+  }
+  .local__list :global(a) {
+    color: var(--cpr-red);
+    font-weight: 600;
+    text-decoration: underline;
+  }
+</style>

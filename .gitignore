@@ -1,0 +1,26 @@
+# build output
+dist/
+.astro/
+
+# deps
+node_modules/
+
+# env
+.env
+.env.production
+
+# os
+.DS_Store
+
+# raw source material (client photos / scrapes) — not part of the app.
+# The optimized images the build actually uses live in src/assets/images.
+gbp/
+hero/
+scrapes/
+*.montage.jpg
+
+# wrangler local state
+.wrangler/
+
+# local Claude settings
+.claude/settings.local.json

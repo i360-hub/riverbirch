@@ -1,0 +1,170 @@
+---
+// Privacy Policy — ported verbatim from the live /privacy page.
+import BaseLayout from "@layouts/BaseLayout.astro";
+import PageHeader from "@components/layout/PageHeader.astro";
+import Icon from "@components/ui/Icon.astro";
+import { site } from "@data/site";
+
+const sections = [
+  {
+    h: "Information Collection and Use",
+    p: [
+      "We collect information directly from you, such as your name, phone number, email address, and project details, when you contact us for our services. We use this information to:",
+    ],
+    list: [
+      "Respond to your inquiries",
+      "Provide the services you have requested",
+      "Send updates and information about our services",
+      "Improve our services and customer experience",
+    ],
+  },
+  {
+    h: "Text Messaging and Communications",
+    p: [
+      "By providing your phone number, you consent to receive text messages (SMS and MMS) from us for business purposes, including but not limited to service updates, reminders, and promotional messages. Standard message and data rates may apply. You can opt-out at any time by replying STOP.",
+    ],
+  },
+  {
+    h: "Sharing of Information",
+    p: [
+      "We do not sell or rent your personal information to third parties. We may share your information with service providers who perform services on our behalf, such as sending emails or texts, under strict confidentiality agreements. We may also disclose information if required by law or to protect our rights and safety or the rights and safety of others.",
+    ],
+  },
+  {
+    h: "Data Security",
+    p: [
+      "We take reasonable measures to protect the information you provide to us from loss, theft, misuse, unauthorized access, disclosure, alteration, and destruction.",
+    ],
+  },
+  {
+    h: "Changes to This Privacy Policy",
+    p: [
+      "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes.",
+    ],
+  },
+  {
+    h: "Consent",
+    p: [
+      "By using our services and providing us with your information, you consent to our collection, use, and sharing of your information as described in this Privacy Policy.",
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Privacy Policy | River Birch Tree Service | Deep Gap NC"
+  description="How River Birch Tree Service collects, uses, and protects your information. Serving Deep Gap, NC and the High Country."
+  path="/privacy"
+>
+  <PageHeader
+    eyebrow="Legal"
+    title="Privacy Policy"
+    subtitle="River Birch Tree Service is committed to protecting the privacy and security of our customers' information. Effective July 1, 2024."
+  />
+
+  <section class="cpr-section privacy">
+    <div class="privacy__inner">
+      <p class="privacy__intro">
+        River Birch Tree Service, located in Deep Gap, NC, is committed to protecting the privacy and
+        security of our customers' information. This Privacy Policy outlines our practices concerning the
+        collection, use, and sharing of your information through our communications and services.
+      </p>
+
+      <div class="privacy__contact">
+        <h2>Contact Information</h2>
+        <p>For any privacy-related questions, please contact us at:</p>
+        <ul role="list">
+          <li><Icon name="phone" /> <a href={site.phoneHref}>{site.phoneDisplay}</a></li>
+          <li><Icon name="mail" /> <a href={`mailto:${site.email}`}>{site.email}</a></li>
+          <li><Icon name="pin" /> {site.address.city}, {site.address.state} · {site.address.region}</li>
+        </ul>
+      </div>
+
+      {
+        sections.map((s) => (
+          <div class="privacy__section">
+            <h2>{s.h}</h2>
+            {s.p.map((para) => <p>{para}</p>)}
+            {s.list && (
+              <ul class="privacy__list" role="list">
+                {s.list.map((item) => (<li><Icon name="check" /> <span>{item}</span></li>))}
+              </ul>
+            )}
+          </div>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .privacy__inner {
+    max-width: var(--cpr-max-width-narrow);
+    margin-inline: auto;
+  }
+  .privacy__intro {
+    font-size: 1.1rem;
+    color: var(--cpr-slate);
+    line-height: 1.7;
+    margin-bottom: var(--cpr-space-xl);
+  }
+  .privacy__contact {
+    background: var(--cpr-bg-light);
+    border-radius: var(--cpr-radius-lg);
+    padding: var(--cpr-space-xl);
+    margin-bottom: var(--cpr-space-2xl);
+  }
+  .privacy__contact h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0.6rem;
+  }
+  .privacy__contact ul {
+    display: grid;
+    gap: 0.6rem;
+    margin-top: var(--cpr-space-md);
+  }
+  .privacy__contact li {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--cpr-slate);
+    font-weight: 600;
+  }
+  .privacy__contact :global(svg) {
+    color: var(--cpr-red);
+    flex: none;
+  }
+  .privacy__contact a {
+    color: var(--cpr-red-dark);
+    text-decoration: underline;
+  }
+  .privacy__section {
+    margin-bottom: var(--cpr-space-xl);
+  }
+  .privacy__section h2 {
+    font-size: 1.35rem;
+    margin-bottom: 0.6rem;
+  }
+  .privacy__section p {
+    color: var(--cpr-slate);
+    line-height: 1.75;
+    margin-bottom: var(--cpr-space-sm);
+  }
+  .privacy__list {
+    display: grid;
+    gap: 0.5rem;
+    margin-top: var(--cpr-space-sm);
+  }
+  .privacy__list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.55rem;
+    color: var(--cpr-slate);
+    line-height: 1.6;
+  }
+  .privacy__list :global(svg) {
+    color: #16a34a;
+    margin-top: 0.25rem;
+    flex: none;
+  }
+</style>

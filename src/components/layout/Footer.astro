@@ -1,0 +1,349 @@
+---
+import { Image } from "astro:assets";
+import { site } from "@data/site";
+import { services } from "@data/services";
+import Icon from "@components/ui/Icon.astro";
+import RatingBadge from "@components/widgets/RatingBadge.astro";
+import logo from "@assets/images/logo.png";
+
+const { address } = site;
+const trustChips = [
+  { icon: "shield", label: "Fully Insured" },
+  { icon: "clock", label: "24/7 Emergency" },
+  { icon: "check", label: "Free Estimates" },
+  { icon: "leaf", label: "Serving the High Country Since 2020" },
+];
+---
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <!-- Service Areas -->
+    <section class="site-footer__areas" aria-labelledby="footer-areas-h">
+      <h2 id="footer-areas-h" class="site-footer__h">Serving Watauga County &amp; the High Country</h2>
+      <p class="site-footer__lede">
+        Locally owned and based in Deep Gap, NC. 24/7 emergency tree service across Boone, Blowing Rock, and all of Watauga County — and surrounding areas.
+      </p>
+      <ul class="site-footer__grid">
+        {
+          site.footerServiceAreas.map((a) => (
+            <li>
+              <a href={a.href}>{a.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+      <a href="/service-areas" class="site-footer__viewall">View All Service Areas <Icon name="arrow" /></a>
+    </section>
+
+    <div class="site-footer__cols">
+      <!-- Brand / NAP (Service Area Business — no street address) -->
+      <div class="site-footer__col">
+        <a href="/" class="site-footer__logo" aria-label={`${site.name} — home`}>
+          <Image src={logo} alt={site.name} height={92} loading="lazy" />
+        </a>
+        <p class="site-footer__brand">{site.legalName}</p>
+        <address class="site-footer__nap">
+          <span class="site-footer__naplabel">Service Area Business</span>
+          {address.city}, {address.state} · {address.region}<br />
+          <span class="site-footer__sab">We come to you — no storefront to visit.</span>
+        </address>
+        <p class="site-footer__hours"><Icon name="clock" /> {site.hours}</p>
+        <a href={site.phoneHref} class="site-footer__phone">{site.phoneDisplay}</a>
+        <div class="site-footer__contactlinks">
+          <a href={`mailto:${site.email}`}><Icon name="mail" /> Email us</a>
+        </div>
+      </div>
+
+      <!-- Services -->
+      <nav class="site-footer__col" aria-label="Services">
+        <span class="site-footer__naplabel">Services</span>
+        <ul class="site-footer__links">
+          {services.map((s) => <li><a href={`/${s.slug}`}>{s.gridTitle}</a></li>)}
+        </ul>
+      </nav>
+
+      <!-- Company + trust + social -->
+      <div class="site-footer__col">
+        <span class="site-footer__naplabel">Company</span>
+        <ul class="site-footer__links">
+          {site.footerLinks.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+        </ul>
+
+        <div class="site-footer__rating">
+          <RatingBadge label="Google Rating" />
+          <a href={site.googleWriteReviewUrl} class="site-footer__writereview" target="_blank" rel="noopener">Leave a review</a>
+        </div>
+
+        <div class="site-footer__social">
+          <a href={site.socials.facebook} aria-label="Facebook" rel="noopener" target="_blank"><Icon name="facebook" /></a>
+          <a href={site.socials.tiktok} aria-label="TikTok" rel="noopener" target="_blank"><Icon name="tiktok" /></a>
+          <a href={site.googleReviewsUrl} aria-label="Google reviews" rel="noopener" target="_blank"><Icon name="pin" /></a>
+        </div>
+      </div>
+    </div>
+
+    <ul class="site-footer__chips" role="list">
+      {trustChips.map((c) => (<li><Icon name={c.icon} /> {c.label}</li>))}
+    </ul>
+
+    <div class="site-footer__legal">
+      <span class="site-footer__insured">{site.insured} · 5.0★ Rated on Google</span>
+      <nav class="site-footer__legal-links" aria-label="Legal">
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/sms-terms-and-conditions">SMS Terms &amp; Conditions</a>
+      </nav>
+    </div>
+
+    <p class="site-footer__copy">
+      &copy; {site.copyrightYear} {site.copyright} &nbsp;·&nbsp;
+      <span class="site-footer__credit">Smart Site by Impact 360</span>
+    </p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--cpr-navy);
+    color: rgba(255, 255, 255, 0.82);
+  }
+  .site-footer__inner {
+    max-width: var(--cpr-max-width);
+    margin-inline: auto;
+    padding: var(--cpr-space-3xl) var(--cpr-space-lg) var(--cpr-space-xl);
+  }
+  .site-footer__h {
+    color: var(--cpr-white);
+    font-size: 1.6rem;
+  }
+  .site-footer__lede {
+    margin: 0.5rem 0 var(--cpr-space-lg);
+    max-width: 640px;
+  }
+  .site-footer__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+  }
+  .site-footer__grid a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--cpr-white);
+    color: var(--cpr-navy);
+    padding: 0.85rem 1.1rem;
+    border-radius: var(--cpr-radius-md);
+    font-weight: 600;
+    font-size: 0.95rem;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .site-footer__grid a::after {
+    content: "→";
+    color: var(--cpr-gold);
+    font-weight: 700;
+    margin-left: 0.5rem;
+  }
+  .site-footer__grid a:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--cpr-shadow-md);
+    border-color: var(--cpr-red);
+  }
+  .site-footer__viewall {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: var(--cpr-space-lg);
+    color: var(--cpr-white);
+    font-weight: 700;
+  }
+  .site-footer__viewall :global(svg) {
+    width: 1.1em;
+    height: 1.1em;
+    color: var(--cpr-gold);
+  }
+
+  .site-footer__cols {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: var(--cpr-space-xl);
+    margin-top: var(--cpr-space-3xl);
+    padding-top: var(--cpr-space-xl);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  .site-footer__logo {
+    display: inline-block;
+    margin-bottom: var(--cpr-space-md);
+  }
+  .site-footer__logo :global(img) {
+    height: 92px;
+    width: auto;
+  }
+  .site-footer__naplabel {
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--cpr-slate-light);
+    margin-bottom: 0.75rem;
+  }
+  .site-footer__brand {
+    color: var(--cpr-white);
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+  }
+  .site-footer__nap {
+    font-style: normal;
+    line-height: 1.7;
+    margin-bottom: var(--cpr-space-md);
+  }
+  .site-footer__sab {
+    color: var(--cpr-slate-light);
+    font-size: 0.9rem;
+  }
+  .site-footer__hours {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-bottom: 0.5rem;
+  }
+  .site-footer__hours :global(svg) {
+    color: var(--cpr-gold);
+  }
+  .site-footer__phone {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--cpr-white);
+  }
+  .site-footer__contactlinks {
+    display: flex;
+    gap: var(--cpr-space-md);
+    margin-top: 0.6rem;
+    flex-wrap: wrap;
+  }
+  .site-footer__contactlinks a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-weight: 600;
+    font-size: 0.92rem;
+    color: rgba(255, 255, 255, 0.85);
+  }
+  .site-footer__contactlinks a:hover {
+    color: var(--cpr-gold);
+  }
+  .site-footer__contactlinks :global(svg) {
+    width: 1.05em;
+    height: 1.05em;
+    color: var(--cpr-gold);
+  }
+  .site-footer__links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .site-footer__links a:hover {
+    color: var(--cpr-white);
+  }
+  .site-footer__rating {
+    display: flex;
+    align-items: center;
+    gap: var(--cpr-space-md);
+    flex-wrap: wrap;
+    margin-top: var(--cpr-space-lg);
+  }
+  .site-footer__writereview {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--cpr-gold);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .site-footer__social {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: var(--cpr-space-lg);
+    font-size: 1.4rem;
+  }
+  .site-footer__social a {
+    color: rgba(255, 255, 255, 0.75);
+  }
+  .site-footer__social a:hover {
+    color: var(--cpr-gold);
+  }
+  .site-footer__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.25rem;
+    margin-top: var(--cpr-space-xl);
+    padding-top: var(--cpr-space-lg);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  .site-footer__chips li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+  .site-footer__chips :global(svg) {
+    width: 1.05em;
+    height: 1.05em;
+    color: var(--cpr-gold);
+  }
+  .site-footer__legal {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1.25rem;
+    margin-top: var(--cpr-space-lg);
+    padding-top: var(--cpr-space-lg);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    font-size: 0.85rem;
+    color: var(--cpr-slate-light);
+  }
+  .site-footer__insured {
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.82);
+    letter-spacing: 0.02em;
+  }
+  .site-footer__legal-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+  }
+  .site-footer__legal-links a {
+    color: var(--cpr-slate-light);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .site-footer__legal-links a:hover {
+    color: var(--cpr-white);
+  }
+  .site-footer__copy {
+    margin-top: var(--cpr-space-md);
+    font-size: 0.85rem;
+    color: var(--cpr-slate-light);
+  }
+  .site-footer__credit {
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 600;
+  }
+
+  @media (max-width: 960px) {
+    .site-footer__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .site-footer__cols {
+      grid-template-columns: 1fr;
+      gap: var(--cpr-space-xl);
+    }
+  }
+  @media (max-width: 600px) {
+    .site-footer__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

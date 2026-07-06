@@ -1,0 +1,78 @@
+---
+// About River Birch Tree Service — owner Ezequiel Moreno, Deep Gap, since 2020.
+import BaseLayout from "@layouts/BaseLayout.astro";
+import PageHeader from "@components/layout/PageHeader.astro";
+import ActionShot from "@components/widgets/ActionShot.astro";
+import ValueProps from "@components/widgets/ValueProps.astro";
+import Reviews from "@components/widgets/Reviews.astro";
+import FinalCta from "@components/widgets/FinalCta.astro";
+import ContactForm from "@components/widgets/ContactForm.astro";
+import { site } from "@data/site";
+import imgOwner from "@assets/images/high-country-river-birch-crew.jpg";
+
+const origin = Astro.site!.toString().replace(/\/$/, "");
+const title = "About River Birch Tree Service | Local, Insured — Deep Gap, NC";
+const description =
+  "Meet River Birch Tree Service LLC — owner Ezequiel Moreno's locally owned, fully-insured tree company in Deep Gap, NC, serving Boone and the High Country since 2020. 5.0★ on Google.";
+---
+
+<BaseLayout title={title} description={description} path="/about-river-birch-tree-service" breadcrumb={[{ name: "About", item: `${origin}/about-river-birch-tree-service` }]}>
+  <PageHeader
+    eyebrow="Locally owned in Deep Gap, NC"
+    title="About River Birch Tree Service"
+    subtitle="A local, fully-insured tree company serving Deep Gap, Boone, and the High Country since 2020 — owned and run by Ezequiel Moreno."
+    ctas={[
+      { label: `Call ${site.phoneDisplay}`, href: site.phoneHref, variant: "call" },
+      { label: "Get a Free Estimate", href: "#contact", variant: "outline" },
+    ]}
+  />
+
+  <section class="cpr-section">
+    <div class="about__inner">
+      <h2>Your Neighbors in the High Country</h2>
+      <p>River Birch Tree Service LLC is a locally owned tree company based right here in Deep Gap, North Carolina. Owner <strong>Ezequiel Moreno</strong> started River Birch in 2020, and since then we've earned a 5.0-star reputation on Google by doing tree work the right way across Boone, Blowing Rock, and all of Watauga County.</p>
+      <p>We're a true Service Area Business — we come to you. From a single hazardous removal tight against your house to clearing a whole mountain lot for a new build, one local, fully-insured crew handles the job from the free estimate to the final rake-down. And when an ice storm or windstorm brings a tree down, we answer 24/7, because we live and work in the same mountains you do.</p>
+      <h2>What We Believe</h2>
+      <p>Good tree work is equal parts skill and respect — skill to bring a big tree down safely near your home and the power line, and respect for your property, your time, and your view. We show up when we say we will, tell you honestly whether a tree needs to come down or can be saved with good pruning, carry insurance on every job, and leave your yard cleaner than we found it.</p>
+    </div>
+  </section>
+
+  <ActionShot
+    image={imgOwner}
+    alt="The River Birch Tree Service crew on a job site in the High Country near Deep Gap, NC"
+    eyebrow="Owned by Ezequiel Moreno"
+    heading="One local crew, from the free estimate to the final cleanup"
+    text="We answer our own phone, give the estimate ourselves, and do the work ourselves — no call center, no runaround. Fully insured, 5.0★ rated on Google, and based in Deep Gap so we're already in the High Country when you need us."
+    flip={true}
+    light={true}
+  />
+
+  <ValueProps />
+  <Reviews />
+  <FinalCta heading="Ready to Work With a Crew You Can Trust?" />
+  <ContactForm formName="About Page Estimate Request" />
+</BaseLayout>
+
+<style>
+  .about__inner {
+    max-width: var(--cpr-max-width-narrow);
+    margin-inline: auto;
+  }
+  .about__inner h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    margin-top: var(--cpr-space-xl);
+    margin-bottom: var(--cpr-space-sm);
+  }
+  .about__inner > h2:first-child {
+    margin-top: 0;
+  }
+  .about__inner p {
+    color: var(--cpr-slate);
+    line-height: 1.75;
+    margin-bottom: var(--cpr-space-md);
+    font-size: 1.05rem;
+  }
+  .about__inner strong {
+    color: var(--cpr-navy);
+  }
+</style>

@@ -1,0 +1,118 @@
+---
+import SectionHeader from "@components/ui/SectionHeader.astro";
+import Icon from "@components/ui/Icon.astro";
+import Button from "@components/ui/Button.astro";
+import { site } from "@data/site";
+
+export interface FaqItem {
+  q: string;
+  a: string; // may contain inline HTML (links)
+}
+interface Props {
+  title?: string;
+  sub?: string;
+  items: FaqItem[];
+  ctaLabel?: string;
+  ctaButtonLabel?: string;
+  light?: boolean;
+}
+const {
+  title = "Understanding Water Damage Restoration",
+  sub = "Plain answers to the questions homeowners ask most about cleanup, drying, rebuild, and insurance.",
+  items,
+  ctaLabel = "Still have a question? Our team is on call 24/7.",
+  ctaButtonLabel = `Call Now: ${site.phoneDisplay}`,
+  light = true,
+} = Astro.props;
+---
+
+<section class:list={["cpr-section", { "cpr-section--light": light }, "faq"]}>
+  <div class="faq__inner">
+    <SectionHeader title={title} sub={sub} />
+
+    <ul class="faq__list" role="list">
+      {
+        items.map((item, i) => (
+          <li class="faq__item">
+            <details name="faq" open={i === 0}>
+              <summary class="faq__q">
+                <span set:html={item.q} />
+                <Icon name="chevron" class="faq__caret" />
+              </summary>
+              <div class="faq__a" set:html={item.a} />
+            </details>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="faq__cta">
+      <p set:html={ctaLabel} />
+      <Button href={site.phoneHref} variant="call" size="lg">{ctaButtonLabel}</Button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq__inner {
+    max-width: var(--cpr-max-width-narrow);
+    margin-inline: auto;
+  }
+  .faq__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .faq__item {
+    background: var(--cpr-white);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: var(--cpr-radius-md);
+    overflow: hidden;
+  }
+  .faq__q {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--cpr-space-md);
+    padding: 1.15rem 1.35rem;
+    font-weight: 700;
+    color: var(--cpr-navy);
+    cursor: pointer;
+    list-style: none;
+  }
+  .faq__q::-webkit-details-marker {
+    display: none;
+  }
+  .faq__caret {
+    width: 1.1em;
+    height: 1.1em;
+    color: var(--cpr-red);
+    flex: none;
+    transition: transform 0.2s ease;
+  }
+  details[open] .faq__caret {
+    transform: rotate(180deg);
+  }
+  .faq__a {
+    padding: 0 1.35rem 1.35rem;
+    color: var(--cpr-slate);
+    line-height: 1.7;
+  }
+  .faq__a :global(a) {
+    color: var(--cpr-red);
+    font-weight: 600;
+    text-decoration: underline;
+  }
+  .faq__cta {
+    margin-top: var(--cpr-space-xl);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--cpr-space-md);
+  }
+  .faq__cta p {
+    color: var(--cpr-slate);
+    font-weight: 600;
+  }
+</style>

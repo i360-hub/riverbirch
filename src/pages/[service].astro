@@ -1,0 +1,120 @@
+---
+// Dynamic Tier-1 service page template. Renders the tree-service section stack
+// from servicePages.ts (per-page copy) + services.ts (title/H1/meta).
+// Produces /tree-removal, /storm-damage-tree-removal, … at their exact URLs.
+import type { ImageMetadata } from "astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Hero from "@components/widgets/Hero.astro";
+import ProofStrip from "@components/widgets/ProofStrip.astro";
+import ProcessSteps from "@components/widgets/ProcessSteps.astro";
+import ActionShot from "@components/widgets/ActionShot.astro";
+import Differentiators from "@components/widgets/Differentiators.astro";
+import Reviews from "@components/widgets/Reviews.astro";
+import Faq from "@components/widgets/Faq.astro";
+import ServiceArea from "@components/widgets/ServiceArea.astro";
+import FinalCta from "@components/widgets/FinalCta.astro";
+import ContactForm from "@components/widgets/ContactForm.astro";
+import RelatedServices from "@components/widgets/RelatedServices.astro";
+import { servicePages } from "@data/servicePages";
+import { serviceBySlug } from "@data/services";
+import { reviewsFor } from "@data/reviews";
+import { site } from "@data/site";
+
+import imgRemovalHero from "@assets/images/deep-gap-nc-tree-removal-topping-spar.jpg";
+import imgRemovalAction from "@assets/images/boone-nc-tree-removal-near-cabin.jpg";
+import imgStormHero from "@assets/images/high-country-storm-ice-fallen-trees-snow.jpg";
+import imgStormAction from "@assets/images/high-country-storm-debris-cleared-road.jpg";
+import imgLandHero from "@assets/images/watauga-county-land-clearing-crew-equipment.jpg";
+import imgLandAction from "@assets/images/high-country-land-clearing-excavator.jpg";
+import imgTrimHero from "@assets/images/boone-nc-tree-trimming-two-climbers.jpg";
+import imgTrimAction from "@assets/images/high-country-tree-pruning-climber.jpg";
+import imgStumpHero from "@assets/images/boone-nc-stump-grinding-lawn.jpg";
+import imgStumpAction from "@assets/images/watauga-county-graded-lot-cleared.jpg";
+import imgViewHero from "@assets/images/blowing-rock-nc-view-clearing-mountain-pond.jpg";
+import imgViewAction from "@assets/images/high-country-view-clearing-climber.jpg";
+import imgMountain from "@assets/images/high-country-tree-removal-climber-mountain.jpg";
+
+const heroImages: Record<string, ImageMetadata> = {
+  "tree-removal": imgRemovalHero,
+  "storm-damage-tree-removal": imgStormHero,
+  "land-clearing": imgLandHero,
+  "tree-trimming-pruning": imgTrimHero,
+  "stump-grinding": imgStumpHero,
+  "view-clearing": imgViewHero,
+};
+const actionImages: Record<string, { img: ImageMetadata; alt: string }> = {
+  "tree-removal": { img: imgRemovalAction, alt: "River Birch climber removing a large tree beside a cabin near Boone, NC" },
+  "storm-damage-tree-removal": { img: imgStormAction, alt: "Storm debris and fallen trees cleared from a High Country road near Boone, NC" },
+  "land-clearing": { img: imgLandAction, alt: "Excavator clearing brush and trees on a mountain lot in Watauga County, NC" },
+  "tree-trimming-pruning": { img: imgTrimAction, alt: "River Birch climber pruning a tall tree with a mountain backdrop near Boone, NC" },
+  "stump-grinding": { img: imgStumpAction, alt: "A cleared, graded lot after River Birch tree and stump work in Watauga County, NC" },
+  "view-clearing": { img: imgViewAction, alt: "River Birch climber selectively clearing trees to open a mountain view near Blowing Rock, NC" },
+};
+
+export function getStaticPaths() {
+  return Object.keys(servicePages).map((service) => ({ params: { service } }));
+}
+
+const { service } = Astro.params;
+const data = servicePages[service];
+const svc = serviceBySlug(service)!;
+const heroImg = heroImages[service] ?? imgMountain;
+const actionShot = actionImages[service];
+
+const faqSchema = [
+  {
+    "@type": "FAQPage",
+    mainEntity: data.faq.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a.replace(/<[^>]+>/g, "") },
+    })),
+  },
+];
+
+const origin = Astro.site!.toString().replace(/\/$/, "");
+const pageUrl = `${origin}/${service}`;
+const serviceSchema = {
+  "@type": "Service",
+  "@id": `${pageUrl}#service`,
+  serviceType: svc.gridTitle,
+  name: svc.gridTitle,
+  url: pageUrl,
+  description: svc.metaDescription,
+  provider: { "@id": `${origin}/#business` },
+  areaServed: site.schema.areaServed.map((c) => ({ "@type": "City", name: c.name })),
+  mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
+};
+---
+
+<BaseLayout title={svc.title} description={svc.metaDescription} path={`/${service}`} schema={[serviceSchema, ...faqSchema]} breadcrumb={[{ name: svc.gridTitle, item: `${origin}/${service}` }]}>
+  <Hero
+    emergencyTag={data.hero.emergencyTag}
+    h1Lines={svc.h1Lines}
+    subtitle={data.hero.subtitle}
+    trustSignals={data.hero.trustSignals}
+    image={heroImg}
+    imageAlt={`River Birch Tree Service — ${svc.gridTitle} in the High Country, NC`}
+    secondaryCta={{ label: data.hero.secondaryCta ?? "Get a Free Estimate", href: "#contact" }}
+  />
+  <ProofStrip />
+  <ProcessSteps title={data.process.title} sub={data.process.sub} ctaLabel={data.process.ctaLabel} steps={data.process.steps} />
+  {actionShot && (
+    <ActionShot
+      image={actionShot.img}
+      alt={actionShot.alt}
+      eyebrow={data.action.eyebrow}
+      heading={data.action.heading}
+      text={data.action.text}
+      flip={true}
+      light={true}
+    />
+  )}
+  <Differentiators title={data.differentiators.title} sub={data.differentiators.sub} rows={data.differentiators.rows} />
+  <Reviews reviews={reviewsFor(service)} title={data.reviewsTitle} sub={data.reviewsSub} light={true} />
+  <Faq title={data.faqTitle} sub={data.faqSub} ctaLabel={data.faqCtaLabel} items={data.faq} />
+  <ServiceArea title={data.areaTitle} sub={data.areaSub} infoHeading={data.areaInfoHeading} infoBlurb={data.areaInfoBlurb} />
+  <FinalCta heading={data.finalCta} />
+  <ContactForm heading={data.contactHeading} description={data.contactDesc} formName={`${svc.gridTitle} Estimate Request`} />
+  <RelatedServices title={data.related.title} sub={data.related.sub} cards={data.related.cards} />
+</BaseLayout>

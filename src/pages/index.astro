@@ -1,0 +1,214 @@
+---
+// Homepage (/) — section order per the brand brief:
+// Sticky call bar (global) → Hero → Trust badges → Local-SEO intro → Service cards
+// → Six why-us value props → Featured reviews → 4-step how it works → Before/After
+// → Gallery → Service-area links + static SVG map + interactive map → FAQs →
+// Final CTA → Lead form → Footer (global).
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Hero from "@components/widgets/Hero.astro";
+import ProofStrip from "@components/widgets/ProofStrip.astro";
+import ActionShot from "@components/widgets/ActionShot.astro";
+import ServicesGrid from "@components/widgets/ServicesGrid.astro";
+import ValueProps from "@components/widgets/ValueProps.astro";
+import Reviews from "@components/widgets/Reviews.astro";
+import ProcessSteps from "@components/widgets/ProcessSteps.astro";
+import BeforeAfter from "@components/widgets/BeforeAfter.astro";
+import Gallery from "@components/widgets/Gallery.astro";
+import ServiceArea from "@components/widgets/ServiceArea.astro";
+import Faq from "@components/widgets/Faq.astro";
+import FinalCta from "@components/widgets/FinalCta.astro";
+import ContactForm from "@components/widgets/ContactForm.astro";
+import Icon from "@components/ui/Icon.astro";
+import { homepage, services } from "@data/services";
+import { featuredReviews } from "@data/reviews";
+
+import heroImg from "@assets/images/deep-gap-nc-arborist-chainsaw-tree-removal-hero.webp";
+import imgCrew from "@assets/images/high-country-tree-removal-climber-mountain.jpg";
+import imgBefore from "@assets/images/deep-gap-nc-hazardous-tree-beside-house.jpg";
+import imgAfter from "@assets/images/boone-nc-clean-property-after-tree-work.jpg";
+import g1 from "@assets/images/boone-nc-tree-removal-near-cabin.jpg";
+import g2 from "@assets/images/high-country-storm-ice-fallen-trees-snow.jpg";
+import g3 from "@assets/images/boone-nc-tree-trimming-two-climbers.jpg";
+import g4 from "@assets/images/watauga-county-land-clearing-crew-equipment.jpg";
+import g5 from "@assets/images/boone-nc-stump-grinding-lawn.jpg";
+import g6 from "@assets/images/blowing-rock-nc-view-clearing-mountain-pond.jpg";
+
+const serviceCards = services.map((s) => ({
+  icon: s.icon,
+  title: s.gridTitle,
+  text: {
+    "tree-removal": "Safe removal of dead, leaning, or dangerous trees — including technical takedowns close to homes and power lines. Fully insured, complete cleanup.",
+    "storm-damage-tree-removal": "Tree down from a storm or ice? We answer 24/7, make the scene safe, clear the tree off your home or drive, and haul off the debris.",
+    "land-clearing": "Clearing trees, brush, and undergrowth for home sites, driveways, and fence lines across Watauga County — careful work on steep mountain lots.",
+    "tree-trimming-pruning": "Proper pruning that keeps your trees healthy and safe — deadwooding, canopy lifting off roofs and drives, and shaping the trees you're keeping.",
+    "stump-grinding": "Grind that old stump below grade and reclaim your yard. We clean up the chips and leave the spot ready to fill and seed.",
+    "view-clearing": "Selectively open up your long-range mountain view without clear-cutting — so your property still feels like the High Country.",
+  }[s.slug]!,
+  href: `/${s.slug}`,
+}));
+
+const processSteps = [
+  { title: "Give River Birch a Call", text: "Call or text us at (828) 964-6567. Tell us what you need — a removal, storm cleanup, trimming, or a whole lot cleared. For a tree that's down, we answer 24/7." },
+  { title: "We Come Take a Look", text: "We meet you at the property, look at the trees and what's around them, and give you a clear, written, no-pressure estimate — free." },
+  { title: "We Do the Work — Safely & Insured", text: "Our fully-insured crew handles the job carefully, roping down anything near your home or the power line so nothing gets damaged." },
+  { title: "Clean Yard, Happy Customer", text: "We chip the brush, cut the wood to your preference, grind stumps on request, and rake up — leaving your property cleaner than we found it." },
+];
+
+const gallery = [
+  { image: g1, alt: "River Birch climber removing a large tree beside a cabin near Boone, NC" },
+  { image: g2, alt: "Storm and ice-damaged trees down in the snow, cleared by River Birch in the High Country" },
+  { image: g3, alt: "Two River Birch climbers trimming a tall tree near Boone, NC" },
+  { image: g4, alt: "River Birch crew clearing a lot with equipment in Watauga County, NC" },
+  { image: g5, alt: "River Birch stump grinding on a lawn in Boone, NC" },
+  { image: g6, alt: "River Birch climber view-clearing high above a mountain property near Blowing Rock, NC" },
+];
+
+const faq = [
+  { q: "Do you offer 24/7 emergency tree service?", a: "Yes. Storms and ice don't wait, so River Birch answers 24/7. If a tree comes down on your home, driveway, or across the road anywhere in the High Country, call (828) 964-6567 any hour and a local crew heads your way." },
+  { q: "Can you remove a tree that's close to my house or a power line?", a: "Absolutely — technical removals near homes and power lines are what we do best. Instead of felling the whole tree, we climb it and rope limbs and trunk sections down in controlled pieces. River Birch is fully insured for exactly this kind of work." },
+  { q: "Is River Birch insured?", a: "Yes. River Birch Tree Service LLC is fully insured for tree work throughout Watauga County. North Carolina has no state arborist license, so insurance is what actually protects your property — and we carry it on every job." },
+  { q: "Do you clean up after the job?", a: "Always. Cleanup and haul-away are included. We chip the brush, cut the wood to your preference, grind stumps on request, and rake the area so your yard looks better than when we arrived." },
+  { q: "Are your estimates really free?", a: "Yes. We come out to your property, look at the job, and give you a clear, written, no-pressure estimate at no cost. Call River Birch at (828) 964-6567 to set one up." },
+  { q: "Do you work on steep mountain lots?", a: "Yes — steep, rocky, wooded High Country lots are our everyday terrain. We plan each job around the slope and access so the work is done safely and your property is protected." },
+  { q: "How much does tree work cost?", a: "It depends on the size of the tree, its lean, and what's around it — a big pine leaning over the roof takes more rigging than an open-lot removal. That's why we give a free on-site estimate with a firm written price before any work starts." },
+  { q: "How fast can you get to me after an ice storm?", a: "As fast as conditions safely allow. River Birch is based right in Deep Gap, so we're already in the High Country and don't have to drive up the mountain from out of the area. Ice and wind hit hard here, and we're built to respond to it." },
+  { q: "Do I need a permit for tree removal or land clearing?", a: "For most tree removal on your own property, no. Larger land clearing — especially with grading or near streams — or work inside some HOAs and towns like Blowing Rock can have rules. We'll tell you what we see and point you to the right local office, but confirming permits is the property owner's responsibility." },
+  { q: "What's the difference between trimming and removal?", a: "Trimming and pruning keep a healthy tree safe and well-shaped — deadwooding, lifting the canopy off your roof, and thinning. Removal is for trees that are dead, dangerous, or in the way. If we can save a tree with good pruning, we'll tell you; if it needs to come down, we'll say that too." },
+];
+
+const faqSchema = [
+  {
+    "@type": "FAQPage",
+    mainEntity: faq.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a.replace(/<[^>]+>/g, "") },
+    })),
+  },
+];
+---
+
+<BaseLayout title={homepage.title} description={homepage.metaDescription} path="/" schema={faqSchema}>
+  <Hero
+    emergencyTag="🌲 5.0★ on Google · Fully Insured · 24/7 Emergency"
+    h1Lines={homepage.h1Lines}
+    subtitle="Tree removal, storm &amp; ice cleanup, land clearing, trimming, stump grinding &amp; view clearing across Boone, Blowing Rock, Deep Gap &amp; Watauga County. Owner Ezequiel Moreno and crew — local, fully insured, and rated 5.0★ on Google. 24/7 for emergencies."
+    trustSignals={["5.0★ Google Rating", "Fully Insured", "24/7 Emergency", "Free Estimates"]}
+    image={heroImg}
+    imageAlt="River Birch Tree Service arborist roped into a tree with a chainsaw, removing it against a blue High Country sky near Deep Gap, NC"
+    focalPoint="50% 38%"
+  />
+  <ProofStrip />
+  <ActionShot
+    image={imgCrew}
+    alt="River Birch climber removing a tall tree with a mountain backdrop in the High Country near Deep Gap, NC"
+    eyebrow="Locally owned in Deep Gap, NC"
+    heading="Your local, fully-insured High Country tree crew"
+    text="River Birch Tree Service is owned by Ezequiel Moreno and based right here in Deep Gap. Since 2020 we've handled tree removal, 24/7 storm & ice cleanup, land and lot clearing, trimming, stump grinding, and view clearing for homeowners across Boone, Blowing Rock, Vilas, Sugar Grove, and the rest of Watauga County — and surrounding areas. We answer our own phone, show up when we say we will, work safely near homes and power lines, and leave your property clean. Fully insured, 5.0★ rated on Google, free estimates."
+    flip={true}
+  />
+  <ServicesGrid
+    title="Full-Service Tree Care for the High Country"
+    sub="From a single hazardous removal to a whole lot cleared — one local, fully-insured crew handles it all."
+    cards={serviceCards}
+  />
+  <ValueProps />
+  <Reviews reviews={featuredReviews} />
+  <ProcessSteps
+    title="How It Works — Simple From Start to Finish"
+    sub="Four easy steps from your first call to a clean, clear yard."
+    steps={processSteps}
+    ctaLabel="Got a tree you're worried about? We'll take a look for free — call anytime, we're here 24/7."
+  />
+  <BeforeAfter
+    before={imgBefore}
+    after={imgAfter}
+    beforeAlt="A tall hazardous tree looming beside a High Country home before River Birch removed it"
+    afterAlt="A clean, finished High Country property after River Birch's tree work"
+    title="See the Difference"
+    sub="Real jobs from around the High Country — safe removals, clean results."
+    caption="From a hazardous tree beside the house to a clean, finished property — the High Country."
+  />
+  <Gallery shots={gallery} />
+  <section class="crosssell">
+    <div class="crosssell__inner">
+      <div class="crosssell__text">
+        <span class="crosssell__eyebrow"><Icon name="home" /> More than trees</span>
+        <h2 class="crosssell__h">We also clear, grade &amp; wall your property</h2>
+        <p class="crosssell__p">Once the trees are down, the same River Birch crew can grade the lot, build retaining walls, cut in a driveway, and handle drainage — one fully-insured local team for the whole project.</p>
+      </div>
+      <a href="/property-services" class="cpr-btn cpr-btn--primary cpr-btn--lg crosssell__cta">See Property Services <Icon name="arrow" /></a>
+    </div>
+  </section>
+  <ServiceArea />
+  <Faq
+    title="Common Questions"
+    sub="Quick answers to the things High Country homeowners ask River Birch most."
+    items={faq}
+  />
+  <FinalCta heading="Got a Tree That Needs Handling? Let's Talk." />
+  <ContactForm
+    heading="Get Your Free Estimate"
+    description="Call or text River Birch, or send us the details below and we'll get right back to you. For a tree that's already down, call anytime — we're on 24/7."
+    formName="Home Page Estimate Request"
+  />
+</BaseLayout>
+
+<style>
+  /* Subtle below-the-fold cross-sell to the Property Services silo. Kept
+     compact and secondary so the homepage stays tree-first. */
+  .crosssell {
+    background: var(--cpr-bg-light);
+    border-top: 1px solid rgba(18, 51, 30, 0.08);
+    border-bottom: 1px solid rgba(18, 51, 30, 0.08);
+    padding: var(--cpr-space-xl) var(--cpr-space-lg);
+  }
+  .crosssell__inner {
+    max-width: var(--cpr-max-width);
+    margin-inline: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--cpr-space-xl);
+    flex-wrap: wrap;
+  }
+  .crosssell__text {
+    flex: 1 1 460px;
+  }
+  .crosssell__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--cpr-gold-dark);
+    margin-bottom: 0.4rem;
+  }
+  .crosssell__eyebrow :global(svg) {
+    width: 1.05em;
+    height: 1.05em;
+  }
+  .crosssell__h {
+    font-size: clamp(1.3rem, 2.4vw, 1.65rem);
+  }
+  .crosssell__p {
+    margin-top: 0.4rem;
+    color: var(--cpr-slate);
+    line-height: 1.6;
+    max-width: 60ch;
+  }
+  .crosssell__cta {
+    flex: none;
+  }
+  .crosssell__cta :global(svg) {
+    width: 1.05em;
+    height: 1.05em;
+  }
+  @media (max-width: 640px) {
+    .crosssell__cta {
+      width: 100%;
+    }
+  }
+</style>

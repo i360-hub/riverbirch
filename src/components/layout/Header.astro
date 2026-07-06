@@ -1,0 +1,250 @@
+---
+import { Image } from "astro:assets";
+import logo from "@assets/images/logo.png";
+import { site, nav } from "@data/site";
+import Button from "@components/ui/Button.astro";
+import Icon from "@components/ui/Icon.astro";
+
+const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
+const isActive = (href?: string) =>
+  href && href !== "/" ? currentPath === href : currentPath === "/" && href === "/";
+---
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a href="/" class="site-header__logo" aria-label={`${site.name} — home`}>
+      <Image src={logo} alt={site.name} height={56} loading="eager" densities={[1, 2]} />
+    </a>
+
+    <!-- Mobile menu toggle (CSS-driven via hidden checkbox) -->
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" hidden />
+    <label for="nav-toggle" class="nav-burger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </label>
+
+    <nav class="site-nav" aria-label="Primary">
+      <ul class="site-nav__list">
+        {
+          nav.map((item) =>
+            item.children ? (
+              <li class="site-nav__item site-nav__item--has-menu">
+                <button type="button" class="site-nav__link" aria-haspopup="true" aria-expanded="false">
+                  {item.label}
+                  <Icon name="chevron" class="site-nav__caret" />
+                </button>
+                <ul class="site-nav__menu">
+                  {item.children.map((c) => (
+                    <li>
+                      <a href={c.href} class:list={["site-nav__sublink", { "is-active": isActive(c.href) }]}>
+                        {c.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ) : (
+              <li class="site-nav__item">
+                <a href={item.href} class:list={["site-nav__link", { "is-active": isActive(item.href) }]}>
+                  {item.label}
+                </a>
+              </li>
+            )
+          )
+        }
+      </ul>
+    </nav>
+
+    <Button href={site.phoneHref} variant="call" class="site-header__cta">{site.phoneDisplay}</Button>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--cpr-white);
+    box-shadow: var(--cpr-shadow-sm);
+    /* Gutter lives on the full-width bar (like .cpr-section), so the inner
+       max-width is a true 1200px content column that lines up with the hero
+       H1 and body content below — not inset by its own padding. */
+    padding-inline: var(--cpr-space-lg);
+  }
+  .site-header__inner {
+    max-width: var(--cpr-max-width);
+    margin-inline: auto;
+    min-height: var(--cpr-header-h);
+    display: flex;
+    align-items: center;
+    gap: var(--cpr-space-lg);
+    padding-block: 0.5rem;
+  }
+  .site-header__logo {
+    flex: none;
+  }
+  .site-nav {
+    margin-left: auto;
+  }
+  .site-nav__list {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+  .site-nav__item {
+    position: relative;
+  }
+  .site-nav__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    background: none;
+    border: 0;
+    padding: 0.6rem 0.75rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--cpr-navy);
+    border-radius: var(--cpr-radius-sm);
+  }
+  .site-nav__link:hover,
+  .site-nav__link.is-active {
+    color: var(--cpr-red);
+  }
+  .site-nav__caret {
+    width: 0.85em;
+    height: 0.85em;
+    transition: transform 0.15s ease;
+  }
+  .site-nav__menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 230px;
+    background: var(--cpr-white);
+    border-radius: var(--cpr-radius-md);
+    box-shadow: var(--cpr-shadow-md);
+    padding: 0.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(6px);
+    transition: all 0.15s ease;
+  }
+  .site-nav__item--has-menu:hover .site-nav__menu,
+  .site-nav__item--has-menu:focus-within .site-nav__menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .site-nav__item--has-menu:hover .site-nav__caret {
+    transform: rotate(180deg);
+  }
+  .site-nav__sublink {
+    display: block;
+    padding: 0.6rem 0.75rem;
+    border-radius: var(--cpr-radius-sm);
+    font-size: 0.925rem;
+    font-weight: 500;
+    color: var(--cpr-slate);
+  }
+  .site-nav__sublink:hover,
+  .site-nav__sublink.is-active {
+    background: var(--cpr-bg-light);
+    color: var(--cpr-red);
+  }
+  .site-header__cta {
+    flex: none;
+  }
+
+  .nav-burger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    margin-left: auto;
+    padding: 0.5rem;
+    cursor: pointer;
+  }
+  .nav-burger span {
+    width: 26px;
+    height: 3px;
+    background: var(--cpr-navy);
+    border-radius: 2px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  /* ---- Mobile ---- */
+  @media (max-width: 960px) {
+    .nav-burger {
+      display: flex;
+      order: 3;
+    }
+    .site-header__cta {
+      order: 2;
+      margin-left: auto;
+    }
+    /* Open menu is an absolute dropdown panel below the header — keeps the
+       header row a fixed 72px and avoids growing the flex line. */
+    .site-nav {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      margin-left: 0;
+      background: var(--cpr-white);
+      box-shadow: var(--cpr-shadow-md);
+      max-height: calc(100dvh - var(--cpr-header-h));
+      overflow-y: auto;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-8px);
+      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+    }
+    .nav-toggle:checked ~ .site-nav {
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+    }
+    .nav-toggle:checked ~ .nav-burger span:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+    }
+    .nav-toggle:checked ~ .nav-burger span:nth-child(2) {
+      opacity: 0;
+    }
+    .nav-toggle:checked ~ .nav-burger span:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+    .site-nav__list {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      padding: var(--cpr-space-sm) var(--cpr-space-md) var(--cpr-space-md);
+    }
+    .site-nav__link {
+      padding: 0.85rem 0.75rem;
+      font-size: 1rem;
+    }
+    .site-nav__item--has-menu .site-nav__link {
+      justify-content: space-between;
+      width: 100%;
+    }
+    .site-nav__menu {
+      position: static;
+      min-width: 0;
+      opacity: 1;
+      /* inherit visibility from the (closed/open) nav panel — do NOT force
+         `visible`, or the hidden panel's sub-menus escape and overlay page
+         content, intercepting clicks (a `visibility:visible` child overrides a
+         `visibility:hidden` parent). */
+      visibility: inherit;
+      transform: none;
+      box-shadow: none;
+      padding: 0 0 var(--cpr-space-sm) var(--cpr-space-md);
+    }
+    .site-nav__caret {
+      display: inline-block;
+    }
+  }
+  @media (min-width: 961px) {
+    .site-header__cta.site-header__cta {
+      margin-left: var(--cpr-space-md);
+    }
+  }
+</style>

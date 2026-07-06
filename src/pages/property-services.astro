@@ -1,0 +1,270 @@
+---
+// Property Services hub (Phase 1) — the tree-adjacent "finish work after the
+// trees come down": land clearing, grading, retaining walls, driveways/paths.
+// Kept as a SEPARATE silo from the tree Services dropdown so the tree cluster
+// stays topically pure. Bridges from the Land Clearing & Stump Grinding pages.
+//
+// Image handling: the feature grid uses only LANDSCAPE, high-res photos (uniform
+// 3:2 cells crop cleanly). The gallery is a masonry (natural-aspect) layout so
+// portrait AND landscape shots both display without forced cropping.
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Hero from "@components/widgets/Hero.astro";
+import ProofStrip from "@components/widgets/ProofStrip.astro";
+import ActionShot from "@components/widgets/ActionShot.astro";
+import SectionHeader from "@components/ui/SectionHeader.astro";
+import Icon from "@components/ui/Icon.astro";
+import Faq from "@components/widgets/Faq.astro";
+import ServiceArea from "@components/widgets/ServiceArea.astro";
+import FinalCta from "@components/widgets/FinalCta.astro";
+import ContactForm from "@components/widgets/ContactForm.astro";
+import { site } from "@data/site";
+
+// Feature cards get the four STRONGEST property photos (all ~4:3 landscape, so
+// they fill the cells with little/no crop). Hero + action + the candid job shots
+// go to the full-bleed hero / action-shot / natural-aspect masonry, which all
+// handle any orientation gracefully.
+// Hero + action: a hardscape path and the working crew (both fill their frames).
+import heroImg from "@assets/images/boone-nc-gravel-path-drainage-stonework.jpg";     // gravel path + stone wall
+import imgAction from "@assets/images/watauga-county-land-clearing-crew-equipment.jpg"; // crew + equipment (shown full, uncropped in ActionShot)
+// Feature cards — subject-centered shots (a wrapper enforces a clean 4:3 crop).
+import fClearing from "@assets/images/high-country-land-clearing-excavator.jpg";     // excavator working (subject centered)
+import fWalls from "@assets/images/high-country-retaining-wall-tiered-slope.jpg";     // tiered block retaining wall
+import fBoulder from "@assets/images/boone-nc-boulder-landscaping-mountain-view.jpg"; // boulder landscaping + view
+import fFinished from "@assets/images/boone-nc-clean-property-after-tree-work.jpg";   // finished home + stone wall
+// Gallery — masonry (natural aspect; portrait & landscape both show uncropped).
+import mDebris from "@assets/images/high-country-storm-debris-cleared-road.jpg";
+import mExcavation from "@assets/images/watauga-county-excavation-grading.jpg";
+import mBoulderRock from "@assets/images/boone-nc-boulder-retaining-landscape-rock.jpg";
+import mGraded from "@assets/images/watauga-county-graded-lot-cleared.jpg";
+import mTruck from "@assets/images/watauga-county-clearing-truck-cleared-lot.jpg";
+
+const origin = Astro.site!.toString().replace(/\/$/, "");
+const title = "Grading, Retaining Walls & Property Services | River Birch — Boone, NC";
+const description =
+  "Beyond tree work — River Birch handles land & lot clearing, grading, retaining walls, and driveways/paths across Boone, Deep Gap & Watauga County. Fully insured. Free estimates — (828) 964-6567.";
+
+interface Feature { img: ImageMetadata; alt: string; title: string; text: string; href?: string }
+const features: Feature[] = [
+  {
+    img: fClearing,
+    alt: "A tracked excavator clearing a wooded lot on a High Country property in Watauga County, NC",
+    title: "Land, Lot & Driveway Clearing",
+    text: "Clearing overgrown lots, building sites, driveways, and fence lines — plus grading and site prep. Careful work on steep High Country ground, and the natural first step once the trees are down.",
+    href: "/land-clearing",
+  },
+  {
+    img: fWalls,
+    alt: "A tiered block retaining wall River Birch built on a steep slope in the High Country, NC",
+    title: "Retaining Walls & Grading",
+    text: "Block and natural-stone retaining walls that hold back the slope and make steep mountain lots usable — with the grading and drainage to keep mountain runoff where it belongs.",
+  },
+  {
+    img: fBoulder,
+    alt: "Boulder landscaping and stonework with a long-range mountain view in Boone, NC",
+    title: "Stone & Boulder Landscaping",
+    text: "Boulder placement, natural-stone work, gravel paths, and stone edging that turn a raw mountain lot into a finished property that fits the High Country.",
+  },
+  {
+    img: fFinished,
+    alt: "A clean, finished property with a stone wall and green lawn after River Birch's work in Boone, NC",
+    title: "Cleared, Graded & Finished",
+    text: "From a wooded slope to a clean, usable property — one insured crew handles the clearing, grading, walls, and finish, so you deal with one company from the first cut to the last.",
+  },
+];
+
+interface Shot { img: ImageMetadata; alt: string }
+const gallery: Shot[] = [
+  { img: mDebris, alt: "Logs and debris cleared along a gravel drive on a High Country property near Boone, NC" },
+  { img: mExcavation, alt: "Excavation and grading a trench on a mountain property in Watauga County, NC" },
+  { img: mBoulderRock, alt: "Large landscape boulders staged for rock and retaining work in Boone, NC" },
+  { img: mGraded, alt: "A cleared and graded mountain lot ready to build in Watauga County, NC" },
+  { img: mTruck, alt: "River Birch equipment on a cleared lot in Watauga County, NC" },
+];
+
+const faq = [
+  { q: "Does River Birch do more than tree work?", a: "Yes. We're best known for tree removal and storm cleanup, but a lot of our jobs don't stop when the tree comes down. Once a lot is cleared, the same crew can grade it, build retaining walls, cut in a driveway, and handle drainage — so you're not hiring three different companies for one project." },
+  { q: "Do you build retaining walls on steep lots?", a: "Yes — steep, rocky mountain lots are exactly where retaining walls earn their keep. We build block and natural-stone walls that hold back the slope and turn unusable grade into usable yard, driveway, or building space. Fully insured on every job." },
+  { q: "Can you clear and prep my lot for a build?", a: "Absolutely. We clear the trees and brush, grade and shape the site, handle drainage, and cut in access — leaving the lot build-ready. It's the natural extension of the land clearing we already do across Watauga County." },
+  { q: "Do you install driveways, paths, and handle drainage?", a: "Yes. We put in gravel driveways and paths, set stone edging, and do the drainage work that keeps mountain runoff off your foundation and out of your yard. Tell us the problem and we'll walk the site with you." },
+  { q: "Do I need a permit for grading or a retaining wall?", a: "It depends on the town, the height of the wall, and things like grading near streams or steep slopes. We'll tell you what we see and point you to the right local office, but confirming permits is ultimately the property owner's responsibility." },
+  { q: "Is your property work insured?", a: "Yes. River Birch Tree Service LLC is fully insured, and that coverage carries across our tree work and our grading, wall, and clearing work — so your property is protected the whole way through." },
+];
+
+const faqSchema = [
+  {
+    "@type": "FAQPage",
+    mainEntity: faq.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a.replace(/<[^>]+>/g, "") },
+    })),
+  },
+];
+const pageUrl = `${origin}/property-services`;
+const serviceSchema = {
+  "@type": "Service",
+  "@id": `${pageUrl}#service`,
+  serviceType: "Land clearing, grading & retaining walls",
+  name: "Property & Land Improvement Services",
+  url: pageUrl,
+  description,
+  provider: { "@id": `${origin}/#business` },
+  areaServed: site.schema.areaServed.map((c) => ({ "@type": "City", name: c.name })),
+  mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
+};
+---
+
+<BaseLayout title={title} description={description} path="/property-services" schema={[serviceSchema, ...faqSchema]} breadcrumb={[{ name: "Property Services", item: pageUrl }]}>
+  <Hero
+    emergencyTag="🏡 Beyond the Trees — Property & Land Services"
+    h1Lines={["Grading, Retaining Walls", "& Property Improvements"]}
+    subtitle="Once the trees are down, River Birch can finish the job. We clear and grade lots, build retaining walls, cut in driveways, and handle drainage across Boone, Deep Gap &amp; the High Country — one fully-insured local crew from the first cut to the final grade."
+    trustSignals={["Fully Insured", "5.0★ on Google", "Steep-Lot Experience", "Free Estimates"]}
+    image={heroImg}
+    imageAlt="A finished gravel path with stone edging and a retaining wall beside a High Country home in Boone, NC"
+    secondaryCta={{ label: "Get a Free Estimate", href: "#contact" }}
+    focalPoint="50% 50%"
+  />
+  <ProofStrip />
+  <ActionShot
+    image={imgAction}
+    alt="The River Birch crew clearing a mountain lot with an excavator and equipment in Watauga County, NC"
+    eyebrow="The finish work after the trees come down"
+    heading="One crew, from the first tree to the final grade"
+    text="A lot of our tree jobs don't end at the stump. After we clear the trees, the same River Birch crew can grade the site, build the wall that holds back the slope, cut in the driveway, and sort out the drainage — so you deal with one local, insured company for the whole project instead of chasing three."
+    flip={true}
+  />
+
+  <section class="cpr-section cpr-section--light">
+    <div class="cpr-section-inner">
+      <SectionHeader
+        title="What We Do Around Your Property"
+        sub="The tree-adjacent work that turns a cleared lot into a finished, usable property."
+      />
+      <ul class="pfeat" role="list">
+        {
+          features.map((f) => (
+            <li class="pfeat__card">
+              <div class="pfeat__imgwrap">
+                <Image src={f.img} alt={f.alt} widths={[440, 700, 900]} sizes="(max-width: 760px) 92vw, 42vw" loading="lazy" class="pfeat__img" />
+              </div>
+              <div class="pfeat__body">
+                <h3 class="pfeat__title">{f.title}</h3>
+                <p class="pfeat__text">{f.text}</p>
+                {f.href && <a href={f.href} class="pfeat__more">Learn more <Icon name="arrow" /></a>}
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="pfeat__note">
+        Also ask us about <strong>fence installation</strong> and <strong>gutter cleaning</strong> while we're on site.
+      </p>
+    </div>
+  </section>
+
+  <section class="cpr-section">
+    <div class="cpr-section-inner">
+      <SectionHeader title="Recent Property Work" sub="Clearing, grading, walls, and finish work from around the High Country." />
+      <div class="pmason">
+        {
+          gallery.map((g) => (
+            <Image src={g.img} alt={g.alt} widths={[320, 480, 640]} sizes="(max-width: 480px) 92vw, (max-width: 800px) 45vw, 30vw" loading="lazy" class="pmason__img" />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <Faq
+    title="Property & Land Services — Common Questions"
+    sub="Grading, walls, driveways, and clearing across Watauga County."
+    items={faq}
+  />
+  <ServiceArea />
+  <FinalCta heading="Got a Lot to Clear, Grade, or Wall? Let's Talk." />
+  <ContactForm heading="Get Your Free Property Estimate" formName="Property Services Estimate Request" />
+</BaseLayout>
+
+<style>
+  /* Feature grid — uniform 3:2 cells, fed only landscape images so crops are clean. */
+  .pfeat {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--cpr-space-lg);
+  }
+  .pfeat__card {
+    display: flex;
+    flex-direction: column;
+    background: var(--cpr-white);
+    border: 1px solid rgba(18, 51, 30, 0.08);
+    border-radius: var(--cpr-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--cpr-shadow-sm);
+  }
+  /* Wrapper enforces the 4:3 crop for ANY source orientation — astro's <img>
+     carries width/height attrs that otherwise override aspect-ratio on the img. */
+  .pfeat__imgwrap {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+  }
+  .pfeat__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .pfeat__body {
+    padding: var(--cpr-space-lg) var(--cpr-space-xl) var(--cpr-space-xl);
+  }
+  .pfeat__title {
+    font-size: 1.25rem;
+    margin-bottom: 0.4rem;
+  }
+  .pfeat__text {
+    color: var(--cpr-slate);
+    line-height: 1.6;
+    font-size: 0.98rem;
+  }
+  .pfeat__more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: var(--cpr-space-md);
+    font-weight: 700;
+    color: var(--cpr-red);
+  }
+  .pfeat__more :global(svg) { width: 1em; height: 1em; }
+  .pfeat__note {
+    margin-top: var(--cpr-space-xl);
+    text-align: center;
+    color: var(--cpr-slate);
+    font-size: 1.02rem;
+  }
+  .pfeat__note strong { color: var(--cpr-navy); }
+
+  /* Masonry gallery — natural aspect, so portrait & landscape both show uncropped. */
+  .pmason {
+    column-count: 3;
+    column-gap: var(--cpr-space-md);
+  }
+  .pmason__img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: var(--cpr-space-md);
+    border-radius: var(--cpr-radius-lg);
+    box-shadow: var(--cpr-shadow-sm);
+    border: 1px solid rgba(18, 51, 30, 0.06);
+    break-inside: avoid;
+  }
+  @media (max-width: 800px) {
+    .pfeat { grid-template-columns: 1fr; }
+    .pmason { column-count: 2; }
+  }
+  @media (max-width: 460px) {
+    .pmason { column-count: 1; }
+  }
+</style>

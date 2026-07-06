@@ -1,0 +1,38 @@
+---
+// Button / CTA link. Mirrors the live site's cpr-btn / wdr-hero-btn styles.
+// Variants: primary (red fill), call (red fill w/ phone icon), outline, ghost.
+import Icon from "./Icon.astro";
+
+interface Props {
+  href: string;
+  variant?: "primary" | "call" | "outline" | "ghost";
+  size?: "md" | "lg";
+  class?: string;
+  ariaLabel?: string;
+  rel?: string;
+  target?: string;
+}
+
+const {
+  href,
+  variant = "primary",
+  size = "md",
+  class: className = "",
+  ariaLabel,
+  rel,
+  target,
+} = Astro.props;
+---
+
+<a
+  href={href}
+  class:list={["cpr-btn", `cpr-btn--${variant}`, `cpr-btn--${size}`, className]}
+  aria-label={ariaLabel}
+  rel={rel}
+  target={target}
+>
+  {variant === "call" && <Icon name="phone" class="cpr-btn__icon" />}
+  <span><slot /></span>
+</a>
+
+<!-- .cpr-btn styles live in global.css so raw-class reuses (Reviews, cross-sell) also pick them up. -->

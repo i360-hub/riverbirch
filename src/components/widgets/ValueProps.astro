@@ -1,0 +1,92 @@
+---
+// Six "why choose us" value-prop cards. Icon + title + text.
+import SectionHeader from "@components/ui/SectionHeader.astro";
+import Icon from "@components/ui/Icon.astro";
+
+interface Prop {
+  icon: string;
+  title: string;
+  text: string;
+}
+interface Props {
+  title?: string;
+  sub?: string;
+  props?: Prop[];
+  light?: boolean;
+}
+const {
+  title = "Why Homeowners Across the High Country Choose River Birch",
+  sub = "Local, insured, and easy to work with — from the free estimate to the final rake-down.",
+  light = true,
+  props = [
+    { icon: "leaf", title: "Local & Family-Run", text: "Owner Ezequiel Moreno started River Birch in Deep Gap in 2020. You get a real High Country crew — not a call center or a team driving up the mountain from out of the area." },
+    { icon: "shield", title: "Fully Insured", text: "We carry insurance on every job. NC has no state arborist license, so coverage is what actually protects your home and property — and we've got it." },
+    { icon: "document", title: "Free, No-Pressure Estimates", text: "We come out, look at the job, and give you a clear written price with no pressure and no surprises." },
+    { icon: "home", title: "Safe Near Homes & Lines", text: "Technical removals near houses and power lines are our specialty. We climb and rig so heavy limbs come down in controlled pieces — no damage." },
+    { icon: "storm", title: "24/7 Storm & Ice Response", text: "When a tree comes down in a High Country storm, we answer any hour. Fast, insured emergency cleanup across Watauga County." },
+    { icon: "check", title: "Complete Cleanup", text: "We chip the brush, cut the wood to your preference, grind stumps on request, and rake the site so your yard looks better than we found it." },
+  ],
+} = Astro.props;
+---
+
+<section class:list={["cpr-section", { "cpr-section--light": light }, "vprops"]}>
+  <div class="cpr-section-inner">
+    <SectionHeader title={title} sub={sub} />
+    <ul class="vprops__grid" role="list">
+      {
+        props.map((p) => (
+          <li class="vprops__card">
+            <span class="vprops__icon"><Icon name={p.icon} /></span>
+            <h3 class="vprops__title">{p.title}</h3>
+            <p class="vprops__text">{p.text}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .vprops__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--cpr-space-lg);
+  }
+  .vprops__card {
+    background: var(--cpr-white);
+    border: 1px solid rgba(18, 51, 30, 0.08);
+    border-radius: var(--cpr-radius-lg);
+    box-shadow: var(--cpr-shadow-sm);
+    padding: var(--cpr-space-xl);
+  }
+  .vprops__icon {
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: var(--cpr-radius-md);
+    background: rgba(200, 153, 46, 0.14);
+    color: var(--cpr-gold-dark);
+    font-size: 1.4rem;
+    margin-bottom: var(--cpr-space-md);
+  }
+  .vprops__title {
+    font-size: 1.2rem;
+    margin-bottom: 0.4rem;
+  }
+  .vprops__text {
+    color: var(--cpr-slate);
+    line-height: 1.6;
+    font-size: 0.96rem;
+  }
+  @media (max-width: 900px) {
+    .vprops__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 560px) {
+    .vprops__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

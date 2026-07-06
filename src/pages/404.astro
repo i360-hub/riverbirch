@@ -1,0 +1,49 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Button from "@components/ui/Button.astro";
+import { site } from "@data/site";
+import { services } from "@data/services";
+---
+
+<BaseLayout title="Page Not Found | River Birch Tree Service" description="The page you're looking for couldn't be found." path="/404" noindex={true}>
+  <section class="nf">
+    <div class="nf__inner">
+      <p class="nf__code">404</p>
+      <h1 class="nf__h1">We couldn't find that page.</h1>
+      <p class="nf__lead">It may have moved. Try one of our main services, or call us 24/7.</p>
+      <Button href={site.phoneHref} variant="call" size="lg">Call Now: {site.phoneDisplay}</Button>
+      <ul class="nf__links">
+        <li><a href="/">Home</a></li>
+        {services.slice(0, 5).map((s) => <li><a href={`/${s.slug}`}>{s.gridTitle}</a></li>)}
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .nf {
+    display: grid;
+    place-items: center;
+    min-height: 60vh;
+    padding: var(--cpr-space-3xl) var(--cpr-space-lg);
+    text-align: center;
+  }
+  .nf__inner { max-width: 640px; }
+  .nf__code {
+    font-size: 4rem;
+    font-weight: 800;
+    color: var(--cpr-red);
+    line-height: 1;
+  }
+  .nf__h1 { font-size: clamp(1.6rem, 3.5vw, 2.2rem); margin-top: var(--cpr-space-sm); }
+  .nf__lead { margin: var(--cpr-space-md) 0 var(--cpr-space-xl); color: var(--cpr-slate); font-size: 1.1rem; }
+  .nf__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+    justify-content: center;
+    margin-top: var(--cpr-space-xl);
+  }
+  .nf__links a { color: var(--cpr-slate); font-weight: 600; }
+  .nf__links a:hover { color: var(--cpr-red); }
+</style>

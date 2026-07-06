@@ -1,0 +1,130 @@
+---
+// Service Areas hub — links to all 20 Watauga County / High Country town pages.
+import BaseLayout from "@layouts/BaseLayout.astro";
+import PageHeader from "@components/layout/PageHeader.astro";
+import ServiceArea from "@components/widgets/ServiceArea.astro";
+import FinalCta from "@components/widgets/FinalCta.astro";
+import ContactForm from "@components/widgets/ContactForm.astro";
+import Icon from "@components/ui/Icon.astro";
+import { locations } from "@data/locations";
+import { site } from "@data/site";
+
+const towns = Object.values(locations);
+const origin = Astro.site!.toString().replace(/\/$/, "");
+
+const title = "Service Areas | Tree Service Across Watauga County & the High Country";
+const description =
+  "River Birch Tree Service covers Deep Gap, Boone, Blowing Rock, Vilas, Sugar Grove, Valle Crucis, Foscoe and all of Watauga County, NC. Fully insured, 24/7 emergency response. Call (828) 964-6567.";
+
+const itemList = {
+  "@type": "ItemList",
+  "@id": `${origin}/service-areas#towns`,
+  name: "River Birch Tree Service — Service Areas",
+  itemListElement: towns.map((t, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    name: `${t.name}, ${t.state}`,
+    url: `${origin}/tree-service-${t.slug}`,
+  })),
+};
+---
+
+<BaseLayout title={title} description={description} path="/service-areas" schema={[itemList]} breadcrumb={[{ name: "Service Areas", item: `${origin}/service-areas` }]}>
+  <PageHeader
+    eyebrow="Watauga County & the High Country"
+    title="Where River Birch Works"
+    subtitle="Locally owned and based in Deep Gap, we serve tree removal, storm &amp; ice cleanup, land clearing, trimming, stump grinding, and view clearing across all of Watauga County — and travel for large jobs beyond the county line."
+    ctas={[
+      { label: `Call ${site.phoneDisplay}`, href: site.phoneHref, variant: "call" },
+      { label: "Get a Free Estimate", href: "#contact", variant: "outline" },
+    ]}
+  />
+
+  <section class="cpr-section">
+    <div class="cpr-section-inner">
+      <h2 class="towns__h">Towns We Serve in {site.address.region}</h2>
+      <p class="towns__lede">Click your town for local tree service details. Don't see your spot? We cover the surrounding areas too — just <a href="/contact">give us a call</a>.</p>
+      <ul class="towns__grid" role="list">
+        {
+          towns.map((t) => (
+            <li>
+              <a href={`/tree-service-${t.slug}`} class="towns__card">
+                <span class="towns__dot" aria-hidden="true" />
+                <span class="towns__name">{t.name}, {t.state}</span>
+                <Icon name="arrow" class="towns__arrow" />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <ServiceArea />
+  <FinalCta heading="Need a Tree Handled in the High Country? Let's Talk." />
+  <ContactForm formName="Service Areas Estimate Request" />
+</BaseLayout>
+
+<style>
+  .towns__h {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+  }
+  .towns__lede {
+    margin: 0.6rem 0 var(--cpr-space-xl);
+    color: var(--cpr-slate);
+    font-size: 1.05rem;
+    max-width: 60ch;
+  }
+  .towns__lede a {
+    color: var(--cpr-red);
+    font-weight: 600;
+    text-decoration: underline;
+  }
+  .towns__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+  }
+  .towns__card {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--cpr-bg-light);
+    border: 1px solid rgba(18, 51, 30, 0.08);
+    border-radius: var(--cpr-radius-md);
+    padding: 0.9rem 1.1rem;
+    font-weight: 600;
+    color: var(--cpr-navy);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  }
+  .towns__card:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--cpr-shadow-md);
+    border-color: var(--cpr-red);
+  }
+  .towns__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--cpr-gold);
+    flex: none;
+  }
+  .towns__name {
+    flex: 1;
+  }
+  .towns__arrow {
+    width: 1em;
+    height: 1em;
+    color: var(--cpr-red);
+  }
+  @media (max-width: 900px) {
+    .towns__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 480px) {
+    .towns__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

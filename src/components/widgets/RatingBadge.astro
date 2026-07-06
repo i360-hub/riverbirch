@@ -1,0 +1,74 @@
+---
+// Reusable "5.0★ Google rating" badge. Per the brief: show the 5.0 rating and
+// stars, link out to the live Google profile — and NEVER show the review count.
+import Icon from "@components/ui/Icon.astro";
+import { site } from "@data/site";
+import { reviewsSummary } from "@data/reviews";
+
+interface Props {
+  label?: string;
+  light?: boolean; // white text for dark sections
+  link?: boolean; // wrap in the Google reviews link
+  class?: string;
+}
+const {
+  label = "Google Rating",
+  light = false,
+  link = true,
+  class: className = "",
+} = Astro.props;
+const Tag = link ? "a" : "div";
+const linkProps = link
+  ? { href: site.googleReviewsUrl, target: "_blank", rel: "noopener", "aria-label": `${reviewsSummary.rating} star rating on Google — read our reviews` }
+  : {};
+---
+
+<Tag class:list={["ratingbadge", { "ratingbadge--light": light }, className]} {...linkProps}>
+  <span class="ratingbadge__num">{reviewsSummary.rating}</span>
+  <span class="ratingbadge__stars" role="img" aria-label={`${reviewsSummary.stars} out of 5 stars`}>
+    {Array.from({ length: reviewsSummary.stars }).map(() => (<Icon name="star" />))}
+  </span>
+  <span class="ratingbadge__label"><Icon name="google" class="ratingbadge__g" />{label}</span>
+</Tag>
+
+<style>
+  .ratingbadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.85rem;
+    border-radius: var(--cpr-radius-pill);
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(200, 153, 46, 0.5);
+    line-height: 1;
+    color: var(--cpr-white);
+  }
+  .ratingbadge--light {
+    background: var(--cpr-white);
+    color: var(--cpr-navy);
+    border-color: rgba(18, 51, 30, 0.12);
+    box-shadow: var(--cpr-shadow-sm);
+  }
+  .ratingbadge__num {
+    font-weight: 800;
+    font-size: 1.05rem;
+  }
+  .ratingbadge__stars {
+    display: inline-flex;
+    gap: 0.08rem;
+    color: var(--cpr-gold);
+    font-size: 0.95rem;
+  }
+  .ratingbadge__label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-weight: 700;
+    font-size: 0.82rem;
+    white-space: nowrap;
+  }
+  .ratingbadge__g {
+    width: 1em;
+    height: 1em;
+  }
+</style>

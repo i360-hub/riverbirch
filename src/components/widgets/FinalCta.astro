@@ -1,0 +1,65 @@
+---
+// Full-width red call-to-action band that precedes the contact form.
+import Button from "@components/ui/Button.astro";
+import { site } from "@data/site";
+
+interface Props {
+  heading?: string;
+  primaryLabel?: string;
+  secondaryLabel?: string;
+  secondaryHref?: string;
+}
+const {
+  heading = "Need Water Damage Help? Talk to Our Team Now.",
+  primaryLabel = `Call Now: ${site.phoneDisplay}`,
+  secondaryLabel = "Request Free Assessment",
+  secondaryHref = "#contact",
+} = Astro.props;
+---
+
+<section class="final-cta">
+  <div class="final-cta__inner">
+    <h2 class="final-cta__h" set:html={heading} />
+    <div class="final-cta__btns">
+      <Button href={site.phoneHref} variant="ghost" size="lg">{primaryLabel}</Button>
+      <Button href={secondaryHref} variant="outline" size="lg">{secondaryLabel}</Button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .final-cta {
+    background: var(--cpr-red);
+    color: var(--cpr-white);
+    padding: var(--cpr-space-2xl) var(--cpr-space-lg);
+  }
+  .final-cta__inner {
+    max-width: var(--cpr-max-width);
+    margin-inline: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--cpr-space-xl);
+    flex-wrap: wrap;
+  }
+  .final-cta__h {
+    color: var(--cpr-white);
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    max-width: 20ch;
+  }
+  .final-cta__btns {
+    display: flex;
+    gap: var(--cpr-space-md);
+    flex-wrap: wrap;
+  }
+  @media (max-width: 700px) {
+    .final-cta__inner {
+      flex-direction: column;
+      text-align: center;
+      align-items: stretch;
+    }
+    .final-cta__btns {
+      justify-content: center;
+    }
+  }
+</style>

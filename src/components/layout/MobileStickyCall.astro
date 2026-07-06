@@ -1,0 +1,39 @@
+---
+// Sitewide sticky call bar — mobile only (mirrors wdr-mobile-sticky-call).
+import { site } from "@data/site";
+import Icon from "@components/ui/Icon.astro";
+---
+
+<a class="sticky-call" href={site.phoneHref}>
+  <Icon name="phone" />
+  <span>Call 24/7 — {site.phoneDisplay}</span>
+</a>
+
+<style>
+  .sticky-call {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.95rem;
+    background: var(--cpr-red);
+    color: var(--cpr-white);
+    font-weight: 700;
+    font-size: 1.05rem;
+    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.15);
+  }
+  .sticky-call :global(svg) {
+    width: 1.2em;
+    height: 1.2em;
+  }
+  @media (max-width: 960px) {
+    .sticky-call {
+      display: flex;
+    }
+  }
+</style>

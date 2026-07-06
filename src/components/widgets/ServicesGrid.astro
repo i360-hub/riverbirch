@@ -1,0 +1,123 @@
+---
+// Homepage services grid (cpr-services). Links out to the Tier-1 service pages.
+import SectionHeader from "@components/ui/SectionHeader.astro";
+import Icon from "@components/ui/Icon.astro";
+
+interface Card {
+  icon: string;
+  title: string;
+  text: string;
+  href: string;
+}
+interface Props {
+  title?: string;
+  sub?: string;
+  cards?: Card[];
+}
+const {
+  title = "Water Damage, Mold, Rebuild. We Do It All.",
+  sub = "Most companies only dry your home. We dry it, clean it, and rebuild it. One contractor from start to finish.",
+  cards = [
+    { icon: "droplet", title: "Water Removal and Drying", text: "24/7 water extraction with truck-mounted equipment. We set up dehumidifiers and air movers to dry walls, floors, and subfloors completely.", href: "/water-damage-restoration" },
+    { icon: "storm", title: "Flood and Storm Damage", text: "Fast response for flooding from storms, broken pipes, or appliance leaks. We pump out the water, dry the structure, and protect your belongings.", href: "/storm-damage" },
+    { icon: "hazard", title: "Sewage Cleanup", text: "Sewage backups are a health hazard. We safely remove the waste, sanitize the area, and treat affected materials so your home is safe again.", href: "/sewage-cleanup" },
+    { icon: "mold", title: "Mold Removal", text: "If mold is growing, we contain the area, remove the mold safely, and run HEPA air scrubbers to clean the air. We fix the source so it does not come back.", href: "/mold-removal" },
+    { icon: "home", title: "Full Home Rebuild", text: "Once your home is dry, our crew puts it back together. New drywall, paint, trim, cabinets, flooring, and subfloors. We handle the entire rebuild.", href: "/water-damage-restoration" },
+    { icon: "droplet", title: "Basement Flooding", text: "Water in your basement can ruin the foundation and everything stored down there. We pump it out, dry the space, and repair the damage.", href: "/basement-flooding" },
+  ],
+} = Astro.props;
+---
+
+<section class="cpr-section cpr-section--light services">
+  <div class="cpr-section-inner">
+    <SectionHeader title={title} sub={sub} />
+
+    <ul class="services__grid" role="list">
+      {
+        cards.map((c) => (
+          <li class="services__card">
+            <a href={c.href} class="services__link">
+              <span class="services__icon"><Icon name={c.icon} /></span>
+              <h3 class="services__title">{c.title}</h3>
+              <p class="services__text">{c.text}</p>
+              <span class="services__more">Learn more <Icon name="arrow" /></span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .services__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--cpr-space-lg);
+  }
+  .services__card {
+    background: var(--cpr-white);
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    border-radius: var(--cpr-radius-lg);
+    box-shadow: var(--cpr-shadow-sm);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  }
+  .services__card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--cpr-shadow-md);
+    border-color: var(--cpr-red);
+  }
+  .services__link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    height: 100%;
+    padding: var(--cpr-space-xl);
+  }
+  .services__icon {
+    display: grid;
+    place-items: center;
+    width: 3.2rem;
+    height: 3.2rem;
+    border-radius: var(--cpr-radius-md);
+    background: rgba(47, 122, 67, 0.1);
+    color: var(--cpr-red);
+    font-size: 1.5rem;
+    margin-bottom: 0.3rem;
+  }
+  .services__title {
+    font-size: 1.25rem;
+  }
+  .services__text {
+    color: var(--cpr-slate);
+    line-height: 1.6;
+    font-size: 0.95rem;
+  }
+  .services__more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: auto;
+    padding-top: var(--cpr-space-sm);
+    font-weight: 700;
+    color: var(--cpr-red);
+  }
+  .services__more :global(svg) {
+    width: 1em;
+    height: 1em;
+    transition: transform 0.15s ease;
+  }
+  .services__card:hover .services__more :global(svg) {
+    transform: translateX(3px);
+  }
+  @media (max-width: 900px) {
+    .services__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 560px) {
+    .services__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
