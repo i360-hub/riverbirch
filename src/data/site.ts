@@ -43,9 +43,9 @@ export const site = {
   googleReviewsUrl: "https://search.google.com/local/reviews?placeid=ChIJ6Y1cyaKMfWlRbq5JFL72V6Q",
   googleWriteReviewUrl: "https://search.google.com/local/writereview?placeid=ChIJ6Y1cyaKMfWlRbq5JFL72V6Q",
 
-  // Real Google rating shown honestly: 5.0★ from 9 reviews, linked to the live
-  // profile. (We still do NOT emit aggregateRating/Review JSON-LD — self-serving
-  // reviews on your own site are ignored by Google for rich results.)
+  // Rating shown as 5.0★ on Google and linked to the live profile. The review
+  // COUNT is intentionally NOT displayed on-page (kept here for future use, e.g.
+  // once volume grows). We also do NOT emit aggregateRating/Review JSON-LD.
   googleRating: "5.0",
   googleReviewCount: "9",
   googleRatingLink: "https://www.google.com/maps?cid=11842205041438600814",

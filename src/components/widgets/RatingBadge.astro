@@ -1,26 +1,27 @@
 ---
-// Reusable Google rating badge — shows the REAL figure (5.0★ from 9 reviews)
-// and links to the live Google profile so it's verifiable.
+// Reusable Google rating badge — shows the real 5.0★ rating and links to the
+// live Google profile so it's verifiable. (Review count is intentionally not
+// shown; visitors can see it on Google if they choose.)
 import Icon from "@components/ui/Icon.astro";
 import { site } from "@data/site";
 import { reviewsSummary } from "@data/reviews";
 
 interface Props {
-  /** Trailing label after the stars. Defaults to "Google · N reviews". */
+  /** Trailing label after the stars. Defaults to "Google Rating". */
   label?: string;
   light?: boolean; // white text for dark sections
   link?: boolean; // wrap in the Google profile link
   class?: string;
 }
 const {
-  label = `Google · ${reviewsSummary.count} reviews`,
+  label = "Google Rating",
   light = false,
   link = true,
   class: className = "",
 } = Astro.props;
 const Tag = link ? "a" : "div";
 const linkProps = link
-  ? { href: site.googleRatingLink, target: "_blank", rel: "noopener", "aria-label": `${reviewsSummary.rating} star rating from ${reviewsSummary.count} reviews on Google — view our profile` }
+  ? { href: site.googleRatingLink, target: "_blank", rel: "noopener", "aria-label": `${reviewsSummary.rating} star rating on Google — view our profile` }
   : {};
 ---
 

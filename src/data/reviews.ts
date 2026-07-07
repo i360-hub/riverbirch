@@ -10,8 +10,10 @@
 // truncated the visible text — see the TODO comments to paste the final text.
 //
 // `topics` route each review to the most relevant service page; `city` routes a
-// review that names a town to that town's page. The review COUNT (9) is shown
-// and every rating links to the live Google profile (see site.googleRatingLink).
+// review that names a town to that town's page. The review COUNT is intentionally
+// NOT displayed (visitors can see it on Google); every rating shows 5.0★ and
+// links to the live Google profile (see site.googleRatingLink). `count` is kept
+// in reviewsSummary for future use once the review volume grows.
 // ============================================================================
 
 export interface Review {
