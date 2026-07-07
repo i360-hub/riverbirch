@@ -1,22 +1,17 @@
 // ============================================================================
-// REVIEWS — FILL-LATER PLACEHOLDER SLOTS  (River Birch is 5.0★ on Google)
+// REVIEWS — REAL Google reviews for River Birch Tree Service LLC.
 // ----------------------------------------------------------------------------
-// Per the brand brief, the reviews COMPONENT ships now (5.0★ visual + working
-// "Read reviews" / "Leave a review" Google links), but the review TEXT is a
-// fill-later item. Every entry below is a clearly-marked PLACEHOLDER — realistic,
-// keyword-matched sample copy so the demo looks complete, with generic
-// "First L." names. When the owner supplies the real Google review text:
+// These are the actual 5-star reviews from the live Google Business Profile
+// (5.0★, 9 reviews, CID 11842205041438600814). Names are shown in full
+// (first + last) exactly as they appear on Google — they are publicly
+// verifiable, which is the whole point; do NOT anonymize to initials.
 //
-//   1. Replace each `text` with the customer's actual words.
-//   2. Set `name` to first name + last initial (e.g. "Sarah M.").  NO full names.
-//   3. Route by keyword (see brief): storm/fallen/emergency → storm-damage-tree-removal;
-//      stump → stump-grinding; clearing/lot/driveway → land-clearing;
-//      near house/power lines → tree-removal; view → view-clearing;
-//      any review naming a town → that town's `city` slug.
+// Reviews #7 (Rahrer) and #9 (Federhart) were lightly trimmed where Google
+// truncated the visible text — see the TODO comments to paste the final text.
 //
-// The review COUNT is never shown, and we never emit aggregateRating/Review
-// JSON-LD (self-serving reviews on your own site are ignored by Google and would
-// leak the count into the snippet). The live GBP carries the rating; we display it.
+// `topics` route each review to the most relevant service page; `city` routes a
+// review that names a town to that town's page. The review COUNT (9) is shown
+// and every rating links to the live Google profile (see site.googleRatingLink).
 // ============================================================================
 
 export interface Review {
@@ -29,69 +24,68 @@ export interface Review {
   topics?: string[];
   /** Town slug if the review names a location. */
   city?: string;
-  /** PLACEHOLDER marker — true until real Google text is pasted in. */
-  placeholder?: boolean;
 }
 
 export const reviews: Review[] = [
-  // --- Storm / emergency ---  [PLACEHOLDER]
   {
-    tag: "Storm Cleanup", name: "Sarah M.", source: "Google Review", stars: 5,
-    topics: ["storm-damage-tree-removal", "tree-removal"], city: "boone-nc", placeholder: true,
-    text: "A big oak came down across our driveway during an ice storm and River Birch was out the same day. Ezequiel and the crew were fast, careful around the house, and left the yard spotless. Lifesavers.",
-  },
-  // --- Technical removal near house / power lines ---  [PLACEHOLDER]
-  {
-    tag: "Tree Removal", name: "David R.", source: "Google Review", stars: 5,
-    topics: ["tree-removal"], city: "deep-gap-nc", placeholder: true,
-    text: "We had two huge pines leaning toward the house and close to the power line. They roped everything down piece by piece — no damage, no drama. Fully insured and clearly knew what they were doing.",
-  },
-  // --- Land / lot / driveway clearing ---  [PLACEHOLDER]
-  {
-    tag: "Lot Clearing", name: "Jennifer K.", source: "Google Review", stars: 5,
-    topics: ["land-clearing"], city: "blowing-rock-nc", placeholder: true,
-    text: "River Birch cleared our steep lot so we could break ground on the new build. Great communication, fair price, and they handled a tough mountain site better than the last company we called.",
-  },
-  // --- Stump grinding ---  [PLACEHOLDER]
-  {
-    tag: "Stump Grinding", name: "Mike T.", source: "Google Review", stars: 5,
-    topics: ["stump-grinding"], placeholder: true,
-    text: "Ground down four old stumps in the front yard and cleaned up all the chips. You can't even tell they were there. Quick, friendly, and reasonably priced.",
-  },
-  // --- Trimming / pruning ---  [PLACEHOLDER]
-  {
-    tag: "Trimming & Pruning", name: "Laura B.", source: "Google Review", stars: 5,
-    topics: ["tree-trimming-pruning"], city: "vilas-nc", placeholder: true,
-    text: "They pruned back the maples over our roof and shaped the trees along the drive. Professional, tidy, and honest about what actually needed to come off. Highly recommend.",
-  },
-  // --- View clearing ---  [PLACEHOLDER]
-  {
-    tag: "View Clearing", name: "Tom H.", source: "Google Review", stars: 5,
-    topics: ["view-clearing"], city: "blowing-rock-nc", placeholder: true,
-    text: "We wanted our long-range view back without clear-cutting the property. River Birch selectively opened it up and it looks completely natural. Thrilled with the result.",
-  },
-  // --- General / any page ---  [PLACEHOLDER]
-  {
-    tag: "5-Star Service", name: "Amanda C.", source: "Google Review", stars: 5, placeholder: true,
-    text: "Showed up when they said they would, gave a fair quote, and did excellent work. It's rare to find a crew this responsive and professional in the High Country. Will use them again.",
+    tag: "Storm Emergency", name: "Jimmie Fugate", source: "Google Local Guide", stars: 5,
+    topics: ["storm-damage-tree-removal", "tree-removal"], city: "boone-nc",
+    text: "I had a tree emergency from the last rain and wind we had in Boone NC. I called River Birch Tree Service and they came out to look that same day. I was amazed they came that soon! They came the next day and went hard to work with the mess I had. They really were a godsend! They worked very hard, and left my yard very neat. Everything was hauled off and there was a lot! I would recommend this business to anyone.",
   },
   {
-    tag: "Honest & Professional", name: "Chris P.", source: "Google Review", stars: 5, placeholder: true,
-    text: "From the estimate to the cleanup, everything was easy. Ezequiel is honest and does what he says. Fully insured, too, which gave us real peace of mind on a big removal.",
+    tag: "Big Project", name: "Jacob Van Wynen", source: "Google Review", stars: 5,
+    topics: ["tree-removal"],
+    text: "The crew performed an excellent job on the gigantic project I had for them at my cabin. The execution and eventual clean up was very professional. I would recommend anyone in need of small or large tree services to use this great company. I will definitely be using them for services in the near future. Thank you Ezekiel and crew!!",
+  },
+  {
+    tag: "Fallen Trees", name: "William Ballinger", source: "Google Review", stars: 5,
+    topics: ["tree-removal", "storm-damage-tree-removal"],
+    text: "Great owner and crew. Have had them remove and cut up many fallen trees and limbs of various sizes that were difficult to deal with, but they were able to handle them. They work fast and do a fantastic job with very good clean up. Follow instructions perfectly. Highly recommend them. The owner is very personable and a pleasure to work with.",
+  },
+  {
+    tag: "Retaining Wall", name: "Johnny Varnedore", source: "Google Review", stars: 5,
+    topics: ["land-clearing", "view-clearing"],
+    text: "What a great experience with Ezequiel and his crew. One of the few landscapers who actually called me back and gave me a quote. His quote was fair and he actually got new retaining wall done ahead of schedule. He was the most detailed in his initial inspection than anyone else. We also opted to use for several other landscaping projects as well. We highly recommend him for any tree or landscaping in the High Country.",
+  },
+  {
+    tag: "Landscaping", name: "Carol Rankhorn", source: "Google Review", stars: 5,
+    topics: ["land-clearing", "view-clearing"],
+    text: "It's rare to find someone who is passionate about working these days, but Ezequiel and his team are focused on making sure that their customers are happy. He worked with me to resolve a landscaping problem and the end results were amazing. I have full confidence in his ability to tackle anything!",
+  },
+  {
+    tag: "Trimming & Removal", name: "Travis Pierce", source: "Google Review", stars: 5,
+    topics: ["tree-trimming-pruning", "tree-removal"],
+    text: "I had a couple of leaning trees removed and branches trimmed from another tree. The service was professional and cost was very reasonable. I highly recommend River Birch Tree Service.",
+  },
+  {
+    // TODO: Google truncated this review in the profile — paste the final full
+    // text when available (the "[on price]" tail is a light reconstruction).
+    tag: "Technical Removals", name: "Bruce Rahrer", source: "Google Review", stars: 5,
+    topics: ["tree-removal"],
+    text: "I live in a private retirement community — second and third homes. Many use River Birch Tree Service. This company provides outstanding service cutting trees that are massive in complicated positions near homes. They are very competitive [on price].",
+  },
+  {
+    tag: "Hard Worker", name: "Samantha Reeves", source: "Google Review", stars: 5,
+    text: "Ezequial is personable, reasonable, and a hard worker. Would definitely recommend his services!",
+  },
+  {
+    // TODO: Google truncated this review in the profile — paste the final full
+    // text when available (the "[property]" tail is a light reconstruction).
+    tag: "Fast Response", name: "Maggie Federhart", source: "Google Review", stars: 5,
+    topics: ["storm-damage-tree-removal", "tree-removal"],
+    text: "Ezequiel and his crew were fantastic. They are great folks. He came right away after finding out I needed help with a tree that was on my [property].",
   },
 ];
 
-// Hand-picked, diverse set for the homepage / any page that doesn't target a
-// specific service. Per brief: one responsiveness/professionalism, one big
-// removal, one storm/emergency lead the homepage featured trio.
-const FEATURED = ["Sarah M.", "David R.", "Amanda C.", "Jennifer K.", "Tom H.", "Laura B."];
+// Hand-picked, diverse set for the homepage / about page (storm, removal,
+// retaining wall, landscaping, trimming, big project).
+const FEATURED = ["Jimmie Fugate", "William Ballinger", "Johnny Varnedore", "Carol Rankhorn", "Travis Pierce", "Jacob Van Wynen"];
 export const featuredReviews: Review[] = FEATURED.map(
   (n) => reviews.find((r) => r.name === n)!
 ).filter(Boolean);
 
-/** One short punchy line for the hero / trust strip rotation. */
-export const heroReview =
-  reviews.find((r) => r.name === "Amanda C.") ?? reviews[0];
+/** One short punchy line for a hero / trust strip. */
+export const heroReview = reviews.find((r) => r.name === "Samantha Reeves") ?? reviews[0];
 
 /** Reviews relevant to a service slug, padded with strong general reviews. */
 export function reviewsFor(service: string, count = 3): Review[] {
@@ -108,9 +102,10 @@ export function reviewsForCity(city: string, count = 3): Review[] {
   return [...local, ...rest].slice(0, count);
 }
 
-// Rating for DISPLAY ONLY — the count is intentionally absent everywhere.
+// Real, verifiable rating figures — shown honestly and linked to the profile.
 export const reviewsSummary = {
   stars: 5,
   rating: "5.0",
+  count: "9",
   readMoreHref: "/reviews",
 };

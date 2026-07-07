@@ -43,11 +43,12 @@ export const site = {
   googleReviewsUrl: "https://search.google.com/local/reviews?placeid=ChIJ6Y1cyaKMfWlRbq5JFL72V6Q",
   googleWriteReviewUrl: "https://search.google.com/local/writereview?placeid=ChIJ6Y1cyaKMfWlRbq5JFL72V6Q",
 
-  // Google rating for DISPLAY ONLY — "5.0★". The review COUNT is never shown,
-  // anywhere. And per the brief we do NOT emit aggregateRating/Review schema
-  // (self-serving reviews on your own site get ignored by Google and would leak
-  // the count into the snippet). The live GBP carries the rating; we just show it.
+  // Real Google rating shown honestly: 5.0★ from 9 reviews, linked to the live
+  // profile. (We still do NOT emit aggregateRating/Review JSON-LD — self-serving
+  // reviews on your own site are ignored by Google for rich results.)
   googleRating: "5.0",
+  googleReviewCount: "9",
+  googleRatingLink: "https://www.google.com/maps?cid=11842205041438600814",
 
   // Interactive Google Maps embed centered on the Deep Gap base / CID. Uses the
   // Maps Embed API when PUBLIC_GOOGLE_MAPS_KEY is set; otherwise the ServiceArea
@@ -69,7 +70,7 @@ export const site = {
     type: "LocalBusiness",
     primaryService: "Tree Service",
     description:
-      "River Birch Tree Service LLC is a locally owned, fully-insured tree service based in Deep Gap, NC, serving Boone, Blowing Rock, and the High Country of Watauga County since 2020. Owner Ezequiel Moreno and crew handle tree removal (including technical removals near homes and power lines), 24/7 emergency storm and ice-damage cleanup, land, lot and driveway clearing, tree trimming and pruning, stump grinding, and view clearing. Free estimates and 5.0-star rated on Google.",
+      "River Birch Tree Service LLC is a locally owned, fully-insured tree service based in Deep Gap, NC, serving Boone, Blowing Rock, and the High Country of Watauga County. Owner Ezequiel Moreno and crew handle tree removal (including technical removals near homes and power lines), 24/7 emergency storm and ice-damage cleanup, land, lot and driveway clearing, tree trimming and pruning, stump grinding, and view clearing. Free estimates and 5.0-star rated on Google.",
     priceRange: "$$",
     foundingDate: "2020",
     languages: ["English", "Spanish"],

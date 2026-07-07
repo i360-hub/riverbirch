@@ -21,7 +21,7 @@ export const homepage = {
   title: "River Birch Tree Service | Tree Removal & Storm Cleanup — Deep Gap & Boone, NC",
   h1Lines: [
     "Local, Fully-Insured Tree Removal & Storm Cleanup",
-    "Serving Deep Gap & the High Country Since 2020",
+    "Serving Deep Gap & the High Country",
   ],
   metaDescription:
     "River Birch Tree Service LLC — tree removal, 24/7 storm & ice cleanup, land clearing, trimming, stump grinding & view clearing in Boone, Blowing Rock & Watauga County. Fully insured. 5.0★ on Google. Call (828) 964-6567.",

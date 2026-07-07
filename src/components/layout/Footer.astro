@@ -11,7 +11,7 @@ const trustChips = [
   { icon: "shield", label: "Fully Insured" },
   { icon: "clock", label: "24/7 Emergency" },
   { icon: "check", label: "Free Estimates" },
-  { icon: "leaf", label: "Serving the High Country Since 2020" },
+  { icon: "leaf", label: "Locally Owned in Deep Gap" },
 ];
 ---
 
@@ -70,7 +70,7 @@ const trustChips = [
         </ul>
 
         <div class="site-footer__rating">
-          <RatingBadge label="Google Rating" />
+          <RatingBadge />
           <a href={site.googleWriteReviewUrl} class="site-footer__writereview" target="_blank" rel="noopener">Leave a review</a>
         </div>
 
@@ -87,7 +87,7 @@ const trustChips = [
     </ul>
 
     <div class="site-footer__legal">
-      <span class="site-footer__insured">{site.insured} · 5.0★ Rated on Google</span>
+      <span class="site-footer__insured">{site.insured} · <a href={site.googleRatingLink} target="_blank" rel="noopener">5.0★ from 9 Google reviews</a></span>
       <nav class="site-footer__legal-links" aria-label="Legal">
         <a href="/privacy">Privacy Policy</a>
         <a href="/sms-terms-and-conditions">SMS Terms &amp; Conditions</a>
@@ -308,6 +308,11 @@ const trustChips = [
     font-weight: 700;
     color: rgba(255, 255, 255, 0.82);
     letter-spacing: 0.02em;
+  }
+  .site-footer__insured a {
+    color: var(--cpr-gold);
+    text-decoration: underline;
+    text-underline-offset: 2px;
   }
   .site-footer__legal-links {
     display: flex;

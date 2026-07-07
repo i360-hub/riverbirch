@@ -27,7 +27,7 @@ const DIFF_ROWS: { feature: string; others: Cell; cpr: Cell }[] = [
   { feature: "Careful, low-impact work on steep mountain lots", others: "no", cpr: "yes" },
   { feature: "Free, no-pressure estimates", others: "sometimes", cpr: "yes" },
   { feature: "Local, High Country–based crew", others: "sometimes", cpr: "yes" },
-  { feature: "Locally owned & operated since 2020", others: "sometimes", cpr: "yes" },
+  { feature: "Locally owned & operated", others: "sometimes", cpr: "yes" },
 ];
 
 const AREA = {

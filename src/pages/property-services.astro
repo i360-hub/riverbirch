@@ -15,11 +15,13 @@ import ProofStrip from "@components/widgets/ProofStrip.astro";
 import ActionShot from "@components/widgets/ActionShot.astro";
 import SectionHeader from "@components/ui/SectionHeader.astro";
 import Icon from "@components/ui/Icon.astro";
+import Reviews from "@components/widgets/Reviews.astro";
 import Faq from "@components/widgets/Faq.astro";
 import ServiceArea from "@components/widgets/ServiceArea.astro";
 import FinalCta from "@components/widgets/FinalCta.astro";
 import ContactForm from "@components/widgets/ContactForm.astro";
 import { site } from "@data/site";
+import { reviewsFor } from "@data/reviews";
 
 // Feature cards get the four STRONGEST property photos (all ~4:3 landscape, so
 // they fill the cells with little/no crop). Hero + action + the candid job shots
@@ -178,6 +180,12 @@ const serviceSchema = {
     </div>
   </section>
 
+  <Reviews
+    reviews={reviewsFor("land-clearing")}
+    title="What Property Clients Say"
+    sub="Real 5-star Google reviews from High Country homeowners — including our retaining-wall and landscaping work."
+    light={true}
+  />
   <Faq
     title="Property & Land Services — Common Questions"
     sub="Grading, walls, driveways, and clearing across Watauga County."

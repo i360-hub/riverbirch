@@ -1,6 +1,6 @@
 ---
-// Reviews page — 5.0★ Google visual, all testimonials, and the Read / Leave-a-
-// review Google links wired now. Review TEXT is fill-later (see reviews.ts).
+// Reviews page — the real 5.0★ Google reviews (9), with Read / Leave-a-review
+// links to the live profile.
 import BaseLayout from "@layouts/BaseLayout.astro";
 import PageHeader from "@components/layout/PageHeader.astro";
 import Reviews from "@components/widgets/Reviews.astro";
@@ -19,16 +19,16 @@ const description =
   <PageHeader
     eyebrow="5-Star Rated on Google"
     title="What Our High Country Neighbors Say"
-    subtitle="River Birch Tree Service is proud to hold a 5.0★ rating on Google across Deep Gap, Boone, Blowing Rock, and Watauga County. Read our reviews on Google — or, if we've worked for you, we'd love it if you left one."
+    subtitle="River Birch Tree Service holds a 5.0★ rating from 9 reviews on Google across Deep Gap, Boone, Blowing Rock, and Watauga County. Read them on Google — or, if we've worked for you, we'd love it if you left one."
     ctas={[
-      { label: "Read Our Google Reviews", href: site.googleReviewsUrl, variant: "primary" },
+      { label: "Read Our Google Reviews", href: site.googleRatingLink, variant: "primary" },
       { label: "Leave a Review", href: site.googleWriteReviewUrl, variant: "outline" },
     ]}
   />
   <Reviews
     reviews={reviews}
-    title="5.0★ on Google"
-    sub="Real reviews from homeowners across the High Country. New reviews appear on our live Google profile as they come in."
+    title="5.0★ from 9 Google Reviews"
+    sub="Every review below is a real, verifiable 5-star review from our live Google Business Profile."
   />
   <FinalCta heading="Ready to See Why We're 5-Star Rated? Let's Talk." />
   <ContactForm formName="Reviews Page Estimate Request" />

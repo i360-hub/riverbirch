@@ -25,7 +25,7 @@ const {
     <SectionHeader title={title} sub={sub} />
 
     <div class="reviews__badgerow">
-      <RatingBadge light={true} label="Rated on Google" />
+      <RatingBadge light={true} />
     </div>
 
     <ul class="reviews__grid" role="list">
@@ -36,7 +36,6 @@ const {
             <div class="reviews__stars" role="img" aria-label={`${r.stars} out of 5 stars`}>
               {Array.from({ length: r.stars }).map(() => (<Icon name="star" />))}
             </div>
-            {/* PLACEHOLDER review text — replace with the real Google review (see reviews.ts) */}
             <p class="reviews__text">{r.text}</p>
             <div class="reviews__author">
               <span class="reviews__initial" aria-hidden="true">{r.name.charAt(0)}</span>
