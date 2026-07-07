@@ -2,10 +2,8 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
-// Demo deploy target. Set this to the client's real domain (e.g.
-// https://www.riverbirchtreeservice.com) before go-live; until then the
-// Cloudflare Pages *.pages.dev URL works with this placeholder.
-const SITE = 'https://river-birch.pages.dev';
+// Production domain (registered at Cloudflare). Apex is canonical; www 301s to it.
+const SITE = 'https://riverbirchtreeservice.com';
 
 // Static (SSG) build for Cloudflare Pages. No adapter needed — all content is
 // prebuilt HTML. Images run through astro:assets (sharp) with avif/webp output.
