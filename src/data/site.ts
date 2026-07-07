@@ -27,13 +27,13 @@ export const site = {
 
   hours: "24/7 Emergency Service",
 
-  // GoHighLevel LeadConnector form — reused from the Plyler's demo sub-account
-  // as-is for this demo build. Swap in River Birch's own GHL form before go-live.
-  ghlFormId: "4GbeOTv0UeNs4bE2JDAe",
-  ghlFormSrc: "https://api.leadconnectorhq.com/widget/form/4GbeOTv0UeNs4bE2JDAe",
-  // Dedicated contact page reuses the same embed (only one demo form available).
-  ghlContactFormId: "4GbeOTv0UeNs4bE2JDAe",
-  ghlContactFormSrc: "https://api.leadconnectorhq.com/widget/form/4GbeOTv0UeNs4bE2JDAe",
+  // GoHighLevel LeadConnector form — River Birch's own "Contact — River Birch"
+  // form in their GHL sub-account. Leads flow into their CRM.
+  ghlFormId: "2IoiG70LCF5TQAsKwfzk",
+  ghlFormSrc: "https://api.leadconnectorhq.com/widget/form/2IoiG70LCF5TQAsKwfzk",
+  // Dedicated contact page uses the same form.
+  ghlContactFormId: "2IoiG70LCF5TQAsKwfzk",
+  ghlContactFormSrc: "https://api.leadconnectorhq.com/widget/form/2IoiG70LCF5TQAsKwfzk",
 
   email: "riverbirchtreexpert@gmail.com",
   // NC has no state arborist license — we claim "fully insured", never a license.
