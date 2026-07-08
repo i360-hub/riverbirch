@@ -2,7 +2,6 @@
 import type { ImageMetadata } from "astro";
 import ResponsivePicture from "@components/ui/ResponsivePicture.astro";
 import Button from "@components/ui/Button.astro";
-import Icon from "@components/ui/Icon.astro";
 import { site } from "@data/site";
 
 interface Cta {
@@ -64,19 +63,9 @@ const isCall = primaryCta.href.startsWith("tel:");
       <Button href={primaryCta.href} variant={isCall ? "call" : "primary"} size="lg">{primaryCta.label}</Button>
       <Button href={secondaryCta.href} variant="outline" size="lg">{secondaryCta.label}</Button>
     </div>
-
-    {
-      trustSignals.length > 0 && (
-        <ul class="hero__trust">
-          {trustSignals.map((t) => (
-            <li class="hero__trust-item">
-              <Icon name="check" class="hero__trust-check" />
-              <span set:html={t} />
-            </li>
-          ))}
-        </ul>
-      )
-    }
+    {/* Trust signals intentionally omitted here — the ProofStrip/StatStrip band
+        directly below the hero already carries them (no duplication). The
+        `trustSignals` prop is kept so callers don't need changing. */}
   </div>
 </section>
 
@@ -149,25 +138,6 @@ const isCall = primaryCta.href.startsWith("tel:");
     align-items: center;
     gap: var(--cpr-space-md);
     margin-top: var(--cpr-space-xl);
-  }
-  .hero__trust {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--cpr-space-md) var(--cpr-space-lg);
-    margin-top: var(--cpr-space-xl);
-  }
-  .hero__trust-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-weight: 600;
-    font-size: 0.95rem;
-  }
-  .hero__trust-check {
-    width: 1.2em;
-    height: 1.2em;
-    color: #4ade80;
-    flex: none;
   }
   @media (max-width: 600px) {
     .hero {
