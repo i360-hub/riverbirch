@@ -1,13 +1,17 @@
 ---
 // Sitewide marketing/analytics tags.
 //
-// Google Analytics 4 (G-1KNRPXM1BT), gated to the production host so preview
-// deploys (*.pages.dev) and local dev never pollute real Analytics data.
-// Deferred to first interaction/idle so it never competes with LCP.
+// Google Analytics 4 (G-1KNRPXM1BT). Loads immediately (matching Google's own
+// gtag.js snippet) so it's caught by Google's tag-verification checks and
+// counts fast-bouncing visitors (e.g. a mobile visitor tapping "Call" within
+// a second of landing). Still gated to the production host so *.workers.dev
+// previews and local dev never pollute real Analytics data. The script tag
+// itself is `async`, so it never blocks parsing/rendering — no LCP cost.
 const GA_ID = "G-1KNRPXM1BT";
 const PROD_HOST = "riverbirchtreeservice.com";
 ---
 
+<script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></script>
 <script is:inline define:vars={{ GA_ID, PROD_HOST }}>
   if (
     location.hostname === PROD_HOST ||
@@ -17,21 +21,7 @@ const PROD_HOST = "riverbirchtreeservice.com";
     function gtag() {
       dataLayer.push(arguments);
     }
-    let gaLoaded = false;
-    function loadGA() {
-      if (gaLoaded) return;
-      gaLoaded = true;
-      const s = document.createElement("script");
-      s.async = true;
-      s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_ID;
-      document.head.appendChild(s);
-      gtag("js", new Date());
-      gtag("config", GA_ID);
-    }
-    ["scroll", "pointerdown", "keydown", "touchstart"].forEach((e) =>
-      window.addEventListener(e, loadGA, { once: true, passive: true }),
-    );
-    if ("requestIdleCallback" in window) requestIdleCallback(loadGA, { timeout: 5000 });
-    else window.addEventListener("load", () => setTimeout(loadGA, 3000));
+    gtag("js", new Date());
+    gtag("config", GA_ID);
   }
 </script>
