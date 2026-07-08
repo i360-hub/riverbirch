@@ -1,15 +1,37 @@
 ---
 // Sitewide marketing/analytics tags.
 //
-// PLACEHOLDER — no analytics/pixels are loaded on this demo build. The client's
-// real tracking IDs have not been provided yet. When they are, add them here
-// behind the same production-host guard used in the reference build (so preview
-// and localhost traffic never pollute real Analytics or fire ad conversions):
-//
-//   • Google Analytics 4  (G-XXXXXXX)
-//   • Google Ads          (AW-XXXXXXXXX conversion)
-//   • Meta (Facebook) Pixel
-//
-// The GoHighLevel lead form (ContactForm.astro) carries its own conversion
-// tracking, so nothing is needed here for lead attribution.
+// Google Analytics 4 (G-1KNRPXM1BT), gated to the production host so preview
+// deploys (*.pages.dev) and local dev never pollute real Analytics data.
+// Deferred to first interaction/idle so it never competes with LCP.
+const GA_ID = "G-1KNRPXM1BT";
+const PROD_HOST = "riverbirchtreeservice.com";
 ---
+
+<script is:inline define:vars={{ GA_ID, PROD_HOST }}>
+  if (
+    location.hostname === PROD_HOST ||
+    location.hostname === "www." + PROD_HOST
+  ) {
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    let gaLoaded = false;
+    function loadGA() {
+      if (gaLoaded) return;
+      gaLoaded = true;
+      const s = document.createElement("script");
+      s.async = true;
+      s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_ID;
+      document.head.appendChild(s);
+      gtag("js", new Date());
+      gtag("config", GA_ID);
+    }
+    ["scroll", "pointerdown", "keydown", "touchstart"].forEach((e) =>
+      window.addEventListener(e, loadGA, { once: true, passive: true }),
+    );
+    if ("requestIdleCallback" in window) requestIdleCallback(loadGA, { timeout: 5000 });
+    else window.addEventListener("load", () => setTimeout(loadGA, 3000));
+  }
+</script>
