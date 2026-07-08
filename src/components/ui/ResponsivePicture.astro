@@ -2,7 +2,17 @@
 // Thin wrapper over astro:assets <Picture>: avif + webp output, responsive
 // widths, with a `priority` mode for the LCP hero (eager + fetchpriority=high,
 // never lazy). Everything else defaults to lazy.
-import { Picture } from "astro:assets";
+//
+// Two performance details handled here:
+//  1. fallbackFormat="jpg" — the <img> fallback is a JPEG, not a PNG. Our sources
+//     are photos; a PNG fallback balloons to multiple MB and ships in the build
+//     even though modern browsers take the avif/webp <source>.
+//  2. priority → an AVIF <link rel=preload> is emitted so the LCP hero starts
+//     downloading immediately instead of waiting for the <picture> to be parsed.
+//     getImage() here uses the same src, widths, and format as the <Picture>
+//     below, so the hashed URLs match and the browser reuses the preloaded
+//     response — no double download.
+import { Picture, getImage } from "astro:assets";
 import type { ImageMetadata } from "astro";
 
 interface Props {
@@ -30,12 +40,35 @@ const {
 // Don't upscale beyond the source's intrinsic width.
 const capped = widths.filter((w) => w <= src.width);
 const finalWidths = capped.length ? capped : [src.width];
+
+// Build the AVIF preload srcset for priority images (matches the <Picture> avif
+// <source> exactly, so no extra request is made).
+let avifPreloadSrcset: string | undefined;
+if (priority) {
+  const variants = await Promise.all(
+    finalWidths.map((w) => getImage({ src, width: w, format: "avif" })),
+  );
+  avifPreloadSrcset = variants.map((v, i) => `${v.src} ${finalWidths[i]}w`).join(", ");
+}
 ---
 
+{
+  priority && avifPreloadSrcset && (
+    <link
+      rel="preload"
+      as="image"
+      type="image/avif"
+      imagesrcset={avifPreloadSrcset}
+      imagesizes={sizes}
+      fetchpriority="high"
+    />
+  )
+}
 <Picture
   src={src}
   alt={alt}
   formats={["avif", "webp"]}
+  fallbackFormat="jpg"
   widths={finalWidths}
   sizes={sizes}
   loading={priority ? "eager" : "lazy"}
