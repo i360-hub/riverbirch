@@ -188,6 +188,7 @@ export const servicePages: Record<string, ServicePageData> = {
       { q: "Do you handle driveways and fence lines?", a: "Yes. Cutting in a new driveway, widening an existing one, or clearing a fence line are all common jobs for us across Deep Gap, Boone, and the rest of the county." },
       { q: "Do I need a permit to clear my land?", a: "It depends on the town, the scope, and things like grading and stream buffers. We'll tell you what we see and point you to the right local office, but confirming permits is ultimately the property owner's responsibility." },
       { q: "What happens to the trees and brush?", a: "We chip the brush, cut and stack or haul the wood based on what you want, and can grind the stumps — leaving the lot clean and ready for grading or building." },
+      { q: "Do you offer brush mulch chipping on site?", a: "Yes. We run limbs and brush through a chipper right on site — you can have the mulch spread over the cleared ground to hold soil and slow regrowth, or we'll haul the chips off. Brush mulch chipping keeps a cleared lot from turning into burn piles." },
     ],
     related: {
       title: "Related Services",
@@ -372,6 +373,61 @@ export const servicePages: Record<string, ServicePageData> = {
     finalCta: "Want Your Mountain View Back? Let's Talk.",
     contactHeading: "Get Your Free View Clearing Estimate",
     contactDesc: "Tell us about your property and the view you want back, or call us — we'll come out and map it with you, no pressure.",
+    ...AREA,
+  },
+  "tree-planting-transplanting": {
+    hero: {
+      emergencyTag: "🌱 Tree Planting & Transplanting",
+      subtitle:
+        "Replanting after a removal, filling a bare spot, or moving an established tree that's in the wrong place? River Birch plants and transplants across Boone, Deep Gap, and Watauga County — with species that actually thrive at High Country elevation. Fully insured, free estimates.",
+      trustSignals: ["High-Country-Hardy Species", "Fully Insured", "5.0★ on Google", "Free Estimates"],
+      secondaryCta: "Get a Free Estimate",
+    },
+    action: {
+      eyebrow: "Put the right tree back",
+      heading: "The crew that takes trees down can put the right ones back",
+      text: "Most of our work is removal — but when you want to replant after a removal, screen a property line, or move an established tree to a better spot, we handle that too. We pick species suited to your elevation and soil, set them at the right depth, and give you the aftercare to get them established.",
+    },
+    process: {
+      title: "How Planting & Transplanting Works",
+      sub: "Right tree, right spot, set up to survive the mountain seasons.",
+      ctaLabel: "Planning a planting or a transplant? Let's talk it through — free estimate.",
+      steps: [
+        { title: "Walk the Site & Pick the Tree", text: "We look at your spot — sun, slope, soil, and elevation — and help you choose a species that will actually thrive in the High Country, not just limp through its first year." },
+        { title: "Prep & Place", text: "For a new tree we dig and amend the hole and set it at the correct depth. For a transplant, we root-prune, lift with as much root ball as we can, and move it carefully to the new location." },
+        { title: "Set, Stake & Water In", text: "We backfill, stake where the wind calls for it, mulch the base, and water in — the details that decide whether a mountain planting takes hold." },
+        { title: "Aftercare Guidance", text: "You get clear, simple aftercare — watering, mulch, and what to watch for through the first seasons — so the tree gets established instead of struggling." },
+      ],
+    },
+    differentiators: {
+      title: "Why River Birch for Planting & Transplanting",
+      sub: "A tree planted too deep, in the wrong spot, or the wrong species for the elevation won't make it. We set it up to live.",
+      rows: DIFF_ROWS,
+    },
+    faqTitle: "Planting & Transplanting Questions",
+    faqSub: "What to know before we plant or move a tree.",
+    faqCtaLabel: "Thinking about a planting or a transplant? Call River Birch for a free estimate.",
+    faq: [
+      { q: "What trees do best in the Boone / High Country area?", a: "Species suited to the elevation and cold — natives like red maple, serviceberry, dogwood, white pine, and spruce tend to do well, depending on your sun, soil, and how exposed the spot is. We'll match the tree to your specific site when we walk it." },
+      { q: "Can you move a tree that's already established?", a: "Often, within reason. Smaller, younger trees transplant far more reliably than large mature ones. We root-prune, lift as much of the root ball as we can, and move it carefully — and we'll give you an honest read on whether a particular tree is a good transplant candidate." },
+      { q: "When is the best time to plant or transplant in the mountains?", a: "The dormant seasons — late fall through early spring — are usually best in the High Country, so roots can establish before summer heat and the next winter. We can plant other times too; we'll just plan the aftercare accordingly." },
+      { q: "Do you replant after a removal?", a: "Yes — a lot of our planting is putting the right tree back after we've taken a hazardous or dead one down. We can grind the old stump and set a new tree nearby in the same visit." },
+      { q: "Do you guarantee the tree will survive?", a: "We can't guarantee nature, but we set every planting up to succeed — right species, right depth, proper staking and mulch, and clear aftercare — and we're honest up front about any spot or tree that's a long shot." },
+    ],
+    related: {
+      title: "Related Services",
+      sub: "Often done together with planting.",
+      cards: [
+        { title: "Tree Removal", text: "Take the old tree down, then put the right one back.", href: "/tree-removal" },
+        { title: "Stump Grinding", text: "Grind the old stump so a new tree can go in nearby.", href: "/stump-grinding" },
+        { title: "Tree Trimming & Pruning", text: "Keep your new and established trees healthy as they grow.", href: "/tree-trimming-pruning" },
+      ],
+    },
+    reviewsTitle: "Trees We've Put In & Moved",
+    reviewsSub: "Real 5-star Google reviews from around the High Country.",
+    finalCta: "Ready to Plant or Move a Tree? Let's Talk.",
+    contactHeading: "Get a Free Planting or Transplant Estimate",
+    contactDesc: "Tell us what you'd like to plant or move, or call us — we'll walk the spot and give you a clear, no-pressure plan and price.",
     ...AREA,
   },
 };

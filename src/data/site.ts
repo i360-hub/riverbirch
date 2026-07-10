@@ -110,15 +110,20 @@ export const site = {
       { name: "Watauga County, NC", wiki: "https://en.wikipedia.org/wiki/Watauga_County,_North_Carolina" },
     ],
     // Core services offered — becomes a makesOffer list on the business node.
-    // Mirrors the 6 built service pages. Extend to all 10 GBP services when the
-    // remaining 4 names are supplied (see brief / README).
+    // Full parity with the 10 GBP "Listing Services": the 6 tree-service pages +
+    // Tree Planting & Transplanting (now a built page) + Tree Stump Removal
+    // (covered by Stump Grinding) + Brush Mulch Chipping (covered on Land Clearing).
     services: [
       "Tree Removal",
       "Emergency Storm & Ice Damage Tree Removal",
       "Land, Lot & Driveway Clearing",
       "Tree Trimming & Pruning",
       "Stump Grinding",
+      "Tree Stump Removal",
       "View Clearing",
+      "Tree Planting",
+      "Tree Transplanting",
+      "Brush Mulch Chipping",
     ],
   },
 

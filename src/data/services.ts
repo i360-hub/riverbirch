@@ -94,6 +94,17 @@ export const services: Service[] = [
     metaDescription:
       "Reclaim your mountain view without clear-cutting. River Birch does selective view clearing, view topping, and enhancement in Blowing Rock, Boone & Watauga County. Fully insured. Call (828) 964-6567.",
   },
+  {
+    slug: "tree-planting-transplanting",
+    navLabel: "Tree Planting & Transplanting",
+    gridTitle: "Planting & Transplanting",
+    group: "care",
+    icon: "tree",
+    title: "Tree Planting & Transplanting | Boone & Watauga County, NC | River Birch",
+    h1Lines: ["Tree Planting & Transplanting", "in the High Country, NC"],
+    metaDescription:
+      "River Birch plants new trees and transplants established ones across Boone, Deep Gap & Watauga County — High Country-hardy species, set and moved to survive. Fully insured, free estimates. Call (828) 964-6567.",
+  },
 ];
 
 export const servicesByGroup = {
