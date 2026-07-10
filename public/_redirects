@@ -18,3 +18,17 @@
 /contact-us                        /contact                                301
 /about                             /about-river-birch-tree-service         301
 /reviews-testimonials              /reviews                                301
+
+# --- Consolidated hamlet town pages -> service-areas hub (kept as text there;
+#     these communities are covered but don't warrant near-duplicate pages) ---
+/tree-service-zionville-nc         /service-areas                          301
+/tree-service-trade-nc             /service-areas                          301
+/tree-service-mabel-nc             /service-areas                          301
+/tree-service-cove-creek-nc        /service-areas                          301
+/tree-service-meat-camp-nc         /service-areas                          301
+/tree-service-sands-nc             /service-areas                          301
+/tree-service-bamboo-nc            /service-areas                          301
+/tree-service-aho-nc               /service-areas                          301
+/tree-service-triplett-nc          /service-areas                          301
+/tree-service-brownwood-nc         /service-areas                          301
+/tree-service-stony-fork-nc        /service-areas                          301
