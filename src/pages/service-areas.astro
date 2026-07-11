@@ -1,5 +1,6 @@
 ---
-// Service Areas hub — links to all 20 Watauga County / High Country town pages.
+// Service Areas hub — links to all High Country town pages, grouped by county
+// (Watauga home base + Ashe & Avery).
 import BaseLayout from "@layouts/BaseLayout.astro";
 import PageHeader from "@components/layout/PageHeader.astro";
 import ServiceArea from "@components/widgets/ServiceArea.astro";
@@ -12,9 +13,15 @@ import { site } from "@data/site";
 const towns = Object.values(locations);
 const origin = Astro.site!.toString().replace(/\/$/, "");
 
-const title = "Service Areas | Tree Service Across Watauga County & the High Country";
+// Group town pages by county so the hub reads as a real three-county footprint.
+const countyOrder = ["Watauga County", "Ashe County", "Avery County"];
+const townsByCounty = countyOrder
+  .map((county) => ({ county, towns: towns.filter((t) => t.county === county) }))
+  .filter((g) => g.towns.length > 0);
+
+const title = "Service Areas | Tree Service Across Watauga, Ashe & Avery Counties";
 const description =
-  "River Birch Tree Service covers Deep Gap, Boone, Blowing Rock, Vilas, Sugar Grove, Valle Crucis, Foscoe and all of Watauga County, NC. Fully insured, 24/7 emergency response. Call (828) 964-6567.";
+  "River Birch Tree Service covers Boone, Blowing Rock, Banner Elk, Beech Mountain, West Jefferson and the High Country across Watauga, Ashe & Avery Counties, NC. Fully insured, 24/7 emergency response. Call (828) 964-6567.";
 
 const itemList = {
   "@type": "ItemList",
@@ -31,9 +38,9 @@ const itemList = {
 
 <BaseLayout title={title} description={description} path="/service-areas" schema={[itemList]} breadcrumb={[{ name: "Service Areas", item: `${origin}/service-areas` }]}>
   <PageHeader
-    eyebrow="Watauga County & the High Country"
+    eyebrow="Watauga, Ashe & Avery Counties"
     title="Where River Birch Works"
-    subtitle="Locally owned and based in Deep Gap, we serve tree removal, storm &amp; ice cleanup, land clearing, trimming, stump grinding, and view clearing across all of Watauga County — and travel for large jobs beyond the county line."
+    subtitle="Locally owned and based in Deep Gap, we serve tree removal, storm &amp; ice cleanup, land clearing, trimming, stump grinding, and view clearing across Watauga County and neighboring Ashe &amp; Avery Counties — and travel for large jobs beyond."
     ctas={[
       { label: `Call ${site.phoneDisplay}`, href: site.phoneHref, variant: "call" },
       { label: "Get a Free Estimate", href: "#contact", variant: "outline" },
@@ -42,22 +49,27 @@ const itemList = {
 
   <section class="cpr-section">
     <div class="cpr-section-inner">
-      <h2 class="towns__h">Towns We Serve in {site.address.region}</h2>
+      <h2 class="towns__h">Towns We Serve Across the High Country</h2>
       <p class="towns__lede">Click your town for local tree service details. Don't see your spot? We cover the surrounding areas too — just <a href="/contact">give us a call</a>.</p>
-      <ul class="towns__grid" role="list">
-        {
-          towns.map((t) => (
-            <li>
-              <a href={`/tree-service-${t.slug}`} class="towns__card">
-                <span class="towns__dot" aria-hidden="true" />
-                <span class="towns__name">{t.name}, {t.state}</span>
-                <Icon name="arrow" class="towns__arrow" />
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-      <p class="towns__also">River Birch also serves {alsoServed.join(", ")}, and the surrounding High Country and NC/TN line communities. <a href="/contact">Call us</a> — if you're near Watauga County, we cover you.</p>
+      {
+        townsByCounty.map((group) => (
+          <div class="towns__county">
+            <h3 class="towns__countyh">{group.county}</h3>
+            <ul class="towns__grid" role="list">
+              {group.towns.map((t) => (
+                <li>
+                  <a href={`/tree-service-${t.slug}`} class="towns__card">
+                    <span class="towns__dot" aria-hidden="true" />
+                    <span class="towns__name">{t.name}, {t.state}</span>
+                    <Icon name="arrow" class="towns__arrow" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+      <p class="towns__also">River Birch also serves {alsoServed.join(", ")}, and the surrounding High Country and NC/TN line communities. <a href="/contact">Call us</a> — if you're anywhere near Watauga, Ashe, or Avery County, we cover you.</p>
     </div>
   </section>
 
@@ -80,6 +92,17 @@ const itemList = {
     color: var(--cpr-red);
     font-weight: 600;
     text-decoration: underline;
+  }
+  .towns__county {
+    margin-bottom: var(--cpr-space-xl);
+  }
+  .towns__countyh {
+    font-size: 1.15rem;
+    color: var(--cpr-navy);
+    margin: 0 0 0.9rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--cpr-gold);
+    display: inline-block;
   }
   .towns__grid {
     display: grid;

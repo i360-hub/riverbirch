@@ -1,12 +1,14 @@
 // The Tier-2 town pages. Rendered by src/pages/tree-service-[town].astro at
 // /tree-service-{slug}.
 //
-// We build dedicated pages for the 15 towns that carry genuinely distinct local
-// content (real terrain / elevation / drainage / demand). The 5 tiniest
-// unincorporated spots (Aho, Bamboo, Sands, Brownwood, Stony Fork) have no
-// distinguishable tree-service story of their own, so they're covered as text on
-// /service-areas and 301-redirect there (see public/_redirects) rather than as
-// near-duplicate pages — GBP coverage without doorway-content risk.
+// We build dedicated pages for the 24 towns that carry genuinely distinct local
+// content (real terrain / elevation / drainage / demand): 15 in Watauga County
+// (home), 5 in Avery County (Banner Elk, Beech Mountain, Sugar Mountain, Linville,
+// Newland) and 4 in Ashe County (West Jefferson, Jefferson, Fleetwood, Lansing).
+// The 5 tiniest unincorporated spots (Aho, Bamboo, Sands, Brownwood, Stony Fork)
+// have no distinguishable tree-service story of their own, so they're covered as
+// text on /service-areas and 301-redirect there (see public/_redirects) rather
+// than as near-duplicate pages — GBP coverage without doorway-content risk.
 //
 // Each town below has a real, town-specific `local` block (conditions + jobs +
 // FAQ), grounded in true High Country geography; no business claims are invented.
@@ -43,6 +45,8 @@ interface TownConfig {
   slug: string;
   name: string;
   state?: string;
+  /** Defaults to "Watauga County" (our home county). Set for Ashe/Avery towns. */
+  county?: string;
   character: string;
   nearby: string[];
   note?: string;
@@ -136,7 +140,7 @@ const townConfigs: TownConfig[] = [
   {
     slug: "seven-devils-nc", name: "Seven Devils",
     character: "the high mountain town straddling the Watauga–Avery line",
-    nearby: ["foscoe-nc", "blowing-rock-nc", "boone-nc"],
+    nearby: ["banner-elk-nc", "sugar-mountain-nc", "beech-mountain-nc", "foscoe-nc"],
     note: "At elevation, Seven Devils takes some of the heaviest ice and wind in the area — which is exactly when our 24/7 storm response matters most.",
     local: {
       conditions: "Seven Devils climbs to 4,000–5,000 feet on the Watauga–Avery line, home to some of the steepest resort lots and the heaviest ice loading in the region. At this elevation the freeze-thaw and rime ice snap limbs and topple exposed conifers, and the near-vertical driveways make every removal a rigging job.",
@@ -147,7 +151,7 @@ const townConfigs: TownConfig[] = [
   {
     slug: "todd-nc", name: "Todd",
     character: "the riverside community on the Watauga–Ashe line along the New River",
-    nearby: ["deep-gap-nc", "meat-camp-nc", "triplett-nc"],
+    nearby: ["fleetwood-nc", "deep-gap-nc", "west-jefferson-nc", "meat-camp-nc"],
     local: {
       conditions: "Todd straddles the Watauga–Ashe line along the South Fork of the New River at around 3,000 feet, a historic riverside community where large hardwoods and sycamores grow in the river bottom. High water undercuts and leans these streamside trees, and the mature canopy over older homes near the Todd General Store needs regular attention.",
       jobs: "Todd work centers on large hardwood removals and pruning along the river and around historic properties, plus cleanup when the New River rises and takes bank trees with it. We handle the technical, close-to-structure work these mature riverside lots call for.",
@@ -215,6 +219,104 @@ const townConfigs: TownConfig[] = [
       faq: { q: "Do you clear trees off long private drives in Triplett?", a: "Yes — rural drives blocked by a downed tree are a common Triplett call. We cut through, clear the drive, and haul off the debris, then handle any remaining hazard trees along it." },
     },
   },
+
+  // ── Avery County ──────────────────────────────────────────────────────────
+  {
+    slug: "banner-elk-nc", name: "Banner Elk", county: "Avery County",
+    character: "the ski-and-college town between Sugar and Beech Mountains",
+    nearby: ["sugar-mountain-nc", "beech-mountain-nc", "seven-devils-nc", "newland-nc"],
+    note: "Much of Banner Elk is second homes and rentals, so a lot of our work here is for owners who aren't on site — we handle it start to finish and send you the result.",
+    local: {
+      conditions: "Banner Elk sits around 3,700 feet between Sugar and Beech Mountains, home to Lees-McRae College and a dense mix of resort second homes, rentals, and older in-town lots. Steep wooded parcels of white pine, hemlock, and northern hardwood ring the town, and the ice and wind that pour off the surrounding 5,000-foot peaks make exposed trees a constant hazard.",
+      jobs: "In Banner Elk we do a lot of removals and view work on steep resort lots, plus storm response for the many second homes and rentals that sit empty between visits. Tight in-town lots near the college call for climbing and lowering in pieces, and we handle absentee-owner jobs from assessment through final cleanup.",
+      faq: { q: "Can you handle a tree at my Banner Elk second home while I'm away?", a: "Yes — much of our Banner Elk work is for owners who aren't on site. Send us photos and we'll assess, clear the tree, haul the debris, and send you the finished result. You don't have to be there." },
+    },
+  },
+  {
+    slug: "beech-mountain-nc", name: "Beech Mountain", county: "Avery County",
+    character: "the highest incorporated town in the eastern United States",
+    nearby: ["banner-elk-nc", "sugar-mountain-nc", "seven-devils-nc"],
+    note: "At over 5,000 feet, Beech takes the heaviest ice and wind in the region — which is exactly when our 24/7 storm response matters most.",
+    local: {
+      conditions: "Beech Mountain tops out above 5,000 feet — the highest incorporated town in the eastern US — where rime ice, freezing fog, and hard wind load trees far beyond what lower elevations ever see. The town is almost entirely wooded second homes and rentals on steep, switchbacked lots, with wind-flagged conifers and brittle hardwoods that snap under ice.",
+      jobs: "Ice and wind cleanup is the headline on Beech — when a system hits, this is one of the first and hardest-hit places in the region. We also do hazard and view work on the steep resort lots, climbing and rigging removals by hand where the near-vertical driveways keep trucks and lifts out.",
+      faq: { q: "Do you clear storm and ice damage on Beech Mountain?", a: "Constantly — at 5,000-plus feet Beech takes the heaviest ice in the area, and our 24/7 crew is ready when it brings trees down. We rig and lower removals on the steep lots by hand where equipment can't reach." },
+    },
+  },
+  {
+    slug: "sugar-mountain-nc", name: "Sugar Mountain", county: "Avery County",
+    character: "the ski-resort village on the slopes above Banner Elk",
+    nearby: ["banner-elk-nc", "beech-mountain-nc", "linville-nc", "seven-devils-nc"],
+    local: {
+      conditions: "Sugar Mountain climbs the slopes above Banner Elk past 4,000 feet, a resort village of ski-in second homes and condos on some of the steepest lots in the county. Tall white pine and hemlock crowd the views here, and the elevation brings the same ice loading and wind-throw that hit the neighboring peaks.",
+      jobs: "View clearing and steep-lot removals drive most Sugar Mountain work — opening up the slope and long-range views owners bought the property for, and taking down ice-damaged conifers on grades that demand full rigging. We also handle storm cleanup for the many units that sit empty midweek and off-season.",
+      faq: { q: "Do you do view clearing on Sugar Mountain?", a: "Yes — it's one of our most-requested jobs up here. We selectively clear and reduce trees to reopen your slope and long-range views while keeping the lot healthy and screened where you still want privacy." },
+    },
+  },
+  {
+    slug: "linville-nc", name: "Linville", county: "Avery County",
+    character: "the historic resort community at the foot of Grandfather Mountain",
+    nearby: ["newland-nc", "sugar-mountain-nc", "banner-elk-nc"],
+    note: "Many Linville and Linville Ridge properties are prized for their Grandfather Mountain views, so selective view clearing is one of our most-requested jobs here.",
+    local: {
+      conditions: "Linville sits at the foot of Grandfather Mountain near 3,600 feet, home to the historic Linville resort, the gated Linville Ridge, and the rugged country around Linville Gorge and Falls. Big rhododendron, hemlock, and mature hardwood define these prized wooded lots, and the exposure along the Grandfather ridgelines drives heavy wind and ice damage.",
+      jobs: "Linville work leans toward careful view and hazard work on prestige lots — selectively reducing and removing trees to protect long-range Grandfather views without stripping a property, plus technical removals close to historic and high-value homes. Storm cleanup along the exposed ridges is steady when the weather turns.",
+      faq: { q: "Can you do view and hazard work on a Linville Ridge lot?", a: "Yes — we're set up for the prestige, view-driven lots around Linville and Grandfather Mountain. We selectively clear for long-range views and take down hazard trees with careful rigging close to high-value homes." },
+    },
+  },
+  {
+    slug: "newland-nc", name: "Newland", county: "Avery County",
+    character: "the Avery County seat and highest county seat in the eastern United States",
+    nearby: ["linville-nc", "banner-elk-nc", "sugar-mountain-nc"],
+    local: {
+      conditions: "Newland is the seat of Avery County and, at about 3,600 feet, the highest county seat in the eastern US, set in the open Toe River valley ringed by wooded ridges. It's a year-round working town — older in-town lots with mature shade trees, surrounding farmland, and homes tucked against the timbered slopes.",
+      jobs: "Newland keeps us busy with everyday tree work for year-round residents — removing dead and hazardous hardwoods around homes and outbuildings, trimming mature shade trees, clearing acreage and fence lines, and grinding stumps. It's a central base for reaching the rest of Avery County.",
+      faq: { q: "Does River Birch serve Newland and the rest of Avery County?", a: "Yes — Newland is our anchor for Avery County work, and we cover the county seat and surrounding communities routinely from our nearby Deep Gap base. Call us for removal, trimming, clearing, storm cleanup, or stump grinding." },
+    },
+  },
+
+  // ── Ashe County ───────────────────────────────────────────────────────────
+  {
+    slug: "west-jefferson-nc", name: "West Jefferson", county: "Ashe County",
+    character: "Ashe County's largest town and its arts-and-tourism hub",
+    nearby: ["jefferson-nc", "fleetwood-nc", "todd-nc"],
+    local: {
+      conditions: "West Jefferson sits around 3,200 feet at the foot of Mount Jefferson, the busiest town in Ashe County with a walkable downtown arts district, mature street trees, and wooded residential lots climbing the surrounding slopes. Aging hardwoods over tight downtown lots and homes on the Mount Jefferson grade are the usual concern.",
+      jobs: "West Jefferson work runs from technical in-town removals over buildings and parked cars to hazard and slope work on the wooded lots around Mount Jefferson. Room to work is tight downtown, so we climb and lower most removals in controlled pieces, and we handle storm cleanup across the busy heart of Ashe County.",
+      faq: { q: "Can you remove a tree on a tight lot in downtown West Jefferson?", a: "Yes — most in-town West Jefferson jobs have no room to fell a tree whole, so we climb and lower it in pieces. We're set up for tight access, parked cars, and neighbors close on both sides." },
+    },
+  },
+  {
+    slug: "jefferson-nc", name: "Jefferson", county: "Ashe County",
+    character: "the Ashe County seat below Mount Jefferson",
+    nearby: ["west-jefferson-nc", "fleetwood-nc", "lansing-nc"],
+    local: {
+      conditions: "Jefferson is the seat of Ashe County, set near 3,000 feet just below Mount Jefferson and the South Fork of the New River, a year-round town of older residential lots, county offices, and surrounding farmland. Mature shade trees over established homes and roadside hardwoods are the common work here.",
+      jobs: "In Jefferson we handle everyday removals and pruning for year-round residents, hazard trees around homes and outbuildings, and cleanup after the storms that funnel through the New River valley. It pairs with neighboring West Jefferson as our base for covering the rest of Ashe County.",
+      faq: { q: "Do you serve Jefferson and greater Ashe County?", a: "Yes — Jefferson and West Jefferson are our anchors for Ashe County, and we cover the county seat and surrounding communities routinely. Call River Birch for removal, trimming, clearing, storm cleanup, or stump grinding." },
+    },
+  },
+  {
+    slug: "fleetwood-nc", name: "Fleetwood", county: "Ashe County",
+    character: "the New River community on the Ashe–Watauga line near Todd",
+    nearby: ["todd-nc", "west-jefferson-nc", "deep-gap-nc"],
+    note: "Fleetwood is one of the closest Ashe communities to our Deep Gap base, so we get out here fast when a tree comes down.",
+    local: {
+      conditions: "Fleetwood lies along the South Fork of the New River near the Ashe–Watauga line at about 3,000 feet, a rural riverside community of farmland, second homes, and wooded lots — and one of the closest Ashe communities to our Deep Gap base. Large river-bottom hardwoods and sycamores grow here, and high water undercuts and leans them over time.",
+      jobs: "Fleetwood work centers on riverside hardwood removals and cleanup when the New River rises and takes bank trees with it, plus clearing and storm response on the surrounding wooded and farm lots. Because it's a short reach from Deep Gap, we respond quickly when a tree comes down out this way.",
+      faq: { q: "Can you handle riverside trees in Fleetwood?", a: "Yes — the New River bottom in Fleetwood grows big hardwoods, and high water undercuts them. We take down and clean up leaning or storm-damaged riverside trees, working carefully around homes and banks — and we're close by in Deep Gap." },
+    },
+  },
+  {
+    slug: "lansing-nc", name: "Lansing", county: "Ashe County",
+    character: "the small northern-Ashe town in the heart of Christmas-tree country",
+    nearby: ["west-jefferson-nc", "jefferson-nc"],
+    local: {
+      conditions: "Lansing sits in northern Ashe County near Big Horse Creek and the New River around 3,000 feet, a small town surrounded by rolling farmland and some of the most productive Fraser-fir Christmas-tree country in the state. Field-edge hardwoods, windbreak rows, and old homestead shade trees are the usual work on Lansing-area properties.",
+      jobs: "Around Lansing we do a lot of acreage and farm-focused work — clearing land and fence lines, removing dead or hazardous trees around homes, barns, and tree-farm fields, and grinding stumps so the ground can be worked or replanted. We cover northern Ashe alongside our core High Country service area.",
+      faq: { q: "Do you clear land and farm trees around Lansing?", a: "Yes — land and fence-line clearing and farm-tree removal are a big part of what we do in the Lansing area. We can open up fields and building sites, drop hazardous trees around barns and homes, and grind the stumps so the ground is ready to use." },
+    },
+  },
 ];
 
 const nameBySlug: Record<string, string> = Object.fromEntries(
@@ -224,7 +326,8 @@ const nameBySlug: Record<string, string> = Object.fromEntries(
 function makeTown(cfg: TownConfig): Town {
   const { slug, name } = cfg;
   const state = cfg.state ?? "NC";
-  const county = "Watauga County";
+  const county = cfg.county ?? "Watauga County";
+  const isHomeCounty = county === "Watauga County";
   const nearby = cfg.nearby
     .filter((s) => nameBySlug[s])
     .map((s) => ({ label: `${nameBySlug[s]}, ${townConfigs.find((t) => t.slug === s)?.state ?? "NC"}`, href: `/tree-service-${s}` }));
@@ -239,7 +342,7 @@ function makeTown(cfg: TownConfig): Town {
     metaDescription: `Fully-insured tree removal, 24/7 storm & ice cleanup, trimming, stump grinding & land clearing in ${name}, ${state}. Local River Birch crew, 5.0★ on Google. Free estimates — ${PHONE}.`,
     h1: `Tree Service in ${name}, ${state}`,
     heroTag: "🌲 Local, Fully-Insured & 24/7",
-    heroSub: `River Birch Tree Service brings safe, insured tree removal, storm & ice cleanup, trimming, stump grinding, and land clearing to ${name} and the surrounding High Country. Owner Ezequiel Moreno and crew are based right here in ${county}.`,
+    heroSub: `River Birch Tree Service brings safe, insured tree removal, storm & ice cleanup, trimming, stump grinding, and land clearing to ${name} and the surrounding High Country. ${isHomeCounty ? `Owner Ezequiel Moreno and crew are based right here in ${county}.` : `Owner Ezequiel Moreno and crew are based nearby in Deep Gap and cover ${name} throughout ${county}.`}`,
     heroTrust: ["5.0★ on Google", "Fully Insured", "24/7 Emergency", "Free Estimates"],
     stats: [
       { number: "24/7", label: "Emergency Response" },

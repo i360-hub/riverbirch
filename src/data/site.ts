@@ -70,7 +70,7 @@ export const site = {
     type: "LocalBusiness",
     primaryService: "Tree Service",
     description:
-      "River Birch Tree Service LLC is a locally owned, fully-insured tree service based in Deep Gap, NC, serving Boone, Blowing Rock, and the High Country of Watauga County. Owner Ezequiel Moreno and crew handle tree removal (including technical removals near homes and power lines), 24/7 emergency storm and ice-damage cleanup, land, lot and driveway clearing, tree trimming and pruning, stump grinding, and view clearing. Free estimates and 5.0-star rated on Google.",
+      "River Birch Tree Service LLC is a locally owned, fully-insured tree service based in Deep Gap, NC, serving Boone, Blowing Rock, Banner Elk, West Jefferson, and the High Country across Watauga, Ashe, and Avery Counties. Owner Ezequiel Moreno and crew handle tree removal (including technical removals near homes and power lines), 24/7 emergency storm and ice-damage cleanup, land, lot and driveway clearing, tree trimming and pruning, stump grinding, and view clearing. Free estimates and 5.0-star rated on Google.",
     priceRange: "$$",
     foundingDate: "2020",
     languages: ["English", "Spanish"],
@@ -82,9 +82,10 @@ export const site = {
     cid: "11842205041438600814",
     profileId: "1987114942540672921",
     mapUrl: "https://maps.google.com/maps?cid=11842205041438600814",
-    // Service radius from the Deep Gap base (meters) — ~25 mi, covering Watauga
-    // County core. Emitted as a GeoCircle.
-    serviceRadiusMeters: 40000,
+    // Service radius from the Deep Gap base (meters) — ~30 mi, covering the
+    // Watauga County core plus neighboring Ashe and Avery County towns we serve.
+    // Emitted as a GeoCircle.
+    serviceRadiusMeters: 48000,
     // Towns served — our Tier-2 town pages (matches the GBP service area).
     areaServed: [
       { name: "Deep Gap, NC", wiki: "https://en.wikipedia.org/wiki/Deep_Gap,_North_Carolina" },
@@ -108,6 +109,19 @@ export const site = {
       { name: "Brownwood, NC" },
       { name: "Stony Fork, NC" },
       { name: "Watauga County, NC", wiki: "https://en.wikipedia.org/wiki/Watauga_County,_North_Carolina" },
+      // Avery County towns.
+      { name: "Banner Elk, NC", wiki: "https://en.wikipedia.org/wiki/Banner_Elk,_North_Carolina" },
+      { name: "Beech Mountain, NC", wiki: "https://en.wikipedia.org/wiki/Beech_Mountain,_North_Carolina" },
+      { name: "Sugar Mountain, NC", wiki: "https://en.wikipedia.org/wiki/Sugar_Mountain,_North_Carolina" },
+      { name: "Linville, NC", wiki: "https://en.wikipedia.org/wiki/Linville,_North_Carolina" },
+      { name: "Newland, NC", wiki: "https://en.wikipedia.org/wiki/Newland,_North_Carolina" },
+      { name: "Avery County, NC", wiki: "https://en.wikipedia.org/wiki/Avery_County,_North_Carolina" },
+      // Ashe County towns.
+      { name: "West Jefferson, NC", wiki: "https://en.wikipedia.org/wiki/West_Jefferson,_North_Carolina" },
+      { name: "Jefferson, NC", wiki: "https://en.wikipedia.org/wiki/Jefferson,_North_Carolina" },
+      { name: "Fleetwood, NC" },
+      { name: "Lansing, NC", wiki: "https://en.wikipedia.org/wiki/Lansing,_North_Carolina" },
+      { name: "Ashe County, NC", wiki: "https://en.wikipedia.org/wiki/Ashe_County,_North_Carolina" },
     ],
     // Core services offered — becomes a makesOffer list on the business node.
     // Full parity with the 10 GBP "Listing Services": the 6 tree-service pages +
@@ -146,6 +160,8 @@ export const site = {
     { label: "Valle Crucis, NC", href: "/tree-service-valle-crucis-nc" },
     { label: "Foscoe, NC", href: "/tree-service-foscoe-nc" },
     { label: "Todd, NC", href: "/tree-service-todd-nc" },
+    { label: "Banner Elk, NC", href: "/tree-service-banner-elk-nc" },
+    { label: "West Jefferson, NC", href: "/tree-service-west-jefferson-nc" },
   ],
 
   copyrightYear: 2026,
@@ -178,6 +194,8 @@ export const nav: NavItem[] = [
       { label: "Blowing Rock", href: "/tree-service-blowing-rock-nc" },
       { label: "Vilas", href: "/tree-service-vilas-nc" },
       { label: "Foscoe", href: "/tree-service-foscoe-nc" },
+      { label: "Banner Elk", href: "/tree-service-banner-elk-nc" },
+      { label: "West Jefferson", href: "/tree-service-west-jefferson-nc" },
       { label: "All Service Areas", href: "/service-areas" },
     ],
   },
