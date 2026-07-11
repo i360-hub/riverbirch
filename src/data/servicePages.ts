@@ -32,9 +32,9 @@ const DIFF_ROWS: { feature: string; others: Cell; cpr: Cell }[] = [
 
 const AREA = {
   areaTitle: "Serving Deep Gap, Boone & the High Country",
-  areaSub: "Locally owned and based in Deep Gap, we cover Watauga County and the surrounding High Country. Pick your town for local details.",
-  areaInfoHeading: "Fast Response Across Watauga County",
-  areaInfoBlurb: "From Deep Gap we reach Boone, Blowing Rock, Vilas, Sugar Grove and the rest of the county quickly — and we travel for large jobs beyond the county line.",
+  areaSub: "Locally owned and based in Deep Gap, we cover Watauga County plus neighboring Ashe & Avery Counties and the surrounding High Country. Pick your town for local details.",
+  areaInfoHeading: "Fast Response Across the High Country",
+  areaInfoBlurb: "From Deep Gap we reach Boone, Blowing Rock, Banner Elk, West Jefferson and the rest of Watauga, Ashe & Avery Counties quickly — and we travel for large jobs beyond.",
 };
 
 export const servicePages: Record<string, ServicePageData> = {
@@ -87,7 +87,7 @@ export const servicePages: Record<string, ServicePageData> = {
       ],
     },
     reviewsTitle: "What Your High Country Neighbors Say",
-    reviewsSub: "Real 5-star Google reviews from homeowners around Watauga County.",
+    reviewsSub: "Real 5-star Google reviews from homeowners across Watauga, Ashe & Avery Counties.",
     finalCta: "Dangerous Tree on Your Property? Let's Take a Look.",
     contactHeading: "Get Your Free Tree Removal Estimate",
     contactDesc: "Send us a few details or call — we'll come out, look at the tree, and give you a clear, no-pressure price. For a tree that's already a hazard, call us right away.",
@@ -131,7 +131,7 @@ export const servicePages: Record<string, ServicePageData> = {
       { q: "A tree fell on my house — what do I do first?", a: "Get everyone out of the affected area and call us right away. If a power line is involved, stay well clear and call your utility and 911 first. Then call River Birch — we'll secure the tree and get it off the structure safely." },
       { q: "Will my homeowner's insurance cover storm tree damage?", a: "Often, yes — when a tree hits a covered structure, many policies help with removal and repair. We document the scene with photos and provide an itemized invoice you can submit to your insurer. Coverage is between you and your carrier, but we make the paperwork easy." },
       { q: "How fast can you get here?", a: "As fast as conditions safely allow. We're based right in Deep Gap, so we're already in the High Country — no waiting on a crew to drive up the mountain from out of the area." },
-      { q: "Do you handle ice-damage cleanup too?", a: "Yes. Ice loads snap limbs and split trunks all over Watauga County. We clear ice-damaged trees and limbs, then can prune or remove what's left compromised so it doesn't come down on the next storm." },
+      { q: "Do you handle ice-damage cleanup too?", a: "Yes. Ice loads snap limbs and split trunks all over the High Country — and hit hardest at elevation in places like Beech Mountain and Seven Devils. We clear ice-damaged trees and limbs, then can prune or remove what's left compromised so it doesn't come down on the next storm." },
     ],
     related: {
       title: "Related Services",
@@ -143,7 +143,7 @@ export const servicePages: Record<string, ServicePageData> = {
       ],
     },
     reviewsTitle: "Neighbors We've Helped After the Storm",
-    reviewsSub: "Real 5-star Google reviews from Watauga County homeowners.",
+    reviewsSub: "Real 5-star Google reviews from High Country homeowners across all three counties.",
     finalCta: "Tree Down? We're Here 24/7 — Call Now.",
     contactHeading: "Get Emergency Storm Help",
     contactDesc: "For a tree that's down right now, call us — we answer 24/7. For non-urgent storm cleanup, send the details and we'll get right back to you.",
@@ -154,7 +154,7 @@ export const servicePages: Record<string, ServicePageData> = {
     hero: {
       emergencyTag: "🌲 Land, Lot & Driveway Clearing",
       subtitle:
-        "Building, expanding, or just opening up an overgrown mountain lot? River Birch clears trees, brush, and undergrowth for home sites, driveways, and fence lines across Watauga County — fully insured, with careful, low-impact work on steep ground.",
+        "Building, expanding, or just opening up an overgrown mountain lot? River Birch clears trees, brush, and undergrowth for home sites, driveways, and fence lines across Watauga, Ashe & Avery Counties — fully insured, with careful, low-impact work on steep ground.",
       trustSignals: ["Fully Insured", "Steep-Lot Experience", "5.0★ on Google", "Free Estimates"],
       secondaryCta: "Get a Free Estimate",
     },
@@ -180,12 +180,12 @@ export const servicePages: Record<string, ServicePageData> = {
       rows: DIFF_ROWS,
     },
     faqTitle: "Land & Lot Clearing Questions",
-    faqSub: "What to know about clearing mountain property in Watauga County.",
+    faqSub: "What to know about clearing mountain property across the High Country.",
     faqCtaLabel: "Planning a build or clearing a lot? Call River Birch for a free look.",
     faq: [
       { q: "Do you clear steep mountain lots?", a: "Yes — steep, wooded, rocky High Country lots are our normal terrain. We plan each clearing around the slope and access so we protect the soil and drainage while getting the site ready." },
       { q: "Can you leave certain trees standing?", a: "Absolutely. We walk the property with you first and mark exactly what stays and what goes. Selective clearing that keeps your best trees is one of the things we do well." },
-      { q: "Do you handle driveways and fence lines?", a: "Yes. Cutting in a new driveway, widening an existing one, or clearing a fence line are all common jobs for us across Deep Gap, Boone, and the rest of the county." },
+      { q: "Do you handle driveways and fence lines?", a: "Yes. Cutting in a new driveway, widening an existing one, or clearing a fence line are all common jobs for us across Deep Gap, Boone, and the rest of the High Country." },
       { q: "Do I need a permit to clear my land?", a: "It depends on the town, the scope, and things like grading and stream buffers. We'll tell you what we see and point you to the right local office, but confirming permits is ultimately the property owner's responsibility." },
       { q: "What happens to the trees and brush?", a: "We chip the brush, cut and stack or haul the wood based on what you want, and can grind the stumps — leaving the lot clean and ready for grading or building." },
       { q: "Do you offer brush mulch chipping on site?", a: "Yes. We run limbs and brush through a chipper right on site — you can have the mulch spread over the cleared ground to hold soil and slow regrowth, or we'll haul the chips off. Brush mulch chipping keeps a cleared lot from turning into burn piles." },
@@ -256,7 +256,7 @@ export const servicePages: Record<string, ServicePageData> = {
       ],
     },
     reviewsTitle: "Homeowners Who Trust Their Trees to Us",
-    reviewsSub: "Real 5-star Google reviews from around Watauga County.",
+    reviewsSub: "Real 5-star Google reviews from around Watauga, Ashe & Avery Counties.",
     finalCta: "Trees Need Attention? Let's Take a Look.",
     contactHeading: "Get Your Free Trimming Estimate",
     contactDesc: "Tell us what your trees need or call us — we'll come out, look them over, and give you an honest, no-pressure estimate.",
@@ -379,7 +379,7 @@ export const servicePages: Record<string, ServicePageData> = {
     hero: {
       emergencyTag: "🌱 Tree Planting & Transplanting",
       subtitle:
-        "Replanting after a removal, filling a bare spot, or moving an established tree that's in the wrong place? River Birch plants and transplants across Boone, Deep Gap, and Watauga County — with species that actually thrive at High Country elevation. Fully insured, free estimates.",
+        "Replanting after a removal, filling a bare spot, or moving an established tree that's in the wrong place? River Birch plants and transplants across Watauga, Ashe & Avery Counties — with species that actually thrive at High Country elevation. Fully insured, free estimates.",
       trustSignals: ["High-Country-Hardy Species", "Fully Insured", "5.0★ on Google", "Free Estimates"],
       secondaryCta: "Get a Free Estimate",
     },

@@ -45,7 +45,7 @@ import mTruck from "@assets/images/watauga-county-clearing-truck-cleared-lot.jpg
 const origin = Astro.site!.toString().replace(/\/$/, "");
 const title = "Grading, Retaining Walls & Property Services | River Birch — Boone, NC";
 const description =
-  "Beyond tree work — River Birch handles land & lot clearing, grading, retaining walls, and driveways/paths across Boone, Deep Gap & Watauga County. Fully insured. Free estimates — (828) 964-6567.";
+  "Beyond tree work — River Birch handles land & lot clearing, grading, retaining walls, and driveways/paths across Watauga, Ashe & Avery Counties. Fully insured. Free estimates — (828) 964-6567.";
 
 interface Feature { img: ImageMetadata; alt: string; title: string; text: string; href?: string }
 const features: Feature[] = [
@@ -88,7 +88,7 @@ const gallery: Shot[] = [
 const faq = [
   { q: "Does River Birch do more than tree work?", a: "Yes. We're best known for tree removal and storm cleanup, but a lot of our jobs don't stop when the tree comes down. Once a lot is cleared, the same crew can grade it, build retaining walls, cut in a driveway, and handle drainage — so you're not hiring three different companies for one project." },
   { q: "Do you build retaining walls on steep lots?", a: "Yes — steep, rocky mountain lots are exactly where retaining walls earn their keep. We build block and natural-stone walls that hold back the slope and turn unusable grade into usable yard, driveway, or building space. Fully insured on every job." },
-  { q: "Can you clear and prep my lot for a build?", a: "Absolutely. We clear the trees and brush, grade and shape the site, handle drainage, and cut in access — leaving the lot build-ready. It's the natural extension of the land clearing we already do across Watauga County." },
+  { q: "Can you clear and prep my lot for a build?", a: "Absolutely. We clear the trees and brush, grade and shape the site, handle drainage, and cut in access — leaving the lot build-ready. It's the natural extension of the land clearing we already do across Watauga, Ashe & Avery Counties." },
   { q: "Do you install driveways, paths, and handle drainage?", a: "Yes. We put in gravel driveways and paths, set stone edging, and do the drainage work that keeps mountain runoff off your foundation and out of your yard. Tell us the problem and we'll walk the site with you." },
   { q: "Do I need a permit for grading or a retaining wall?", a: "It depends on the town, the height of the wall, and things like grading near streams or steep slopes. We'll tell you what we see and point you to the right local office, but confirming permits is ultimately the property owner's responsibility." },
   { q: "Is your property work insured?", a: "Yes. River Birch Tree Service LLC is fully insured, and that coverage carries across our tree work and our grading, wall, and clearing work — so your property is protected the whole way through." },
@@ -188,7 +188,7 @@ const serviceSchema = {
   />
   <Faq
     title="Property & Land Services — Common Questions"
-    sub="Grading, walls, driveways, and clearing across Watauga County."
+    sub="Grading, walls, driveways, and clearing across Watauga, Ashe &amp; Avery Counties."
     items={faq}
   />
   <ServiceArea />

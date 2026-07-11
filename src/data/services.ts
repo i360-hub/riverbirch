@@ -24,7 +24,7 @@ export const homepage = {
     "Serving Deep Gap & the High Country",
   ],
   metaDescription:
-    "River Birch Tree Service LLC — tree removal, 24/7 storm & ice cleanup, land clearing, trimming, stump grinding & view clearing in Boone, Blowing Rock & Watauga County. Fully insured. 5.0★ on Google. Call (828) 964-6567.",
+    "River Birch Tree Service LLC — tree removal, 24/7 storm & ice cleanup, land clearing, trimming, stump grinding & view clearing in Boone, Banner Elk, West Jefferson & across the High Country. Fully insured. 5.0★ on Google. Call (828) 964-6567.",
 } as const;
 
 export const services: Service[] = [
@@ -37,7 +37,7 @@ export const services: Service[] = [
     title: "Tree Removal in Boone & Deep Gap, NC | River Birch Tree Service",
     h1Lines: ["Tree Removal in Boone", "& the High Country, NC"],
     metaDescription:
-      "Safe, fully-insured tree removal in Boone, Deep Gap & Watauga County — including technical removals near homes and power lines. Free estimates. Call River Birch at (828) 964-6567.",
+      "Safe, fully-insured tree removal in Boone, Deep Gap & across Watauga, Ashe & Avery Counties — including technical removals near homes and power lines. Free estimates. Call River Birch at (828) 964-6567.",
   },
   {
     slug: "storm-damage-tree-removal",
@@ -56,8 +56,8 @@ export const services: Service[] = [
     gridTitle: "Land & Lot Clearing",
     group: "removal",
     icon: "wind",
-    title: "Land, Lot & Driveway Clearing | Watauga County, NC | River Birch",
-    h1Lines: ["Land, Lot & Driveway Clearing", "Across Watauga County"],
+    title: "Land, Lot & Driveway Clearing | High Country, NC | River Birch",
+    h1Lines: ["Land, Lot & Driveway Clearing", "Across the High Country"],
     metaDescription:
       "Building, expanding, or opening up a mountain lot? River Birch clears land, lots, and driveways in Boone, Deep Gap & the High Country. Fully insured. Free estimates — (828) 964-6567.",
   },
@@ -70,7 +70,7 @@ export const services: Service[] = [
     title: "Tree Trimming & Pruning | Boone & the High Country, NC",
     h1Lines: ["Tree Trimming & Pruning", "in Boone & the High Country"],
     metaDescription:
-      "Keep your trees healthy, safe, and shaped right. River Birch provides expert tree trimming and pruning in Boone, Blowing Rock & Watauga County. Fully insured. Call (828) 964-6567.",
+      "Keep your trees healthy, safe, and shaped right. River Birch provides expert tree trimming and pruning in Boone, Blowing Rock & across the High Country. Fully insured. Call (828) 964-6567.",
   },
   {
     slug: "stump-grinding",
@@ -92,7 +92,7 @@ export const services: Service[] = [
     title: "View Clearing & Enhancement | High Country, NC | River Birch",
     h1Lines: ["View Clearing &", "Enhancement in the High Country"],
     metaDescription:
-      "Reclaim your mountain view without clear-cutting. River Birch does selective view clearing, view topping, and enhancement in Blowing Rock, Boone & Watauga County. Fully insured. Call (828) 964-6567.",
+      "Reclaim your mountain view without clear-cutting. River Birch does selective view clearing, view topping, and enhancement in Blowing Rock, Boone & across the High Country. Fully insured. Call (828) 964-6567.",
   },
   {
     slug: "tree-planting-transplanting",
@@ -100,10 +100,10 @@ export const services: Service[] = [
     gridTitle: "Planting & Transplanting",
     group: "care",
     icon: "tree",
-    title: "Tree Planting & Transplanting | Boone & Watauga County, NC | River Birch",
+    title: "Tree Planting & Transplanting | Boone & the High Country, NC | River Birch",
     h1Lines: ["Tree Planting & Transplanting", "in the High Country, NC"],
     metaDescription:
-      "River Birch plants new trees and transplants established ones across Boone, Deep Gap & Watauga County — High Country-hardy species, set and moved to survive. Fully insured, free estimates. Call (828) 964-6567.",
+      "River Birch plants new trees and transplants established ones across Watauga, Ashe & Avery Counties — High Country-hardy species, set and moved to survive. Fully insured, free estimates. Call (828) 964-6567.",
   },
 ];
 
