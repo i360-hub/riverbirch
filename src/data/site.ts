@@ -41,7 +41,7 @@ export const site = {
 
   // Direct Google Business Profile links (place ChIJ6Y1cyaKMfWlRbq5JFL72V6Q).
   googleReviewsUrl: "https://www.google.com/search?hl=en-US&gl=us&q=River+Birch+Tree+Service+LLc.&ludocid=11842205041438600814&lsig=AB86z5VzYPLZiU27ubzAM9h_oQih#lrd=0x627d8ca2c95c8de9:0xa457f6be1449ae6e,3",
-  googleWriteReviewUrl: "https://search.google.com/local/writereview?placeid=ChIJ6Y1cyaKMfWlRbq5JFL72V6Q",
+  googleWriteReviewUrl: "https://www.google.com/search?hl=en-US&gl=us&q=River+Birch+Tree+Service+LLc.&ludocid=11842205041438600814&lsig=AB86z5VzYPLZiU27ubzAM9h_oQih#lrd=0x627d8ca2c95c8de9:0xa457f6be1449ae6e,3",
 
   // Rating shown as 5.0★ on Google and linked to the live profile. The review
   // COUNT is intentionally NOT displayed on-page (kept here for future use, e.g.
