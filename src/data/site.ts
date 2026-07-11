@@ -122,6 +122,16 @@ export const site = {
       { name: "Fleetwood, NC" },
       { name: "Lansing, NC", wiki: "https://en.wikipedia.org/wiki/Lansing,_North_Carolina" },
       { name: "Ashe County, NC", wiki: "https://en.wikipedia.org/wiki/Ashe_County,_North_Carolina" },
+      // Smaller communities covered as text on /service-areas (no dedicated page).
+      { name: "Glendale Springs, NC" },
+      { name: "Creston, NC" },
+      { name: "Warrensville, NC" },
+      { name: "Crumpler, NC" },
+      { name: "Elk Park, NC", wiki: "https://en.wikipedia.org/wiki/Elk_Park,_North_Carolina" },
+      { name: "Crossnore, NC", wiki: "https://en.wikipedia.org/wiki/Crossnore,_North_Carolina" },
+      { name: "Pineola, NC" },
+      { name: "Montezuma, NC" },
+      { name: "Minneapolis, NC" },
     ],
     // Core services offered — becomes a makesOffer list on the business node.
     // Full parity with the 10 GBP "Listing Services": the 6 tree-service pages +

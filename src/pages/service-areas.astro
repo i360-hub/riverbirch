@@ -7,7 +7,7 @@ import ServiceArea from "@components/widgets/ServiceArea.astro";
 import FinalCta from "@components/widgets/FinalCta.astro";
 import ContactForm from "@components/widgets/ContactForm.astro";
 import Icon from "@components/ui/Icon.astro";
-import { locations, alsoServed } from "@data/locations";
+import { locations, alsoServedByCounty } from "@data/locations";
 import { site } from "@data/site";
 
 const towns = Object.values(locations);
@@ -69,7 +69,18 @@ const itemList = {
           </div>
         ))
       }
-      <p class="towns__also">River Birch also serves {alsoServed.join(", ")}, and the surrounding High Country and NC/TN line communities. <a href="/contact">Call us</a> — if you're anywhere near Watauga, Ashe, or Avery County, we cover you.</p>
+      <div class="towns__also-block">
+        <h3 class="towns__alsoh">Also Serving Across the High Country</h3>
+        <p class="towns__alsolede">We cover these smaller communities too — same fully-insured tree removal, 24/7 storm &amp; ice cleanup, trimming, stump grinding, and land clearing. Don't see your spot? <a href="/contact">Give us a call.</a></p>
+        <ul class="towns__alsolist" role="list">
+          {
+            alsoServedByCounty.map((g) => (
+              <li><strong>{g.county}:</strong> {g.towns.join(", ")}</li>
+            ))
+          }
+        </ul>
+        <p class="towns__also">River Birch also reaches the surrounding High Country and NC/TN line communities. If you're anywhere near Watauga, Ashe, or Avery County, we cover you.</p>
+      </div>
     </div>
   </section>
 
@@ -95,6 +106,47 @@ const itemList = {
   }
   .towns__county {
     margin-bottom: var(--cpr-space-xl);
+  }
+  .towns__also-block {
+    margin-top: var(--cpr-space-xl);
+    padding-top: var(--cpr-space-xl);
+    border-top: 1px solid rgba(18, 51, 30, 0.1);
+  }
+  .towns__alsoh {
+    font-size: 1.25rem;
+    color: var(--cpr-navy);
+    margin: 0 0 0.5rem;
+  }
+  .towns__alsolede {
+    color: var(--cpr-slate);
+    max-width: 66ch;
+    margin: 0 0 var(--cpr-space-lg);
+  }
+  .towns__alsolede a {
+    color: var(--cpr-red);
+    font-weight: 600;
+    text-decoration: underline;
+  }
+  .towns__alsolist {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.9rem 1.5rem;
+    margin: 0 0 var(--cpr-space-lg);
+  }
+  .towns__alsolist li {
+    color: var(--cpr-slate);
+    line-height: 1.5;
+  }
+  .towns__alsolist strong {
+    display: block;
+    color: var(--cpr-navy);
+    font-weight: 700;
+    margin-bottom: 0.15rem;
+  }
+  @media (max-width: 900px) {
+    .towns__alsolist {
+      grid-template-columns: 1fr;
+    }
   }
   .towns__countyh {
     font-size: 1.15rem;

@@ -57,9 +57,18 @@ interface TownConfig {
   };
 }
 
-/** Smaller GBP service-area communities we cover but don't build pages for.
- *  Listed as text on /service-areas; their /tree-service-* URLs 301 there. */
-export const alsoServed = ["Aho", "Bamboo", "Sands", "Brownwood", "Stony Fork"];
+/** Smaller service-area communities we cover but don't build dedicated pages
+ *  for — listed as crawlable text on /service-areas, grouped by county. These
+ *  give GBP-style coverage (the town names appear on the page) without the
+ *  doorway-content risk of near-duplicate pages. */
+export const alsoServedByCounty: { county: string; towns: string[] }[] = [
+  { county: "Watauga County", towns: ["Aho", "Bamboo", "Sands", "Brownwood", "Stony Fork"] },
+  { county: "Ashe County", towns: ["Glendale Springs", "Creston", "Warrensville", "Grassy Creek", "Crumpler", "Nathans Creek"] },
+  { county: "Avery County", towns: ["Elk Park", "Crossnore", "Pineola", "Montezuma", "Minneapolis", "Plumtree"] },
+];
+
+/** Flat list (Watauga hamlets) kept for any legacy consumer. */
+export const alsoServed = alsoServedByCounty[0].towns;
 
 const PHONE = "(828) 964-6567";
 
