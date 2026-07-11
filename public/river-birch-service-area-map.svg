@@ -1,12 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 620" role="img" aria-label="River Birch Tree Service coverage map of Watauga County and the High Country, North Carolina">
-  <title>River Birch Tree Service — Watauga County Service Area</title>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 620" role="img" aria-label="River Birch Tree Service coverage map of Watauga, Ashe and Avery Counties in the High Country of North Carolina, based in Deep Gap">
+  <title>River Birch Tree Service — Watauga, Ashe &amp; Avery County Service Area</title>
   <defs>
     <linearGradient id="rbSky" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#F7F1DF"/>
       <stop offset="1" stop-color="#EFE6CC"/>
     </linearGradient>
-    <radialGradient id="rbGlow" cx="50%" cy="46%" r="55%">
-      <stop offset="0" stop-color="#2F7A43" stop-opacity="0.16"/>
+    <radialGradient id="rbGlow" cx="50%" cy="52%" r="60%">
+      <stop offset="0" stop-color="#2F7A43" stop-opacity="0.14"/>
       <stop offset="1" stop-color="#2F7A43" stop-opacity="0"/>
     </radialGradient>
   </defs>
@@ -14,102 +14,95 @@
   <rect x="0" y="0" width="820" height="620" rx="18" fill="url(#rbSky)"/>
   <rect x="0" y="0" width="820" height="620" rx="18" fill="url(#rbGlow)"/>
 
-  <!-- County outline (stylized High Country / Watauga blob) -->
-  <path d="M120 250
-           C 150 160, 300 120, 400 135
-           C 520 152, 640 150, 700 220
-           C 748 275, 730 360, 680 410
-           C 620 470, 520 490, 430 480
-           C 330 470, 220 470, 165 405
-           C 118 350, 100 305, 120 250 Z"
-        fill="#12331E" fill-opacity="0.06" stroke="#12331E" stroke-opacity="0.35" stroke-width="2.5" stroke-dasharray="2 7" stroke-linecap="round"/>
+  <!-- Subtle Blue Ridge ridge lines for texture -->
+  <g fill="none" stroke="#2F7A43" stroke-linecap="round">
+    <path d="M70 300 C 210 268, 330 320, 470 288 C 590 262, 690 300, 760 280" stroke-opacity="0.14" stroke-width="2"/>
+    <path d="M70 355 C 210 328, 330 372, 470 344 C 590 320, 690 356, 760 336" stroke-opacity="0.1" stroke-width="2"/>
+    <path d="M70 250 C 210 222, 330 262, 470 236 C 590 214, 690 248, 760 230" stroke-opacity="0.1" stroke-width="2"/>
+  </g>
 
-  <!-- Ridge lines (Blue Ridge feel) -->
-  <path d="M150 330 C 250 300, 340 345, 430 315 C 520 288, 610 330, 690 305" fill="none" stroke="#2F7A43" stroke-opacity="0.28" stroke-width="2"/>
-  <path d="M170 375 C 270 350, 360 388, 450 360 C 540 335, 620 372, 690 350" fill="none" stroke="#2F7A43" stroke-opacity="0.2" stroke-width="2"/>
+  <!-- ── County coverage regions ─────────────────────────────────────────── -->
+  <!-- Avery County (southwest) -->
+  <path d="M150 360 C 175 342, 235 350, 252 385 C 268 418, 258 460, 220 482 C 185 502, 140 492, 126 452 C 113 415, 125 378, 150 360 Z"
+        fill="#12331E" fill-opacity="0.11" stroke="#12331E" stroke-opacity="0.5" stroke-width="2.5" stroke-dasharray="2 7" stroke-linecap="round"/>
+  <!-- Watauga County (center, home) -->
+  <path d="M292 330 C 292 280, 360 248, 448 256 C 512 262, 565 288, 556 350 C 549 405, 502 450, 428 452 C 356 454, 300 432, 294 380 C 291 360, 291 345, 292 330 Z"
+        fill="#2F7A43" fill-opacity="0.15" stroke="#2F7A43" stroke-opacity="0.6" stroke-width="3" stroke-dasharray="2 7" stroke-linecap="round"/>
+  <!-- Ashe County (northeast) -->
+  <path d="M560 250 C 552 200, 590 150, 640 148 C 685 146, 712 185, 706 235 C 701 275, 660 292, 610 288 C 582 286, 564 275, 560 250 Z"
+        fill="#C8992E" fill-opacity="0.16" stroke="#A87E1E" stroke-opacity="0.6" stroke-width="2.5" stroke-dasharray="2 7" stroke-linecap="round"/>
 
-  <!-- Town dots + labels -->
-  <g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="14" fill="#233b2b">
-    <g>
-      <circle cx="300" cy="290" r="4.5" fill="#2F7A43"/><text x="300" y="278" text-anchor="middle" font-weight="600">Boone</text>
+  <!-- County name labels -->
+  <g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-weight="800" letter-spacing="1.2"
+     paint-order="stroke" stroke="#F7F1DF" stroke-width="4" stroke-linejoin="round" text-anchor="middle">
+    <text x="188" y="352" font-size="14" fill="#12331E">AVERY</text>
+    <text x="410" y="300" font-size="15" fill="#245C34">WATAUGA</text>
+    <text x="632" y="140" font-size="14" fill="#8A6714">ASHE</text>
+  </g>
+
+  <!-- ── Towns ───────────────────────────────────────────────────────────── -->
+  <g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13"
+     paint-order="stroke" stroke="#F7F1DF" stroke-width="3.5" stroke-linejoin="round">
+    <!-- Watauga County (green) -->
+    <g fill="#1B3A27">
+      <circle cx="444" cy="366" r="4.5" fill="#2F7A43" stroke="none"/><text x="434" y="362" text-anchor="end" font-weight="600">Boone</text>
+      <circle cx="433" cy="422" r="4" fill="#2F7A43" stroke="none"/><text x="433" y="440" text-anchor="middle">Blowing Rock</text>
+      <circle cx="320" cy="338" r="4" fill="#2F7A43" stroke="none"/><text x="308" y="342" text-anchor="end">Vilas</text>
+      <circle cx="320" cy="366" r="4" fill="#2F7A43" stroke="none"/><text x="308" y="370" text-anchor="end">Valle Crucis</text>
+      <circle cx="331" cy="415" r="4" fill="#2F7A43" stroke="none"/><text x="331" y="433" text-anchor="middle">Foscoe</text>
+      <circle cx="523" cy="276" r="4" fill="#2F7A43" stroke="none"/><text x="523" y="264" text-anchor="middle">Todd</text>
     </g>
-    <g>
-      <circle cx="360" cy="360" r="4" fill="#2F7A43"/><text x="360" y="381" text-anchor="middle">Blowing Rock</text>
+    <!-- Ashe County (gold) -->
+    <g fill="#6E5211">
+      <circle cx="625" cy="165" r="4" fill="#A87E1E" stroke="none"/><text x="625" y="153" text-anchor="middle">Lansing</text>
+      <circle cx="670" cy="220" r="4.5" fill="#A87E1E" stroke="none"/><text x="681" y="224" text-anchor="start" font-weight="600">Jefferson</text>
+      <circle cx="647" cy="234" r="4.5" fill="#A87E1E" stroke="none"/><text x="636" y="252" text-anchor="end" font-weight="600">West Jefferson</text>
+      <circle cx="580" cy="262" r="4" fill="#A87E1E" stroke="none"/><text x="580" y="280" text-anchor="middle">Fleetwood</text>
     </g>
-    <g>
-      <circle cx="240" cy="320" r="4" fill="#2F7A43"/><text x="216" y="324" text-anchor="end">Vilas</text>
-    </g>
-    <g>
-      <circle cx="215" cy="365" r="4" fill="#2F7A43"/><text x="200" y="382" text-anchor="end">Sugar Grove</text>
-    </g>
-    <g>
-      <circle cx="270" cy="405" r="4" fill="#2F7A43"/><text x="270" y="424" text-anchor="middle">Valle Crucis</text>
-    </g>
-    <g>
-      <circle cx="320" cy="420" r="4" fill="#2F7A43"/><text x="330" y="438" text-anchor="start">Foscoe</text>
-    </g>
-    <g>
-      <circle cx="240" cy="450" r="4" fill="#2F7A43"/><text x="240" y="469" text-anchor="middle">Seven Devils</text>
-    </g>
-    <g>
-      <circle cx="205" cy="240" r="4" fill="#2F7A43"/><text x="205" y="228" text-anchor="middle">Zionville</text>
-    </g>
-    <g>
-      <circle cx="170" cy="280" r="4" fill="#2F7A43"/><text x="156" y="284" text-anchor="end">Trade</text>
-    </g>
-    <g>
-      <circle cx="185" cy="215" r="4" fill="#2F7A43"/><text x="185" y="203" text-anchor="middle">Mabel</text>
-    </g>
-    <g>
-      <circle cx="245" cy="265" r="4" fill="#2F7A43"/><text x="235" y="255" text-anchor="end">Cove Creek</text>
-    </g>
-    <g>
-      <circle cx="345" cy="235" r="4" fill="#2F7A43"/><text x="345" y="223" text-anchor="middle">Meat Camp</text>
-    </g>
-    <g>
-      <circle cx="330" cy="315" r="4" fill="#2F7A43"/><text x="345" y="309" text-anchor="start">Sands</text>
-    </g>
-    <g>
-      <circle cx="385" cy="315" r="4" fill="#2F7A43"/><text x="398" y="312" text-anchor="start">Bamboo</text>
-    </g>
-    <g>
-      <circle cx="405" cy="360" r="4" fill="#2F7A43"/><text x="418" y="364" text-anchor="start">Aho</text>
-    </g>
-    <g>
-      <circle cx="470" cy="250" r="4" fill="#2F7A43"/><text x="470" y="238" text-anchor="middle">Todd</text>
-    </g>
-    <g>
-      <circle cx="530" cy="285" r="4" fill="#2F7A43"/><text x="544" y="282" text-anchor="start">Triplett</text>
-    </g>
-    <g>
-      <circle cx="560" cy="335" r="4" fill="#2F7A43"/><text x="574" y="339" text-anchor="start">Brownwood</text>
-    </g>
-    <g>
-      <circle cx="590" cy="380" r="4" fill="#2F7A43"/><text x="604" y="384" text-anchor="start">Stony Fork</text>
+    <!-- Avery County (forest) -->
+    <g fill="#12331E">
+      <circle cx="206" cy="373" r="4" fill="#12331E" stroke="none"/><text x="196" y="373" text-anchor="end">Beech Mtn</text>
+      <circle cx="218" cy="401" r="4.5" fill="#12331E" stroke="none"/><text x="229" y="405" text-anchor="start" font-weight="600">Banner Elk</text>
+      <circle cx="229" cy="422" r="4" fill="#12331E" stroke="none"/><text x="240" y="426" text-anchor="start">Sugar Mtn</text>
+      <circle cx="150" cy="449" r="4" fill="#12331E" stroke="none"/><text x="150" y="467" text-anchor="middle">Newland</text>
+      <circle cx="218" cy="470" r="4" fill="#12331E" stroke="none"/><text x="229" y="474" text-anchor="start">Linville</text>
     </g>
   </g>
 
-  <!-- HQ pin: Deep Gap -->
-  <g transform="translate(430 305)">
-    <ellipse cx="0" cy="30" rx="20" ry="6" fill="#12331E" fill-opacity="0.18"/>
-    <path d="M0 30 C -20 2, -18 -18, 0 -24 C 18 -18, 20 2, 0 30 Z" fill="#C8992E" stroke="#12331E" stroke-width="2"/>
-    <circle cx="0" cy="-6" r="7.5" fill="#12331E"/>
-    <text x="0" y="-38" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="800" fill="#12331E">Deep Gap</text>
-    <text x="0" y="-54" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="700" letter-spacing="0.08em" fill="#C8992E">OUR BASE</text>
+  <!-- Deep Gap — home base (star) -->
+  <g>
+    <circle cx="500" cy="338" r="14" fill="#C8992E" fill-opacity="0.22"/>
+    <path d="M500 325 l3.6 7.3 8.1 1.2 -5.85 5.7 1.38 8.05 -7.23 -3.8 -7.23 3.8 1.38 -8.05 -5.85 -5.7 8.1 -1.2 Z"
+          fill="#C8992E" stroke="#12331E" stroke-width="1.2" stroke-linejoin="round"/>
+    <text x="500" y="368" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif"
+          font-size="13" font-weight="800" fill="#12331E"
+          paint-order="stroke" stroke="#F7F1DF" stroke-width="3.5" stroke-linejoin="round">Deep Gap (HQ)</text>
   </g>
 
-  <!-- Title block -->
+  <!-- ── Title ───────────────────────────────────────────────────────────── -->
   <g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
-    <text x="60" y="80" font-size="30" font-weight="800" fill="#12331E">Serving Watauga County</text>
-    <text x="60" y="110" font-size="17" font-weight="600" fill="#2F7A43">&amp; the High Country — 24/7 Emergency Tree Service</text>
+    <text x="44" y="58" font-size="25" font-weight="800" fill="#12331E">River Birch Tree Service</text>
+    <text x="44" y="82" font-size="15" font-weight="600" fill="#2F7A43">Service Area — Watauga · Ashe · Avery Counties, NC</text>
   </g>
 
-  <!-- Legend -->
-  <g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="14" fill="#233b2b" transform="translate(60 540)">
-    <path d="M6 -6 C -4 -20, -3 -30, 6 -33 C 15 -30, 16 -20, 6 -6 Z" fill="#C8992E" stroke="#12331E" stroke-width="1.5" transform="scale(0.7)"/>
-    <text x="18" y="-8" font-weight="700" fill="#12331E">River Birch base (Deep Gap)</text>
-    <circle cx="252" cy="-14" r="4.5" fill="#2F7A43"/>
-    <text x="266" y="-8">Towns we cover</text>
-    <text x="0" y="24" font-size="12.5" fill="#5c5a4e">And surrounding areas across the High Country — call for large jobs beyond the county line.</text>
+  <!-- Compass -->
+  <g transform="translate(766 66)" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+    <path d="M0 -22 L7 8 L0 1 L-7 8 Z" fill="#12331E"/>
+    <text x="0" y="26" text-anchor="middle" font-size="12" font-weight="700" fill="#12331E">N</text>
+  </g>
+
+  <!-- ── Legend ──────────────────────────────────────────────────────────── -->
+  <g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="14" fill="#233B2B">
+    <line x1="44" y1="548" x2="776" y2="548" stroke="#12331E" stroke-opacity="0.12" stroke-width="1.5"/>
+    <rect x="44" y="566" width="16" height="16" rx="3" fill="#2F7A43" fill-opacity="0.85"/>
+    <text x="68" y="579" font-weight="600">Watauga County</text>
+    <rect x="214" y="566" width="16" height="16" rx="3" fill="#C8992E" fill-opacity="0.9"/>
+    <text x="238" y="579" font-weight="600">Ashe County</text>
+    <rect x="356" y="566" width="16" height="16" rx="3" fill="#12331E" fill-opacity="0.85"/>
+    <text x="380" y="579" font-weight="600">Avery County</text>
+    <path d="M520 574 l3.3 6.7 7.4 1.1 -5.35 5.2 1.26 7.35 -6.61 -3.47 -6.61 3.47 1.26 -7.35 -5.35 -5.2 7.4 -1.1 Z"
+          transform="translate(-6 -8)" fill="#C8992E" stroke="#12331E" stroke-width="1"/>
+    <text x="534" y="579" font-weight="600" fill="#12331E">Deep Gap — home base</text>
+    <text x="44" y="604" font-size="12.5" fill="#5A6B60">Fully insured · 24/7 emergency response across all three counties &amp; the surrounding High Country.</text>
   </g>
 </svg>
