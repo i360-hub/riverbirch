@@ -180,6 +180,29 @@ const jsonLd = {
     <Footer />
     <MobileStickyCall />
 
+    <!-- LeadConnector (GoHighLevel) external tracking. Vendor requires it just
+         before </body>. Gated to the production host — matching Analytics.astro —
+         so *.workers.dev previews and local dev never fire real tracking hits.
+         The tag self-loads from its data-tracking-id, so we inject it only on the
+         live domain rather than rendering the tag unconditionally. -->
+    <script is:inline>
+      (function () {
+        var PROD_HOST = "riverbirchtreeservice.com";
+        if (
+          location.hostname !== PROD_HOST &&
+          location.hostname !== "www." + PROD_HOST
+        )
+          return;
+        var s = document.createElement("script");
+        s.src = "https://link.msgsndr.com/js/external-tracking.js";
+        s.setAttribute(
+          "data-tracking-id",
+          "tk_bc271c1f58b649e4b869e012a8bccb93"
+        );
+        document.body.appendChild(s);
+      })();
+    </script>
+
     <!-- Scroll-reveal: gentle fade + rise on each section as it enters view.
          transform/opacity only (no layout shift), one-shot, and fully skipped
          under prefers-reduced-motion. The hero/LCP is never delayed. -->
