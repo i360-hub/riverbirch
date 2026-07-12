@@ -57,7 +57,9 @@ const isCall = primaryCta.href.startsWith("tel:");
     <h1 class="hero__title">
       {h1Lines.map((line, i) => (<>{i > 0 && <br />}<span set:html={line} /></>))}
     </h1>
-    {subtitle && <h2 class="hero__sub" set:html={subtitle} />}
+    {/* Descriptive lede, not a section heading — a <p> keeps the H1→H2 outline
+        clean (an <h2> here competed with the page's real section headings). */}
+    {subtitle && <p class="hero__sub" set:html={subtitle} />}
 
     <div class="hero__actions">
       <Button href={primaryCta.href} variant={isCall ? "call" : "primary"} size="lg">{primaryCta.label}</Button>

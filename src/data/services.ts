@@ -18,13 +18,17 @@ export interface Service {
 
 export const homepage = {
   slug: "",
-  title: "River Birch Tree Service | Tree Removal & Storm Cleanup — Deep Gap & Boone, NC",
+  // Homepage carries the most domain authority, so it targets our highest-volume
+  // term ("tree service boone nc" ~70/mo) rather than Deep Gap (home base, but
+  // ~zero search volume). Deep Gap still leads the "local, based right here"
+  // story in the hero, about section, and GBP/NAP — just not the title/H1.
+  title: "Boone NC Tree Service & Removal | River Birch",
   h1Lines: [
     "Local, Fully-Insured Tree Removal & Storm Cleanup",
-    "Serving Deep Gap & the High Country",
+    "Serving Boone & the High Country",
   ],
   metaDescription:
-    "River Birch Tree Service LLC — tree removal, 24/7 storm & ice cleanup, land clearing, trimming, stump grinding & view clearing in Boone, Banner Elk, West Jefferson & across the High Country. Fully insured. 5.0★ on Google. Call (828) 964-6567.",
+    "River Birch Tree Service — tree removal, 24/7 storm & ice cleanup, trimming, stump grinding & land clearing in Boone & across the High Country. Fully insured. 5.0★ on Google. Call (828) 964-6567.",
 } as const;
 
 export const services: Service[] = [

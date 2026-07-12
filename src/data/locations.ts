@@ -50,6 +50,12 @@ interface TownConfig {
   character: string;
   nearby: string[];
   note?: string;
+  /** Bespoke SEO title/meta overrides for high-value pages (e.g. Boone) that
+   *  face real competition and deserve non-formulaic tags. When omitted, the
+   *  standard templated title/metaDescription is used. Keep title under ~60
+   *  chars so it isn't truncated on the SERP. */
+  seoTitle?: string;
+  seoMetaDescription?: string;
   local: {
     conditions: string;
     jobs: string;
@@ -64,6 +70,10 @@ interface TownConfig {
     faq2: { q: string; a: string };
     faq3: { q: string; a: string };
   };
+  /** Optional extra Q&As appended after the town-specific FAQs (before the
+   *  insurance one). Used on high-value pages to target intent the SERP rewards
+   *  — e.g. Boone's cost-focused "People Also Ask" box and "…cost" long-tail. */
+  extraFaqs?: { q: string; a: string }[];
 }
 
 /** Smaller service-area communities we cover but don't build dedicated pages
@@ -102,6 +112,11 @@ const townConfigs: TownConfig[] = [
     character: "the heart of the High Country and home to Appalachian State",
     nearby: ["deep-gap-nc", "blowing-rock-nc", "meat-camp-nc"],
     note: "From tight university-town lots to wooded ridgetop homes, Boone has every kind of tree job — and we handle all of them.",
+    // Boone is our highest-volume, most-competitive target ("tree service boone
+    // nc" ~70/mo, "tree removal boone nc" ~40/mo). Bespoke tags — exact-match,
+    // front-loaded, under ~60 chars — instead of the shared town formula.
+    seoTitle: "Tree Service in Boone, NC | Removal & 24/7 Storm Cleanup",
+    seoMetaDescription: `Boone, NC tree removal & 24/7 storm cleanup — from tight downtown lots near App State to wooded ridgetop homes. Fully insured, 5.0★ on Google. Free estimates: ${PHONE}.`,
     local: {
       conditions: "Boone sits around 3,300 feet, and its trees run from the tight, mature street canopy near downtown and Appalachian State to steep wooded ridgetop lots on the edges of town. Rhododendron, white pine, and ailing hemlocks are everywhere, and the big older hardwoods leaning over campus-area rentals and hillside neighborhoods need regular hazard assessment.",
       jobs: "Boone keeps us busy with technical removals over houses and parked cars, crown reduction on large hardwoods near power lines, and cleanup after the wind events that funnel through the valley. Room to work is the constant challenge in town, so we rope and lower most Boone removals in controlled pieces rather than dropping anything whole.",
@@ -111,6 +126,11 @@ const townConfigs: TownConfig[] = [
       faq2: { q: "Do you work around Appalachian State and student rentals in Boone?", a: "Regularly. Rental lots near campus are tight and often have cars and foot traffic close by, so we schedule around it, rope everything down in pieces, and clean up fully. We can bill the owner or property manager directly." },
       faq3: { q: "How quickly can you respond to a downed tree in Boone during a storm?", a: "Fast — Boone is a short run from our Deep Gap base and where we do the most emergency work. We answer 24/7 and prioritize trees on houses, blocked drives, and anything tangled in a service line." },
     },
+    extraFaqs: [
+      { q: "How much does tree removal cost in Boone, NC?", a: "It depends far more on the tree than the town. A small tree in an open yard is a quick job; a large hardwood leaning over your house, driveway, or a power line takes climbing, rigging, and a bigger crew, so it costs more. Boone's tight in-town lots near campus and steep ridgetop driveways also take longer to work safely than an open field. Rather than quote a number that won't fit your tree, we come out and give you a free written estimate for the exact job — so the price you're quoted is the price for the work." },
+      { q: "What makes one Boone tree job cost more than another?", a: "Four things, mostly: the tree's size and species (a big oak or silver maple takes longer than a slim pine); how close it is to your house, power lines, or a neighbor's property (tight targets mean roping every piece down instead of felling it whole); site access (whether we can get a truck and chipper near the tree, or it's a steep, wooded lot above Bamboo Road); and the extras you want — keeping the wood, stump grinding, and full haul-away. We walk the site, factor all of it in, and put the price in writing before any work starts." },
+      { q: "Are your estimates in Boone really free?", a: "Yes — always. We come to your Boone property, look at the tree, the lean, and everything around it, and hand you a clear, no-pressure written estimate at no cost. There's no charge and no obligation to book. Call or text (828) 964-6567 to set one up." },
+    ],
   },
   {
     slug: "blowing-rock-nc", name: "Blowing Rock",
@@ -452,8 +472,8 @@ function makeTown(cfg: TownConfig): Town {
     name,
     state,
     county,
-    title: `Tree Service in ${name}, ${state} | Tree Removal & Storm Cleanup | River Birch`,
-    metaDescription: `Fully-insured tree removal, 24/7 storm & ice cleanup, trimming, stump grinding & land clearing in ${name}, ${state}. Local River Birch crew, 5.0★ on Google. Free estimates — ${PHONE}.`,
+    title: cfg.seoTitle ?? `Tree Service in ${name}, ${state} | Tree Removal & Storm Cleanup | River Birch`,
+    metaDescription: cfg.seoMetaDescription ?? `Fully-insured tree removal, 24/7 storm & ice cleanup, trimming, stump grinding & land clearing in ${name}, ${state}. Local River Birch crew, 5.0★ on Google. Free estimates — ${PHONE}.`,
     h1: `Tree Service in ${name}, ${state}`,
     heroTag: "🌲 Local, Fully-Insured & 24/7",
     heroSub: `River Birch Tree Service brings safe, insured tree removal, storm & ice cleanup, trimming, stump grinding, and land clearing to ${name} and the surrounding High Country. ${isHomeCounty ? `Owner Ezequiel Moreno and crew are based right here in ${county}.` : `Owner Ezequiel Moreno and crew are based nearby in Deep Gap and cover ${name} throughout ${county}.`}`,
@@ -485,6 +505,7 @@ function makeTown(cfg: TownConfig): Town {
       cfg.local.faq,
       cfg.local.faq2,
       cfg.local.faq3,
+      ...(cfg.extraFaqs ?? []),
       { q: `Is River Birch insured, and do you need a license in ${state}?`, a: `River Birch Tree Service LLC is fully insured for tree work in ${name} and throughout ${county}. ${state === "TN" ? "Neither Carolina nor Tennessee issues a state arborist license" : "North Carolina has no state arborist license"}, so insurance is what actually protects your property — and we carry it on every job. Estimates are always free — call ${PHONE}.` },
     ],
     nearby,
