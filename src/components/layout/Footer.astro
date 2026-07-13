@@ -48,7 +48,10 @@ const trustChips = [
           <span class="site-footer__sab">We come to you — no storefront to visit.</span>
         </address>
         <p class="site-footer__hours"><Icon name="clock" /> {site.hours}</p>
-        <a href={site.phoneHref} class="site-footer__phone">{site.phoneDisplay}</a>
+        {/* NAP anchor: the footer keeps the REAL business number (matches the
+            GBP listing and schema), while the rest of the site shows the
+            call-tracking number. */}
+        <a href={site.napPhoneHref} class="site-footer__phone">{site.napPhoneDisplay}</a>
         <div class="site-footer__contactlinks">
           <a href={`mailto:${site.email}`}><Icon name="mail" /> Email us</a>
         </div>

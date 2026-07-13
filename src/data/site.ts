@@ -9,8 +9,15 @@ export const site = {
   tagline: "Local, Fully-Insured Tree Removal & 24/7 Storm Cleanup",
   owner: "Ezequiel Moreno",
 
-  phoneDisplay: "(828) 964-6567",
-  phoneHref: "tel:8289646567",
+  // Call-tracking number — what visitors see and dial everywhere on the site.
+  phoneDisplay: "(828) 818-8505",
+  phoneHref: "tel:8288188505",
+
+  // The business's real number. NAP-critical: stays on the LocalBusiness
+  // schema (BaseLayout) and the footer so Google can match the site to the
+  // GBP listing and citations. Never swap these for the tracking number.
+  napPhoneDisplay: "(828) 964-6567",
+  napPhoneHref: "tel:8289646567",
 
   // Service Area Business — address hidden (owner's home). Show city/region ONLY.
   // No `street` key anywhere: nothing can accidentally render a street address.

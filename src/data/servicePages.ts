@@ -127,7 +127,7 @@ export const servicePages: Record<string, ServicePageData> = {
     faqSub: "What to know when a tree comes down in the High Country.",
     faqCtaLabel: "Emergency right now? Call River Birch — we answer 24/7.",
     faq: [
-      { q: "Do you really answer 24/7?", a: "Yes. Storms and ice don't keep business hours in the High Country, so neither do we. Call (828) 964-6567 any hour and you'll reach a local River Birch crew for emergency storm and ice-damage tree work." },
+      { q: "Do you really answer 24/7?", a: "Yes. Storms and ice don't keep business hours in the High Country, so neither do we. Call (828) 818-8505 any hour and you'll reach a local River Birch crew for emergency storm and ice-damage tree work." },
       { q: "A tree fell on my house — what do I do first?", a: "Get everyone out of the affected area and call us right away. If a power line is involved, stay well clear and call your utility and 911 first. Then call River Birch — we'll secure the tree and get it off the structure safely." },
       { q: "Will my homeowner's insurance cover storm tree damage?", a: "Often, yes — when a tree hits a covered structure, many policies help with removal and repair. We document the scene with photos and provide an itemized invoice you can submit to your insurer. Coverage is between you and your carrier, but we make the paperwork easy." },
       { q: "How fast can you get here?", a: "As fast as conditions safely allow. We're based right in Deep Gap, so we're already in the High Country — no waiting on a crew to drive up the mountain from out of the area." },

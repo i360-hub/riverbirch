@@ -89,7 +89,7 @@ export const alsoServedByCounty: { county: string; towns: string[] }[] = [
 /** Flat list (Watauga hamlets) kept for any legacy consumer. */
 export const alsoServed = alsoServedByCounty[0].towns;
 
-const PHONE = "(828) 964-6567";
+const PHONE = "(828) 818-8505";
 
 const townConfigs: TownConfig[] = [
   {
@@ -129,7 +129,7 @@ const townConfigs: TownConfig[] = [
     extraFaqs: [
       { q: "How much does tree removal cost in Boone, NC?", a: "It depends far more on the tree than the town. A small tree in an open yard is a quick job; a large hardwood leaning over your house, driveway, or a power line takes climbing, rigging, and a bigger crew, so it costs more. Boone's tight in-town lots near campus and steep ridgetop driveways also take longer to work safely than an open field. Rather than quote a number that won't fit your tree, we come out and give you a free written estimate for the exact job — so the price you're quoted is the price for the work." },
       { q: "What makes one Boone tree job cost more than another?", a: "Four things, mostly: the tree's size and species (a big oak or silver maple takes longer than a slim pine); how close it is to your house, power lines, or a neighbor's property (tight targets mean roping every piece down instead of felling it whole); site access (whether we can get a truck and chipper near the tree, or it's a steep, wooded lot above Bamboo Road); and the extras you want — keeping the wood, stump grinding, and full haul-away. We walk the site, factor all of it in, and put the price in writing before any work starts." },
-      { q: "Are your estimates in Boone really free?", a: "Yes — always. We come to your Boone property, look at the tree, the lean, and everything around it, and hand you a clear, no-pressure written estimate at no cost. There's no charge and no obligation to book. Call or text (828) 964-6567 to set one up." },
+      { q: "Are your estimates in Boone really free?", a: "Yes — always. We come to your Boone property, look at the tree, the lean, and everything around it, and hand you a clear, no-pressure written estimate at no cost. There's no charge and no obligation to book. Call or text (828) 818-8505 to set one up." },
     ],
   },
   {

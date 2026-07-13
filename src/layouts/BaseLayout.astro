@@ -55,7 +55,9 @@ const business = {
   description: s.description,
   slogan: site.tagline,
   url: `${origin}/`,
-  telephone: site.phoneHref.replace("tel:", "+1"),
+  // NAP-critical: schema carries the REAL business number (napPhone), never
+  // the call-tracking number — it must match the GBP listing and citations.
+  telephone: site.napPhoneHref.replace("tel:", "+1"),
   email: site.email,
   founder: { "@type": "Person", name: site.owner },
   image: `${origin}${s.image}`,
