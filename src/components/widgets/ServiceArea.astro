@@ -71,7 +71,9 @@ const {
           showStaticMap && (
             <img
               class="area__staticmap"
-              src="/river-birch-service-area-map.svg"
+              {/* -v2 suffix: public/ assets get a 7-day edge cache (_headers),
+                  so a redesign must ship under a new URL to appear immediately. */}
+              src="/river-birch-service-area-map-v2.svg"
               alt="Map of River Birch Tree Service's coverage across Watauga, Ashe & Avery Counties in the High Country of North Carolina, based in Deep Gap"
               width="820"
               height="620"
