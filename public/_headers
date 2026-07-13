@@ -23,3 +23,10 @@
   X-Frame-Options: SAMEORIGIN
   Permissions-Policy: geolocation=(), microphone=(), camera=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains
+
+# Keep the pages.dev alias (and per-deploy hash previews) out of search engines.
+# Host-scoped: these rules never apply on riverbirchtreeservice.com.
+https://:project.pages.dev/*
+  X-Robots-Tag: noindex
+https://:version.:project.pages.dev/*
+  X-Robots-Tag: noindex
