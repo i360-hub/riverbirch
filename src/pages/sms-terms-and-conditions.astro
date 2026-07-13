@@ -16,7 +16,9 @@ const blocks = [
   { tag: "h2", html: "Privacy" },
   { tag: "p", html: `We do not sell or share your mobile number with third parties for their marketing. See our <a href="/privacy">Privacy Policy</a> for how we handle your information.` },
   { tag: "h2", html: "Contact" },
-  { tag: "p", html: `Questions about these terms? Call us at <a href="${site.phoneHref}">${site.phoneDisplay}</a> or email <a href="mailto:${site.email}">${site.email}</a>.` },
+  // The SMS program is registered to the real business number, so this legal
+  // page cites napPhone — not the sitewide call-tracking number.
+  { tag: "p", html: `Questions about these terms? Call us at <a href="${site.napPhoneHref}">${site.napPhoneDisplay}</a> or email <a href="mailto:${site.email}">${site.email}</a>.` },
 ];
 ---
 
