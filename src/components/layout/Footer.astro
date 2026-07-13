@@ -99,7 +99,7 @@ const trustChips = [
 
     <p class="site-footer__copy">
       &copy; {site.copyrightYear} {site.copyright} &nbsp;·&nbsp;
-      <span class="site-footer__credit">Smart Site by Impact 360</span>
+      <span class="site-footer__credit">Smart Site by <a href="https://www.impact360media.com" target="_blank" rel="noopener">Impact 360</a></span>
     </p>
   </div>
 </footer>
@@ -338,6 +338,14 @@ const trustChips = [
   .site-footer__credit {
     color: rgba(255, 255, 255, 0.7);
     font-weight: 600;
+  }
+  .site-footer__credit a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .site-footer__credit a:hover {
+    color: var(--cpr-white);
   }
 
   @media (max-width: 960px) {
