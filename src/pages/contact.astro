@@ -9,14 +9,14 @@ import { site } from "@data/site";
 const origin = Astro.site!.toString().replace(/\/$/, "");
 const title = "Contact River Birch Tree Service | Free Estimates | Deep Gap, NC";
 const description =
-  "Contact River Birch Tree Service for a free estimate on tree removal, storm cleanup, trimming, stump grinding, or land clearing in Boone & the High Country. Call or text (828) 818-8505. 24/7 emergencies.";
+  "Contact River Birch Tree Service for a free estimate on tree removal, storm cleanup, trimming, stump grinding, or land clearing in Boone & the High Country. Call (828) 818-8505. 24/7 emergencies.";
 ---
 
 <BaseLayout title={title} description={description} path="/contact" breadcrumb={[{ name: "Contact", item: `${origin}/contact` }]}>
   <PageHeader
     eyebrow="Free Estimates · 24/7 Emergencies"
     title="Contact River Birch Tree Service"
-    subtitle="Call or text us at (828) 818-8505, or send the details below and we'll get right back to you. Based in Deep Gap and serving Watauga, Ashe &amp; Avery Counties — we come to you."
+    subtitle="Call us at (828) 818-8505, or send the details below and we'll get right back to you. Based in Deep Gap and serving Watauga, Ashe &amp; Avery Counties — we come to you."
     ctas={[
       { label: `Call ${site.phoneDisplay}`, href: site.phoneHref, variant: "call" },
       { label: "Get a Free Estimate", href: "#contact", variant: "outline" },
