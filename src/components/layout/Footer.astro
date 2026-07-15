@@ -74,7 +74,9 @@ const trustChips = [
 
         <div class="site-footer__rating">
           <RatingBadge />
-          <a href={site.googleWriteReviewUrl} class="site-footer__writereview" target="_blank" rel="noopener">Leave a review</a>
+          <a href={site.googleWriteReviewUrl} class="site-footer__writereview" target="_blank" rel="noopener">
+            <span class="site-footer__writereview-stars" aria-hidden="true">★★★★★</span> Leave Us a Review
+          </a>
         </div>
 
         <div class="site-footer__social">
@@ -257,11 +259,24 @@ const trustChips = [
     margin-top: var(--cpr-space-lg);
   }
   .site-footer__writereview {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
     font-weight: 700;
     font-size: 0.9rem;
-    color: var(--cpr-gold);
-    text-decoration: underline;
-    text-underline-offset: 2px;
+    color: var(--cpr-navy);
+    background: var(--cpr-gold);
+    padding: 0.55rem 1.1rem;
+    border-radius: 8px;
+    transition: filter 0.15s ease, transform 0.15s ease;
+  }
+  .site-footer__writereview:hover {
+    filter: brightness(1.08);
+    transform: translateY(-1px);
+  }
+  .site-footer__writereview-stars {
+    color: var(--cpr-navy);
+    letter-spacing: 1px;
   }
   .site-footer__social {
     display: flex;
