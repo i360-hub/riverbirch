@@ -3,14 +3,18 @@
 Static Astro build (`output: 'static'`) — no adapter, no server. Cloudflare Pages
 serves `dist/` directly, with `_redirects` and `_headers` applied at the edge.
 
-> **TL;DR — to deploy a change:**
+> **TL;DR — to deploy a change:** commit and push to `main`. GitHub Actions
+> (`.github/workflows/deploy.yml`) builds, deploys to the Pages project
+> **`river-birch`**, and smoke-checks the launch checklist (staging noindexed,
+> prod not). Watch it with `gh run watch`.
+>
+> Emergency/manual path (same project, still works):
 > ```bash
 > npm run build
 > npx wrangler pages deploy dist --project-name river-birch
 > ```
-> The live domain (`www.riverbirchtreeservice.com`) is served by the Cloudflare
-> **Pages** project named **`river-birch`**. It is **not** git-connected — pushing
-> to GitHub does **not** deploy anything. You must run the command above.
+> If you deploy manually, push the matching commit right after — GitHub is the
+> source of truth.
 
 ## Build settings
 
@@ -27,34 +31,20 @@ The build produces 64 pages + `404.html`, `sitemap-index.xml`/`sitemap-0.xml`,
 
 ---
 
-## How this project actually deploys (direct upload)
+## How this project actually deploys (GitHub Actions direct upload)
 
 The Pages project **`river-birch`** already exists and owns the custom domains
-(`riverbirchtreeservice.com`, `www.riverbirchtreeservice.com`). It is **not**
-connected to git, so deploys are manual direct uploads:
+(`riverbirchtreeservice.com`, `www.riverbirchtreeservice.com`). It is not
+git-connected on the Cloudflare side; instead, `.github/workflows/deploy.yml`
+runs on every push to `main` and direct-uploads the fresh build with
+`wrangler pages deploy` (using repo secrets `CLOUDFLARE_API_TOKEN` +
+`CLOUDFLARE_ACCOUNT_ID`), then asserts the launch checklist: pages.dev serves
+`X-Robots-Tag: noindex`, prod serves 200 without it, canonical is correct.
 
-```bash
-npm run build
-npx wrangler pages deploy dist --project-name river-birch
-```
-
-The command prints a unique preview URL (e.g. `https://<hash>.river-birch.pages.dev`)
+Each deploy gets a unique preview URL (`https://<hash>.river-birch.pages.dev`)
 and updates the production alias `river-birch.pages.dev` and the custom domains.
 The Cloudflare edge may briefly serve a cached copy of the old HTML after a
 deploy — verify with a cache-buster (`?cb=$(date +%s)`) if you see stale content.
-
-### The GitHub repo does *not* auto-deploy
-
-The repo lives at `github.com/i360-hub/riverbirch`, but the Pages project has
-**Git Provider: No** — commits and pushes never trigger a deploy. Use git for
-version history only; run the `wrangler pages deploy` command above to go live.
-
-### Optional: connecting git for auto-deploy
-
-If you *want* push-to-deploy, in the Cloudflare dashboard go to
-**Workers & Pages → `river-birch` → Settings → Builds & deployments →
-Connect to Git**, pick the repo, and set the build settings from the table above.
-Until that's done, deploys are manual.
 
 ## The separate Worker (`wrangler.toml`) — not the live site
 

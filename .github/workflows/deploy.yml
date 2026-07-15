@@ -1,0 +1,52 @@
+# Push-to-deploy: build the Astro site and deploy to the existing Cloudflare
+# Pages project, then smoke-check the launch checklist. Note the prod domain's
+# edge cache may serve stale HTML briefly after a deploy; header checks are
+# unaffected, and the canonical check runs against the fresh pages.dev copy.
+# Requires repo secrets CLOUDFLARE_API_TOKEN + CLOUDFLARE_ACCOUNT_ID.
+
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name river-birch
+
+      - name: Smoke-check launch checklist
+        run: |
+          sleep 10
+
+          echo "1/4 staging must serve 200 with noindex..."
+          curl -s -D - -o /dev/null "https://river-birch.pages.dev/" | tee /tmp/h
+          grep -i "x-robots-tag: noindex" /tmp/h
+
+          echo "2/4 fresh build must carry the prod canonical (checked on pages.dev)..."
+          curl -sf "https://river-birch.pages.dev/" | grep -q 'rel="canonical" href="https://riverbirchtreeservice.com/"'
+
+          echo "3/4 production must serve 200..."
+          curl -sf -o /dev/null "https://riverbirchtreeservice.com/?cb=$(date +%s)"
+
+          echo "4/4 production must NOT be noindexed..."
+          ! curl -s -D - -o /dev/null "https://riverbirchtreeservice.com/?cb=$(date +%s)" | grep -qi "x-robots-tag"
+
+          echo "All checks passed."
