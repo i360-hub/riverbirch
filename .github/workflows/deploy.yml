@@ -50,3 +50,35 @@ jobs:
           ! curl -s -D - -o /dev/null "https://riverbirchtreeservice.com/?cb=$(date +%s)" | grep -qi "x-robots-tag"
 
           echo "All checks passed."
+
+      # Ping IndexNow with the just-built sitemap URLs so Bing/Yandex/etc. recrawl
+      # promptly. Key is public (served at /<key>.txt), so no secret needed. This
+      # is a best-effort notification — a failure here must not fail the deploy.
+      - name: Notify IndexNow
+        continue-on-error: true
+        run: |
+          python3 - <<'PY'
+          import json, re, urllib.request, urllib.error
+          key  = "19c835a4b30ae415f0c9434ce2a635ad"
+          host = "riverbirchtreeservice.com"
+          urls = re.findall(r"<loc>(.*?)</loc>", open("dist/sitemap-0.xml", encoding="utf-8").read())
+          if not urls:
+              raise SystemExit("No URLs found in dist/sitemap-0.xml")
+          body = {
+              "host": host,
+              "key": key,
+              "keyLocation": f"https://{host}/{key}.txt",
+              "urlList": urls,
+          }
+          req = urllib.request.Request(
+              "https://api.indexnow.org/indexnow",
+              data=json.dumps(body).encode("utf-8"),
+              headers={"Content-Type": "application/json; charset=utf-8"},
+          )
+          try:
+              r = urllib.request.urlopen(req, timeout=30)
+              print(f"IndexNow accepted (HTTP {r.status}) — submitted {len(urls)} URLs")
+          except urllib.error.HTTPError as e:
+              print(f"IndexNow HTTP {e.code}: {e.read().decode(errors='replace')}")
+              raise
+          PY
