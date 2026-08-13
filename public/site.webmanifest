@@ -3,8 +3,9 @@
   "short_name": "River Birch",
   "description": "Local, fully-insured tree removal and 24/7 storm cleanup in Deep Gap, Boone & the High Country of Watauga County, NC.",
   "icons": [
-    { "src": "/icon-192.png", "type": "image/png", "sizes": "192x192" },
-    { "src": "/icon-512.png", "type": "image/png", "sizes": "512x512" }
+    { "src": "/icon-192-v2.png", "type": "image/png", "sizes": "192x192", "purpose": "any" },
+    { "src": "/icon-512-v2.png", "type": "image/png", "sizes": "512x512", "purpose": "any" },
+    { "src": "/icon-512-v2.png", "type": "image/png", "sizes": "512x512", "purpose": "maskable" }
   ],
   "theme_color": "#12331e",
   "background_color": "#ffffff",
