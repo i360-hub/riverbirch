@@ -6,8 +6,19 @@ import Icon from "@components/ui/Icon.astro";
 
 <a class="sticky-call" href={site.phoneHref}>
   <Icon name="phone" />
-  <span>Call 24/7 — {site.phoneDisplay}</span>
+  <span>Call Now — {site.phoneDisplay}</span>
 </a>
+
+<style is:global>
+  /* The bar is fixed to the bottom on ≤960px, so reserve room for it. Without
+     this it overlays the last rows of the footer — including the Privacy and
+     SMS Terms links, which A2P carrier reviewers must be able to click. */
+  @media (max-width: 960px) {
+    body {
+      padding-bottom: calc(4rem + env(safe-area-inset-bottom, 0px));
+    }
+  }
+</style>
 
 <style>
   .sticky-call {

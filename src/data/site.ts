@@ -6,7 +6,7 @@ import { mapEmbed, mapsLink } from "./maps";
 export const site = {
   name: "River Birch Tree Service",
   legalName: "River Birch Tree Service LLC",
-  tagline: "Local, Fully-Insured Tree Removal & 24/7 Storm Cleanup",
+  tagline: "Local, Fully-Insured Tree Removal & Fast Storm Cleanup",
   owner: "Ezequiel Moreno",
 
   // Call-tracking number — what visitors see and dial everywhere on the site.
@@ -32,7 +32,10 @@ export const site = {
   // Business geo (Deep Gap base) — schema + map pin, per the brand brief.
   geo: { lat: 36.2513841, lng: -81.6869554 },
 
-  hours: "24/7 Emergency Service",
+  // Real operating hours (matches the GBP listing). The site previously claimed
+  // 24/7 emergency service, which generated angry reviews from unanswered
+  // overnight storm calls — do not reintroduce a 24/7 or "any hour" claim.
+  hours: "Mon–Sat, 7:00 AM – 7:00 PM",
 
   // GoHighLevel LeadConnector form — River Birch's own "Contact — River Birch"
   // form in their GHL sub-account. Leads flow into their CRM.
@@ -42,7 +45,9 @@ export const site = {
   ghlContactFormId: "2IoiG70LCF5TQAsKwfzk",
   ghlContactFormSrc: "https://api.leadconnectorhq.com/widget/form/2IoiG70LCF5TQAsKwfzk",
 
-  email: "riverbirchtreexpert@gmail.com",
+  // Business inbox on the domain — also the contact cited on the privacy and
+  // SMS terms pages and in the LocalBusiness schema for the A2P registration.
+  email: "info@riverbirchtreeservice.com",
   // NC has no state arborist license — we claim "fully insured", never a license.
   insured: "Fully Insured",
 
@@ -77,7 +82,7 @@ export const site = {
     type: "LocalBusiness",
     primaryService: "Tree Service",
     description:
-      "River Birch Tree Service LLC is a locally owned, fully-insured tree service based in Deep Gap, NC, serving Boone, Blowing Rock, Banner Elk, West Jefferson, and the High Country across Watauga, Ashe, and Avery Counties. Owner Ezequiel Moreno and crew handle tree removal (including technical removals near homes and power lines), 24/7 emergency storm and ice-damage cleanup, land, lot and driveway clearing, tree trimming and pruning, stump grinding, and view clearing. Free estimates and 5.0-star rated on Google.",
+      "River Birch Tree Service LLC is a locally owned, fully-insured tree service based in Deep Gap, NC, serving Boone, Blowing Rock, Banner Elk, West Jefferson, and the High Country across Watauga, Ashe, and Avery Counties. Owner Ezequiel Moreno and crew handle tree removal (including technical removals near homes and power lines), fast emergency storm and ice-damage cleanup, land, lot and driveway clearing, tree trimming and pruning, stump grinding, and view clearing. Free estimates and 5.0-star rated on Google.",
     priceRange: "$$",
     foundingDate: "2020",
     languages: ["English", "Spanish"],

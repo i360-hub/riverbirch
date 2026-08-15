@@ -22,7 +22,7 @@ export interface ServicePageData {
 const DIFF_ROWS: { feature: string; others: Cell; cpr: Cell }[] = [
   { feature: "Fully insured on every job", others: "sometimes", cpr: "yes" },
   { feature: "Technical removals near homes & power lines", others: "sometimes", cpr: "yes" },
-  { feature: "24/7 emergency storm & ice response", others: "no", cpr: "yes" },
+  { feature: "Priority storm & ice emergency response", others: "no", cpr: "yes" },
   { feature: "Complete cleanup & debris haul-away", others: "sometimes", cpr: "yes" },
   { feature: "Careful, low-impact work on steep mountain lots", others: "no", cpr: "yes" },
   { feature: "Free, no-pressure estimates", others: "sometimes", cpr: "yes" },
@@ -54,7 +54,7 @@ export const servicePages: Record<string, ServicePageData> = {
     process: {
       title: "How a River Birch Tree Removal Works",
       sub: "A clear plan from the free estimate to the final rake-down. Here's what to expect.",
-      ctaLabel: "Got a tree you're worried about? We'll take a look for free — call anytime.",
+      ctaLabel: "Got a tree you're worried about? We'll take a look for free — give us a call.",
       steps: [
         { title: "Free On-Site Estimate", text: "We come look at the tree, the lean, and what's around it — house, lines, driveway — and give you a clear, no-pressure written price." },
         { title: "A Safe Removal Plan", text: "For tight or hazardous trees we climb and rig, lowering limbs and sections with ropes instead of dropping them. Open lots we can fell and process fast." },
@@ -82,7 +82,7 @@ export const servicePages: Record<string, ServicePageData> = {
       sub: "Other ways the River Birch crew can help around your High Country property.",
       cards: [
         { title: "Stump Grinding", text: "Grind that stump below grade and reclaim the spot for good.", href: "/stump-grinding" },
-        { title: "Emergency Storm & Ice Cleanup", text: "Tree down after a storm? We respond 24/7 across the High Country.", href: "/storm-damage-tree-removal" },
+        { title: "Emergency Storm & Ice Cleanup", text: "Tree down after a storm? We respond fast across the High Country.", href: "/storm-damage-tree-removal" },
         { title: "Tree Trimming & Pruning", text: "Keep the trees you're keeping healthy, safe, and well-shaped.", href: "/tree-trimming-pruning" },
       ],
     },
@@ -96,10 +96,10 @@ export const servicePages: Record<string, ServicePageData> = {
 
   "storm-damage-tree-removal": {
     hero: {
-      emergencyTag: "🚨 24/7 Emergency Storm & Ice Response",
+      emergencyTag: "🚨 Priority Storm & Ice Emergency Response",
       subtitle:
-        "Tree down on your house, drive, or across the road after a High Country storm or ice event? River Birch answers 24/7. We make the property safe, clear the tree, and haul off the debris — fully insured, any hour.",
-      trustSignals: ["24/7 Emergency", "5.0★ on Google", "Fully Insured", "Fast Response"],
+        "Tree down on your house, drive, or across the road after a High Country storm or ice event? River Birch moves you to the front of the schedule. We make the property safe, clear the tree, and haul off the debris — fully insured.",
+      trustSignals: ["Priority Emergency Response", "5.0★ on Google", "Fully Insured", "Fast Response"],
       secondaryCta: "Request Emergency Help",
     },
     action: {
@@ -110,9 +110,9 @@ export const servicePages: Record<string, ServicePageData> = {
     process: {
       title: "How Emergency Storm Cleanup Works",
       sub: "When a tree is down, minutes matter. Here's how we get you safe and clear, fast.",
-      ctaLabel: "Tree down right now? Don't wait — call River Birch, we're on 24/7.",
+      ctaLabel: "Tree down right now? Don't wait — call River Birch.",
       steps: [
-        { title: "Call Our 24/7 Line", text: "Reach a real local crew any hour — day, night, weekend, holiday. Tell us what's down and where, and we head your way." },
+        { title: "Call Our Emergency Line", text: "Reach a real local crew, Monday through Saturday, 7:00 AM to 7:00 PM. Tell us what's down and where, and we head your way." },
         { title: "Make the Scene Safe", text: "We assess hazards first — leaning trunks, tension in fallen limbs, anything near a line — and secure the area before we start cutting." },
         { title: "Clear the Tree", text: "We cut the tree off your home, driveway, or roadway in controlled sections and remove the weight from the structure carefully." },
         { title: "Clean Up & Haul Off", text: "We chip the brush, clear the debris, and leave the site safe. Need a full removal or stump grind after? We handle that too." },
@@ -125,9 +125,9 @@ export const servicePages: Record<string, ServicePageData> = {
     },
     faqTitle: "Emergency Storm & Ice Questions",
     faqSub: "What to know when a tree comes down in the High Country.",
-    faqCtaLabel: "Emergency right now? Call River Birch — we answer 24/7.",
+    faqCtaLabel: "Emergency right now? Call River Birch — storm work goes to the front of the line.",
     faq: [
-      { q: "Do you really answer 24/7?", a: "Yes. Storms and ice don't keep business hours in the High Country, so neither do we. Call (828) 818-8505 any hour and you'll reach a local River Birch crew for emergency storm and ice-damage tree work." },
+      { q: "How quickly do you respond to a storm emergency?", a: "Storm and ice damage jumps the queue — it goes ahead of scheduled work. Call (828) 818-8505 during business hours (Mon–Sat, 7:00 AM – 7:00 PM) and you'll reach a local River Birch crew for emergency storm and ice-damage tree work. If a power line is down, call your utility and 911 first." },
       { q: "A tree fell on my house — what do I do first?", a: "Get everyone out of the affected area and call us right away. If a power line is involved, stay well clear and call your utility and 911 first. Then call River Birch — we'll secure the tree and get it off the structure safely." },
       { q: "Will my homeowner's insurance cover storm tree damage?", a: "Often, yes — when a tree hits a covered structure, many policies help with removal and repair. We document the scene with photos and provide an itemized invoice you can submit to your insurer. Coverage is between you and your carrier, but we make the paperwork easy." },
       { q: "How fast can you get here?", a: "As fast as conditions safely allow. We're based right in Deep Gap, so we're already in the High Country — no waiting on a crew to drive up the mountain from out of the area." },
@@ -144,9 +144,9 @@ export const servicePages: Record<string, ServicePageData> = {
     },
     reviewsTitle: "Neighbors We've Helped After the Storm",
     reviewsSub: "Real 5-star Google reviews from High Country homeowners across all three counties.",
-    finalCta: "Tree Down? We're Here 24/7 — Call Now.",
+    finalCta: "Tree Down? We'll Get Right Out — Call Now.",
     contactHeading: "Get Emergency Storm Help",
-    contactDesc: "For a tree that's down right now, call us — we answer 24/7. For non-urgent storm cleanup, send the details and we'll get right back to you.",
+    contactDesc: "For a tree that's down right now, call us — storm work goes to the front of the schedule. For non-urgent storm cleanup, send the details and we'll get right back to you.",
     ...AREA,
   },
 

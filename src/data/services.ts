@@ -28,7 +28,7 @@ export const homepage = {
     "Serving Boone & the High Country",
   ],
   metaDescription:
-    "River Birch Tree Service — tree removal, 24/7 storm & ice cleanup, trimming, stump grinding & land clearing in Boone & across the High Country. Fully insured. 5.0★ on Google. Call (828) 818-8505.",
+    "River Birch Tree Service — tree removal, fast storm & ice cleanup, trimming, stump grinding & land clearing in Boone & across the High Country. Fully insured. 5.0★ on Google. Call (828) 818-8505.",
 } as const;
 
 export const services: Service[] = [
@@ -49,10 +49,10 @@ export const services: Service[] = [
     gridTitle: "Emergency Storm & Ice Cleanup",
     group: "removal",
     icon: "storm",
-    title: "Emergency Storm & Ice Damage Tree Removal | 24/7 | Boone, NC",
-    h1Lines: ["24/7 Emergency Storm &", "Ice Damage Tree Cleanup"],
+    title: "Emergency Storm & Ice Damage Tree Removal | Boone, NC",
+    h1Lines: ["Emergency Storm &", "Ice Damage Tree Cleanup"],
     metaDescription:
-      "Tree down from a storm or ice? River Birch offers 24/7 emergency storm & ice-damage tree removal across Boone, Deep Gap & the High Country. Fully insured, fast response. Call (828) 818-8505.",
+      "Tree down from a storm or ice? River Birch offers priority emergency storm & ice-damage tree removal across Boone, Deep Gap & the High Country. Fully insured, fast response. Call (828) 818-8505.",
   },
   {
     slug: "land-clearing",

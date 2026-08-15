@@ -5,30 +5,51 @@ import LocalContent from "@components/widgets/LocalContent.astro";
 import FinalCta from "@components/widgets/FinalCta.astro";
 import { site } from "@data/site";
 
+// A2P 10DLC (customer care) terms. Three things here are load-bearing for the
+// carrier review and must not drift:
+//   • the ONLY opt-in surface is the SMS consent chat widget — never a form;
+//   • no marketing/promotional language anywhere on the page;
+//   • the carrier liability disclaimer (section 7) is present.
+// Phone/email cite napPhone + the business inbox, not the call-tracking line.
 const blocks = [
-  { tag: "p", html: `These SMS Terms &amp; Conditions govern text-message communications with River Birch Tree Service LLC ("River Birch," "we," "us"). By providing your phone number and opting in, you agree to the terms below.` },
-  { tag: "h2", html: "Consent to Receive Messages" },
-  { tag: "p", html: `When you provide your mobile number — for example, on our estimate request form or by texting us — you consent to receive SMS/MMS messages from River Birch about your estimate, scheduling, service updates, and occasional offers. Consent is not a condition of purchase.` },
-  { tag: "h2", html: "Message Frequency &amp; Rates" },
-  { tag: "p", html: `Message frequency varies based on your interactions with us. Message and data rates may apply, depending on your mobile carrier and plan.` },
-  { tag: "h2", html: "Opting Out" },
-  { tag: "p", html: `You can opt out of text messages at any time by replying <strong>STOP</strong> to any message. You will receive a confirmation and no further texts unless you opt back in. Reply <strong>HELP</strong> for help, or contact us directly.` },
-  { tag: "h2", html: "Privacy" },
-  { tag: "p", html: `We do not sell or share your mobile number with third parties for their marketing. See our <a href="/privacy">Privacy Policy</a> for how we handle your information.` },
-  { tag: "h2", html: "Contact" },
-  // The SMS program is registered to the real business number, so this legal
-  // page cites napPhone — not the sitewide call-tracking number.
-  { tag: "p", html: `Questions about these terms? Call us at <a href="${site.napPhoneHref}">${site.napPhoneDisplay}</a> or email <a href="mailto:${site.email}">${site.email}</a>.` },
+  { tag: "p", html: `<strong>${site.legalName}</strong><br />Last updated: August 15, 2026` },
+
+  { tag: "h2", html: "1. Program description" },
+  { tag: "p", html: `River Birch Tree Service LLC operates a customer care text messaging program. We send messages about estimate follow-ups, appointment confirmations, scheduling changes, crew arrival times, and job status updates. We do not send marketing or promotional messages through this program.` },
+
+  { tag: "h2", html: "2. How you opt in" },
+  { tag: "p", html: `You are enrolled only when you provide your phone number and check the SMS consent box in the chat widget on riverbirchtreeservice.com. Consent is not a condition of purchase. Submitting a contact or estimate request form on this site does not enroll you in text messages.` },
+
+  { tag: "h2", html: "3. Message frequency" },
+  { tag: "p", html: `Message frequency varies based on your interactions with us.` },
+
+  { tag: "h2", html: "4. Cost" },
+  { tag: "p", html: `Message and data rates may apply, depending on your mobile carrier and plan.` },
+
+  { tag: "h2", html: "5. Opting out" },
+  { tag: "p", html: `Reply <strong>STOP</strong> to any message to opt out at any time. You will receive one confirmation message and no further texts unless you opt back in.` },
+
+  { tag: "h2", html: "6. Help" },
+  { tag: "p", html: `Reply <strong>HELP</strong> to any message for help, or contact us at <a href="${site.napPhoneHref}">${site.napPhoneDisplay}</a> or <a href="mailto:${site.email}">${site.email}</a>.` },
+
+  { tag: "h2", html: "7. Carriers" },
+  { tag: "p", html: `Carriers are not liable for delayed or undelivered messages.` },
+
+  { tag: "h2", html: "8. Privacy" },
+  { tag: "p", html: `See our <a href="/privacy">Privacy Policy</a> for how we handle your information: <a href="https://riverbirchtreeservice.com/privacy">https://riverbirchtreeservice.com/privacy</a>` },
+
+  { tag: "h2", html: "9. Contact" },
+  { tag: "p", html: `River Birch Tree Service LLC<br />${site.address.city}, ${site.address.state} &middot; ${site.address.region}<br /><a href="${site.napPhoneHref}">${site.napPhoneDisplay}</a><br /><a href="mailto:${site.email}">${site.email}</a>` },
 ];
 ---
 
 <BaseLayout
   title="SMS Terms & Conditions | River Birch Tree Service"
-  description="Review River Birch Tree Service's SMS terms for text-message communications and marketing notifications. Deep Gap, NC."
+  description="SMS terms for River Birch Tree Service's customer care text messaging program — opt-in, message frequency, rates, and how to reply STOP or HELP. Deep Gap, NC."
   path="/sms-terms-and-conditions"
   noindex={true}
 >
   <PageHeader eyebrow="Legal" title="SMS Terms & Conditions" />
   <LocalContent blocks={blocks} />
-  <FinalCta heading="Questions? Talk to Our Team 24/7." />
+  <FinalCta heading="Questions? Talk to Our Team." />
 </BaseLayout>

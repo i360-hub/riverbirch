@@ -80,12 +80,15 @@ const business = {
   ],
   geo: { "@type": "GeoCoordinates", latitude: site.geo.lat, longitude: site.geo.lng },
   hasMap: s.mapUrl,
+  // Real hours: Mon–Sat 7:00 AM – 7:00 PM, closed Sunday. This previously
+  // emitted 00:00–23:59 across all seven days to back a 24/7 claim the business
+  // does not actually staff. Keep this in sync with site.hours and the GBP.
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-      opens: "00:00",
-      closes: "23:59",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      opens: "07:00",
+      closes: "19:00",
     },
   ],
   makesOffer: s.services.map((svc) => ({
@@ -253,5 +256,9 @@ const jsonLd = {
         });
       })();
     </script>
+
+    <!-- GoHighLevel A2P chat widget — REQUIRED for SMS compliance.
+         Must be live and publicly reachable before the A2P brand is submitted.
+         Paste the LeadConnector snippet from GHL here. -->
   </body>
 </html>

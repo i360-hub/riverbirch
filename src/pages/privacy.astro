@@ -19,9 +19,16 @@ const sections = [
     ],
   },
   {
-    h: "Text Messaging and Communications",
+    // A2P 10DLC: opt-in is the SMS consent chat widget ONLY — never a form, never
+    // "you gave us your number". The final paragraph is the carrier-mandated
+    // mobile-information non-sharing clause: reviewers pattern-match its exact
+    // wording, so it is reproduced verbatim. Do not paraphrase or condense it.
+    h: "Text Messaging (SMS/MMS)",
     p: [
-      "By providing your phone number, you consent to receive text messages (SMS and MMS) from us for business purposes, including but not limited to service updates, reminders, and promotional messages. Standard message and data rates may apply. You can opt-out at any time by replying STOP.",
+      "River Birch Tree Service LLC sends text messages only to people who have opted in through the SMS consent chat widget on this website. Submitting a form on this site, or providing your phone number by any other means, does not enroll you in text messages.",
+      "Messages are limited to customer care: estimate follow-ups, appointment confirmations, scheduling changes, crew arrival notifications, and job status updates. We do not send marketing or promotional text messages.",
+      "Message frequency varies based on your interactions with us. Message and data rates may apply. Reply STOP at any time to opt out, or HELP for help. Carriers are not liable for delayed or undelivered messages.",
+      "No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. Information sharing to subcontractors in support services, such as customer service, is permitted. All other use case categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties.",
     ],
   },
   {
@@ -59,7 +66,7 @@ const sections = [
   <PageHeader
     eyebrow="Legal"
     title="Privacy Policy"
-    subtitle="River Birch Tree Service is committed to protecting the privacy and security of our customers' information. Effective July 1, 2024."
+    subtitle="River Birch Tree Service is committed to protecting the privacy and security of our customers' information. Effective August 15, 2026."
   />
 
   <section class="cpr-section privacy">
@@ -74,7 +81,9 @@ const sections = [
         <h2>Contact Information</h2>
         <p>For any privacy-related questions, please contact us at:</p>
         <ul role="list">
-          <li><Icon name="phone" /> <a href={site.phoneHref}>{site.phoneDisplay}</a></li>
+          {/* Legal page: cites the REAL business number (napPhone), which is the
+              number the SMS program is registered to — not the call-tracking line. */}
+          <li><Icon name="phone" /> <a href={site.napPhoneHref}>{site.napPhoneDisplay}</a></li>
           <li><Icon name="mail" /> <a href={`mailto:${site.email}`}>{site.email}</a></li>
           <li><Icon name="pin" /> {site.address.city}, {site.address.state} · {site.address.region}</li>
         </ul>
