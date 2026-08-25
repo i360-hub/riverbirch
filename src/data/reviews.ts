@@ -2,7 +2,7 @@
 // REVIEWS — REAL Google reviews for River Birch Tree Service LLC.
 // ----------------------------------------------------------------------------
 // These are the actual 5-star reviews from the live Google Business Profile
-// (5.0★, 9 reviews, CID 11842205041438600814). Names are shown in full
+// (5.0★, 11 reviews as of 2026-08-25, CID 11842205041438600814). Names are shown in full
 // (first + last) exactly as they appear on Google — they are publicly
 // verifiable, which is the whole point; do NOT anonymize to initials.
 //

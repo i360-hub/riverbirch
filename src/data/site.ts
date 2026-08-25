@@ -51,7 +51,10 @@ export const site = {
   // NC has no state arborist license — we claim "fully insured", never a license.
   insured: "Fully Insured",
 
-  // Direct Google Business Profile links (place ChIJ6Y1cyaKMfWlRbq5JFL72V6Q).
+  // Direct Google Business Profile links (place ChIJ6Y1cyaKMfWIRbq5JFL72V6Q).
+  // NOTE: that is a capital I in "fWIR", not a lowercase L — verified against the
+  // GBP API 2026-08-25. The two are indistinguishable in most fonts and this value
+  // was previously stored with an l, which would silently break any link built from it.
   googleReviewsUrl: "https://www.google.com/search?hl=en-US&gl=us&q=River+Birch+Tree+Service+LLc.&ludocid=11842205041438600814&lsig=AB86z5VzYPLZiU27ubzAM9h_oQih#lrd=0x627d8ca2c95c8de9:0xa457f6be1449ae6e,3",
   googleWriteReviewUrl: "https://www.google.com/search?hl=en-US&gl=us&q=River+Birch+Tree+Service+LLc.&ludocid=11842205041438600814&lsig=AB86z5VzYPLZiU27ubzAM9h_oQih#lrd=0x627d8ca2c95c8de9:0xa457f6be1449ae6e,3",
 
@@ -90,7 +93,7 @@ export const site = {
     logo: "/logo.png",
     image: "/og-default.jpg",
     // Google Business Profile identifiers.
-    placeId: "ChIJ6Y1cyaKMfWlRbq5JFL72V6Q",
+    placeId: "ChIJ6Y1cyaKMfWIRbq5JFL72V6Q",
     cid: "11842205041438600814",
     profileId: "1987114942540672921",
     mapUrl: "https://maps.google.com/maps?cid=11842205041438600814",
