@@ -59,7 +59,7 @@ export const site = {
   // COUNT is intentionally NOT displayed on-page (kept here for future use, e.g.
   // once volume grows). We also do NOT emit aggregateRating/Review JSON-LD.
   googleRating: "5.0",
-  googleReviewCount: "9",
+  googleReviewCount: "11",
   googleRatingLink: "https://www.google.com/maps?cid=11842205041438600814",
 
   // Interactive Google Maps embed centered on the Deep Gap base / CID. Uses the
@@ -109,7 +109,6 @@ export const site = {
       { name: "Foscoe, NC", wiki: "https://en.wikipedia.org/wiki/Foscoe,_North_Carolina" },
       { name: "Seven Devils, NC", wiki: "https://en.wikipedia.org/wiki/Seven_Devils,_North_Carolina" },
       { name: "Zionville, NC", wiki: "https://en.wikipedia.org/wiki/Zionville,_North_Carolina" },
-      { name: "Trade, TN", wiki: "https://en.wikipedia.org/wiki/Trade,_Tennessee" },
       { name: "Mabel, NC" },
       { name: "Cove Creek, NC" },
       { name: "Meat Camp, NC" },

@@ -263,7 +263,7 @@ const townConfigs: TownConfig[] = [
   {
     slug: "zionville-nc", name: "Zionville",
     character: "the community near the Tennessee line in northwestern Watauga County",
-    nearby: ["mabel-nc", "trade-nc", "vilas-nc", "cove-creek-nc"],
+    nearby: ["mabel-nc", "vilas-nc", "cove-creek-nc"],
     local: {
       conditions: "Zionville sits in the northwestern corner of Watauga County near the Tennessee line at about 3,000 feet, rolling farmland and wooded ridges in the Cove Creek headwaters. Old farm hardwoods, windbreak rows, and roadside trees along the state-line highways are the usual work here.",
       jobs: "In Zionville we do a lot of acreage clearing and farm-tree removal — taking out dead or hazardous trees around barns and homes, clearing fence lines, and grinding stumps on working and reclaimed land. We cover Zionville and the NC/TN line communities right alongside our core Watauga service area.",
@@ -286,21 +286,6 @@ const townConfigs: TownConfig[] = [
       faq: { q: "Do you take on farm and acreage tree work in Mabel?", a: "Yes — that's most of what we do in Mabel. We clear pasture and fence lines, drop hazardous trees around barns and homes, and grind the stumps so you can put the ground back to use." },
       faq2: { q: "Is Mabel too far out for River Birch to reach?", a: "Not at all — we travel to Mabel and the surrounding line communities routinely from our Deep Gap base. The distance doesn't change our pricing or our response for the northwest corner of the county." },
       faq3: { q: "Can you remove a big shade tree leaning over a Mabel farmhouse?", a: "Yes — aging hardwoods over homes and barns are the common hazard out here in the wind. We drop them safely away from the buildings in controlled pieces and grind the stump." },
-    },
-  },
-  {
-    slug: "trade-nc", name: "Trade", state: "TN",
-    character: "the historic community just over the line, the oldest unincorporated town in Tennessee",
-    nearby: ["zionville-nc", "mabel-nc", "vilas-nc"],
-    note: "We cover Trade and the NC/TN line communities right alongside our Watauga County service area.",
-    local: {
-      conditions: "Trade lies just over the Tennessee line from Zionville at around 2,900 feet — the oldest unincorporated town in Tennessee — in the same headwater country as our northwestern Watauga towns. Rural farmland, wooded slopes, and old homestead shade trees define the tree work here.",
-      jobs: "Because Trade sits right against our NC service area, we cover it the same way we cover Zionville and Mabel — removals around farms and homes, land and fence-line clearing, and storm cleanup when the line-country weather brings trees down. It's a short reach from our Deep Gap base.",
-      why: "Just over the line in Trade, homeowners get the same River Birch crew our NC neighbors rely on — fully insured, careful around the old homesteads, and quick to reach straight down US-421. Being a short drive away means Trade never feels like an afterthought.",
-      extra: "Trade lies just over the Tennessee line from Zionville along US-421 — the oldest unincorporated town in Tennessee — in the same headwater farm country as our northwest Watauga communities. Rural homesteads, wooded slopes, and old shade trees around the farms define the work, and it's a short reach for us straight down the highway.",
-      faq: { q: "Does River Birch cross into Trade, TN?", a: "Yes — Trade is right on our doorstep across the state line, and we serve it alongside the NC line communities. Call us for the same tree removal, clearing, and storm work we do throughout the area." },
-      faq2: { q: "Do you need a Tennessee license to work in Trade?", a: "No — neither Carolina nor Tennessee issues a state arborist license, so insurance is what protects your property on either side of the line. River Birch is fully insured and works Trade the same as our NC communities." },
-      faq3: { q: "Do you handle old homestead trees around Trade?", a: "We do — the big shade trees and windbreaks around the older Trade homesteads are common work. We remove the hazardous ones away from the house and outbuildings and grind the stumps." },
     },
   },
   {
