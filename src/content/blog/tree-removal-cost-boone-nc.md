@@ -1,10 +1,10 @@
 ---
 title: "How Much Does Tree Removal Cost in Boone, NC?"
 seoTitle: "Tree Removal Cost in Boone, NC — What Sets the Price"
-description: "What does tree removal cost in Boone and the High Country? Ezequiel Moreno of River Birch Tree Service explains the real price factors — size, species, slope, and access — and why free on-site estimates beat phone quotes."
+description: "What tree removal costs in Boone, NC. Most jobs run $500 to $2,500. Size, species, slope, and access set the price. Free on-site estimates."
 pubDate: 2026-10-04
 heroImage: "cost-boone"
-heroAlt: "Tree removal crew working near a mountain cabin outside Boone, NC"
+heroAlt: "Climber roped into a tree he is taking down in sections beside a wood-sided cabin in the North Carolina High Country"
 author: "Ezequiel Moreno"
 takeaways:
   - "Most single-tree removals around Boone run roughly $500 to $2,500. Size, species, access, and position set the real price."
@@ -56,7 +56,7 @@ Our forests are not like the Piedmont's. White pines grow tall and fast and are 
 
 ## Storm and emergency work is priced differently
 
-A tree through your roof at midnight is not a scheduled job. [Emergency and storm-damage work](/storm-damage-tree-removal) runs above normal rates because the crew is working around the clock, often in bad weather, on trees that are already broken and loaded with tension. One tip: if a storm-damaged tree is on a structure, take photos before anyone touches it. Your insurance company will want them. If an ice storm just hit, here is [what to do in the first 48 hours](/blog/ice-storm-tree-damage-high-country-nc).
+A tree on your roof is not a scheduled job. [Emergency and storm-damage work](/storm-damage-tree-removal) runs above normal rates because storm calls jump to the front of the schedule. The crew is often out in bad weather, on trees that are already broken and loaded with tension. We take storm calls Monday through Saturday, 7 AM to 7 PM. One tip: if a storm-damaged tree is on a structure, take photos before anyone touches it. Your insurance company will want them. If an ice storm just hit, here is [what to do in the first 48 hours](/blog/ice-storm-tree-damage-high-country-nc).
 
 ## Do not forget the stump
 
@@ -73,7 +73,3 @@ Most removal quotes do not include the stump unless you ask. [Stump grinding](/s
 **Get more than one quote.** I will say it even though I am one of the quotes. Just make sure everyone bidding is insured. A cheap quote from an uninsured crew is not cheap if something goes wrong on your property. We are fully insured, and our estimates are free, on-site, and in writing.
 
 One more thing worth checking before you schedule anything: [whether you need a permit or HOA approval](/blog/tree-removal-permit-watauga-county-nc) for your address. In town limits and HOA communities, that step comes first.
-
-## About River Birch Tree Service
-
-River Birch Tree Service LLC is a locally owned, fully-insured tree service based in Deep Gap, NC, serving [Boone](/tree-service-boone-nc), Blowing Rock, Banner Elk, West Jefferson, and the High Country across Watauga, Ashe, and Avery Counties since 2020. Owner Ezequiel Moreno and his crew handle [tree removal](/tree-removal), trimming, stump grinding, land clearing, and storm cleanup. Free estimates. Call (828) 818-8505, English y español.

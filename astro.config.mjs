@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import rehypeUnpublishedLinks from './src/lib/rehypeUnpublishedLinks.mjs';
 
 // Production domain (registered at Cloudflare). Apex is canonical; www 301s to it.
 const SITE = 'https://riverbirchtreeservice.com';
@@ -18,6 +19,11 @@ export default defineConfig({
       filter: (page) => !page.includes("/thank-you") && !page.includes("/privacy"),
     }),
   ],
+  markdown: {
+    // Links to blog posts that are scheduled but not yet published render as
+    // plain text until their pubDate, so a live post never links to a 404.
+    rehypePlugins: [rehypeUnpublishedLinks],
+  },
   build: {
     // Emit `page.html` (not `page/index.html`) so Cloudflare Pages serves each
     // page at its no-trailing-slash URL (e.g. /mold-removal) — matching

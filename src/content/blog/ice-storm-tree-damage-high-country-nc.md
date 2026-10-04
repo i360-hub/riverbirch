@@ -1,10 +1,10 @@
 ---
 title: "Ice Storm Damaged Your Trees? What High Country Homeowners Should Do First"
 seoTitle: "Ice Storm Tree Damage in the High Country — First Steps"
-description: "An ice storm just hit the High Country. Now what? Ezequiel Moreno of River Birch Tree Service walks through the first 48 hours: what is dangerous, what can wait, what to document for insurance, and when to call a crew."
+description: "Ice storm hit your trees? The first 48 hours: what is dangerous, what can wait, what to photograph for insurance, and when to call a crew."
 pubDate: 2026-10-14
 heroImage: "ice-storm"
-heroAlt: "Ice-covered fallen trees and storm debris on a mountain road in the North Carolina High Country"
+heroAlt: "Crew cutting up a snow-covered fallen pine on a wooded slope in the North Carolina High Country"
 author: "Ezequiel Moreno"
 takeaways:
   - "Stay clear of hanging limbs and leaning trunks. Never cut wood under tension yourself."
@@ -77,7 +77,3 @@ You cannot ice-proof a forest, but you can tilt the odds:
 - **Plant smart.** Native species suited to your elevation handle High Country weather better than ornamentals picked for looks.
 
 Late fall is the right time for this work, before the ice arrives. One visit can take the worst risks off the board.
-
-## About River Birch Tree Service
-
-River Birch Tree Service LLC is a locally owned, fully-insured tree service based in Deep Gap, NC, serving Boone, [Blowing Rock](/tree-service-blowing-rock-nc), Banner Elk, West Jefferson, and the High Country across Watauga, Ashe, and Avery Counties since 2020. Owner Ezequiel Moreno and his crew handle [emergency storm and ice cleanup](/storm-damage-tree-removal), tree removal, trimming, and stump grinding. Free estimates. Call (828) 818-8505, English y español.
