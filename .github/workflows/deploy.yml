@@ -36,18 +36,23 @@ jobs:
         run: |
           sleep 10
 
-          echo "1/4 staging must serve 200 with noindex..."
+          echo "1/5 staging must serve 200 with noindex..."
           curl -s -D - -o /dev/null "https://river-birch.pages.dev/" | tee /tmp/h
           grep -i "x-robots-tag: noindex" /tmp/h
 
-          echo "2/4 fresh build must carry the prod canonical (checked on pages.dev)..."
+          echo "2/5 fresh build must carry the prod canonical (checked on pages.dev)..."
           curl -sf "https://river-birch.pages.dev/" | grep -q 'rel="canonical" href="https://riverbirchtreeservice.com/"'
 
-          echo "3/4 production must serve 200..."
+          echo "3/5 production must serve 200..."
           curl -sf -o /dev/null "https://riverbirchtreeservice.com/?cb=$(date +%s)"
 
-          echo "4/4 production must NOT be noindexed..."
+          echo "4/5 production must NOT be noindexed..."
           ! curl -s -D - -o /dev/null "https://riverbirchtreeservice.com/?cb=$(date +%s)" | grep -qi "x-robots-tag"
+
+          echo "5/5 www must 301 to the apex, path preserved..."
+          curl -s -D - -o /dev/null "https://www.riverbirchtreeservice.com/tree-removal?cb=$(date +%s)" | tee /tmp/w
+          grep -qi "^HTTP/.* 301" /tmp/w
+          grep -qi "^location: https://riverbirchtreeservice.com/tree-removal" /tmp/w
 
           echo "All checks passed."
 

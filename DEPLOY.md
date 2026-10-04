@@ -64,13 +64,13 @@ Both custom domains are **already attached to the `river-birch` Pages project**
 not a pending step. If you ever need to re-add one: Pages project →
 **Custom domains → Set up a custom domain**.
 
-1. Canonical host is `https://www.riverbirchtreeservice.com`.
-2. Because the live domains are served by **Pages** (not the Worker), the apex →
-   www and http → https redirects are **not** handled by `worker.js` on the live
-   site — `worker.js` only runs on the `*.workers.dev` preview host. On the live
-   domain those redirects come from Cloudflare's dashboard (a redirect rule +
-   "Always Use HTTPS") and/or the `_redirects` file in `dist/`. Verify apex →
-   www actually 301s after any DNS change.
+1. Canonical host is the apex, `https://riverbirchtreeservice.com` (no `www`). It is
+   what `astro.config.mjs`, every canonical tag, the sitemap and `robots.txt` use.
+2. `www` → apex is a 301 handled by the Pages middleware in
+   `functions/_middleware.js` (path and query preserved). `_redirects` cannot match
+   on hostname, and `worker.js` only runs on the `*.workers.dev` preview host, so
+   neither handles it. http → https comes from Cloudflare's "Always Use HTTPS".
+   The deploy workflow asserts the www → apex 301 after every deploy.
 3. **Verify each deploy** on the printed `<hash>.river-birch.pages.dev` preview
    URL before trusting the live domain (edge cache can lag briefly).
 
