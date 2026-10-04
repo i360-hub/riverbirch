@@ -2,7 +2,7 @@
 title: "Ice Storm Damaged Your Trees? What High Country Homeowners Should Do First"
 seoTitle: "Ice Storm Tree Damage in the High Country — First Steps"
 description: "An ice storm just hit the High Country. Now what? Ezequiel Moreno of River Birch Tree Service walks through the first 48 hours: what is dangerous, what can wait, what to document for insurance, and when to call a crew."
-pubDate: 2026-11-01
+pubDate: 2026-10-14
 heroImage: "ice-storm"
 heroAlt: "Ice-covered fallen trees and storm debris on a mountain road in the North Carolina High Country"
 author: "Ezequiel Moreno"

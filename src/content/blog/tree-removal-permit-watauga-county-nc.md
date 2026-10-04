@@ -2,7 +2,7 @@
 title: "Do You Need a Permit to Remove a Tree in Watauga County, NC?"
 seoTitle: "Tree Removal Permits in Watauga County, NC — The Rules"
 description: "Do you need a permit to cut down a tree in Watauga County, Boone, or Blowing Rock? Ezequiel Moreno of River Birch Tree Service explains the local rules, HOA approvals, and when you can just cut."
-pubDate: 2026-11-15
+pubDate: 2026-10-24
 heroImage: "permit-watauga"
 heroAlt: "Arborist removing a tree on a mountain property in the North Carolina High Country"
 author: "Ezequiel Moreno"
