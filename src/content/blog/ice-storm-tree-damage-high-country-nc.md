@@ -45,6 +45,15 @@ Not every ice-damaged tree is a removal. Here is my honest triage:
 - **Maybe:** bark torn but the trunk intact, up to half the canopy gone. Worth a professional look. Species and structure decide it.
 - **Likely a removal:** split trunk, bark stripped down one side, more than half the canopy gone, root plate lifted, or a lean that was not there before the storm.
 
+| What you see | What it usually means | What to do |
+|---|---|---|
+| Clean broken limbs, tree otherwise healthy | Likely savable | Prune properly, keep an eye on it |
+| Bark torn, trunk intact, less than half the canopy lost | Maybe | Get a professional look |
+| Split trunk or bark stripped down one side | Likely a removal | Call a crew |
+| More than half the canopy gone | Likely a removal | Call a crew |
+| Root plate lifted or a new lean | Likely a removal | Stay clear, call a crew |
+| Limb or tree on a power line | Utility hazard | Call the power company, not a tree service |
+
 White pines, our most common storm casualty, are brittle-topped and do not recover well from major crown loss. Oaks handle it better. Hemlocks already stressed by woolly adelgid often do not bounce back. I would rather tell you a tree can be saved with [pruning](/tree-trimming-pruning) than sell you a removal. A quick look is all it takes, and estimates are free.
 
 ## What about insurance?

@@ -19,6 +19,13 @@ faqs:
 
 > In unincorporated Watauga County, you generally do not need a county permit to remove a tree on your own property. But Boone and Blowing Rock have their own tree rules, and many mountain HOAs require written approval first, sometimes with replanting conditions. Check your town and your HOA before you schedule the work.
 
+| Where your lot sits | Permit situation | What to do |
+|---|---|---|
+| Unincorporated Watauga County | Generally no county permit | Hire a crew; mind roads and power lines |
+| Town of Boone | Town tree rules apply | Check with Boone Planning and Inspections |
+| Blowing Rock | Town tree rules apply | Check with the town planning office |
+| HOA or gated community | HOA approval often required | Get written approval before work starts |
+
 ## Outside town limits: generally no permit needed
 
 If your property is in the county but outside any town, which covers much of Deep Gap, Vilas, Valle Crucis, and the rural stretches between, Watauga County does not run a tree-removal permit program for private homes. You can hire a crew and get the work done. The normal common-sense rules still apply. Do not drop anything across a road. Stay clear of power lines, since that is the utility's territory. And if the tree sits on a shared boundary, talk to your neighbor first.

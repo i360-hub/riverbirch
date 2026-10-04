@@ -34,6 +34,17 @@ Things that push a quote up:
 - Steep slopes or soft, wet ground where trucks cannot set up
 - Tight mountain driveways with no turnaround for the chipper
 
+The short version, all in one place:
+
+| Price factor | Tends to cost less | Tends to cost more |
+|---|---|---|
+| Tree size | Under 30 ft, thin trunk | Over 60 ft, thick trunk |
+| Species | White pine, poplar | Oak, hickory, or any dead tree |
+| Access | Open yard, truck gets close | Steep slope, climbing only |
+| Position | Away from structures | Over a house, deck, or lines |
+| Extras | Removal only | Add stump grinding or haul-off |
+| Timing | Scheduled visit | Emergency or storm call |
+
 ## Species matters here too
 
 Our forests are not like the Piedmont's. White pines grow tall and fast and are usually the most straightforward removals. Mature red and white oaks have wide, heavy canopies. More wood, more rigging, a bigger job at the same height. And dead trees cost more whatever the species. Dead wood is brittle and hard to predict, which makes the work slower and more dangerous for the crew. If you have a hemlock dying back from woolly adelgid, and there are plenty in Watauga and Ashe Counties, do not wait. It only gets pricier and more hazardous as it declines.
