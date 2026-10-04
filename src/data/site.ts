@@ -224,6 +224,7 @@ export const nav: NavItem[] = [
     ],
   },
   { label: "Reviews", href: "/reviews" },
+  { label: "Blog", href: "/blog" },
   { label: "About", href: "/about-river-birch-tree-service" },
   { label: "Contact", href: "/contact" },
 ];
