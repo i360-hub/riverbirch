@@ -11,7 +11,9 @@ const blog = defineCollection({
     // Shorter <title> for search results (~60 chars); falls back to `title`.
     // Does not affect the on-page H1 or the BlogPosting headline.
     seoTitle: z.string().optional(),
-    description: z.string(),
+    // Meta description. Search results cut off past ~155 characters, so the
+    // build fails on anything longer than 160.
+    description: z.string().max(160),
     pubDate: z.coerce.date(),
     updatedDate: z.coerce.date().optional(),
     heroImage: z.string(),

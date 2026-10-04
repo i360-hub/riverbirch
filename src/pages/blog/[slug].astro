@@ -141,10 +141,17 @@ if (faqs.length > 0) {
         <p>
           {author} is the owner of River Birch Tree Service LLC, a locally owned,
           fully-insured tree service based in Deep Gap, NC. Since 2020, {author ===
-          "Ezequiel Moreno" ? "Ezequiel" : author} and his crew have served Boone,
-          Blowing Rock, Banner Elk, West Jefferson, and the High Country across
-          Watauga, Ashe, and Avery Counties — tree removal, storm cleanup,
-          trimming, land clearing, and stump grinding. Free on-site estimates:{" "}
+          "Ezequiel Moreno" ? "Ezequiel" : author} and his crew have served{" "}
+          <a href="/tree-service-boone-nc">Boone</a>,{" "}
+          <a href="/tree-service-blowing-rock-nc">Blowing Rock</a>,{" "}
+          <a href="/tree-service-banner-elk-nc">Banner Elk</a>,{" "}
+          <a href="/tree-service-west-jefferson-nc">West Jefferson</a>, and the
+          High Country across Watauga, Ashe, and Avery Counties —{" "}
+          <a href="/tree-removal">tree removal</a>,{" "}
+          <a href="/storm-damage-tree-removal">storm cleanup</a>,{" "}
+          <a href="/tree-trimming-pruning">trimming</a>,{" "}
+          <a href="/land-clearing">land clearing</a>, and{" "}
+          <a href="/stump-grinding">stump grinding</a>. Free on-site estimates:{" "}
           <a href={site.phoneHref}>{site.phoneDisplay}</a>, English y español.
         </p>
       </aside>
@@ -326,6 +333,11 @@ if (faqs.length > 0) {
   }
   .post__author p:last-child {
     margin-bottom: 0;
+  }
+  .post__author a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
   }
   .post__related {
     padding-block: 0 clamp(2rem, 5vw, 3.5rem);
