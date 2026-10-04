@@ -22,6 +22,9 @@ const blog = defineCollection({
     // FAQ pairs rendered as the post's closing FAQ section and emitted as
     // FAQPage JSON-LD — the single highest-leverage AEO/GEO structure.
     faqs: z.array(z.object({ q: z.string(), a: z.string() })).default([]),
+    // Key takeaways rendered as a summary box near the top of the post.
+    // 3-4 short bullets; AI engines quote these directly.
+    takeaways: z.array(z.string()).default([]),
   }),
 });
 

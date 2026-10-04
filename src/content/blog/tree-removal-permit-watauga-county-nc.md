@@ -6,6 +6,10 @@ pubDate: 2026-10-24
 heroImage: "permit-watauga"
 heroAlt: "Arborist removing a tree on a mountain property in the North Carolina High Country"
 author: "Ezequiel Moreno"
+takeaways:
+  - "Unincorporated Watauga County generally requires no tree-removal permit. Boone and Blowing Rock have their own rules."
+  - "HOA approval matters more than county rules across much of the High Country. Get it in writing first."
+  - "Give your tree service your address and HOA status before scheduling, so approval needs get flagged early."
 faqs:
   - q: "Do I need a permit to remove a tree on my property in Watauga County?"
     a: "In unincorporated Watauga County, there is generally no county permit required to remove a tree on your own residential property. But the towns have their own rules. Boone and Blowing Rock both regulate tree removal more closely, and many mountain HOAs require written approval before any tree comes down. Always check your town and your HOA first."

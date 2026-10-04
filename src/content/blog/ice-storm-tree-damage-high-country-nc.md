@@ -6,6 +6,11 @@ pubDate: 2026-10-14
 heroImage: "ice-storm"
 heroAlt: "Ice-covered fallen trees and storm debris on a mountain road in the North Carolina High Country"
 author: "Ezequiel Moreno"
+takeaways:
+  - "Stay clear of hanging limbs and leaning trunks. Never cut wood under tension yourself."
+  - "Photograph all damage before any cleanup. Your photos are the insurance claim."
+  - "Trees on structures, blocking driveways, or near lines need a crew now. Yard brush can wait."
+  - "Many ice-damaged trees can be saved with proper pruning. Split trunks and lifted root plates usually cannot."
 faqs:
   - q: "What should I do first after an ice storm damages my trees?"
     a: "Stay clear of hanging limbs and leaning trunks. They are the most dangerous thing in your yard right now. Do not try to cut anything under tension yourself. Photograph all damage before cleanup for your insurance claim, then call a tree service for anything touching a structure, blocking a driveway, or near a power line. River Birch Tree Service prioritizes storm calls during operating hours at (828) 818-8505."
