@@ -170,6 +170,7 @@ export const site = {
     { label: "About Us", href: "/about-river-birch-tree-service" },
     { label: "Property Services", href: "/property-services" },
     { label: "Reviews", href: "/reviews" },
+    { label: "Blog", href: "/blog" },
     { label: "Service Areas", href: "/service-areas" },
     { label: "Contact", href: "/contact" },
   ],
@@ -224,6 +225,7 @@ export const nav: NavItem[] = [
     ],
   },
   { label: "Reviews", href: "/reviews" },
+  { label: "Blog", href: "/blog" },
   { label: "About", href: "/about-river-birch-tree-service" },
   { label: "Contact", href: "/contact" },
 ];

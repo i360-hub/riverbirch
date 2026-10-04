@@ -1,0 +1,389 @@
+---
+// Blog post renderer — /blog/[slug].
+// AEO/GEO: BlogPosting + FAQPage JSON-LD, byline with dates, direct-answer
+// blockquote convention (posts open the body with a 40–60 word quotable
+// answer), question-form H2s, internal links to service/town pages.
+import { render } from "astro:content";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import FinalCta from "@components/widgets/FinalCta.astro";
+import Faq from "@components/widgets/Faq.astro";
+import { site } from "@data/site";
+import { getPublishedPosts } from "@lib/posts";
+import { blogImageSrc } from "@lib/blogImages";
+
+export async function getStaticPaths() {
+  const posts = await getPublishedPosts();
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const { title, seoTitle, description, pubDate, updatedDate, heroImage, heroAlt, author, faqs, takeaways } =
+  post.data;
+
+// Related posts: latest published posts excluding this one.
+const related = (await getPublishedPosts())
+  .filter((p) => p.id !== post.id)
+  .slice(0, 3);
+
+const path = `/blog/${post.id}`;
+const origin = Astro.site?.toString().replace(/\/$/, "") ?? "";
+
+const dateFmt = new Intl.DateTimeFormat("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+const pubDisplay = dateFmt.format(pubDate);
+const pubISO = pubDate.toISOString();
+const modISO = (updatedDate ?? pubDate).toISOString();
+// heroImage is a key into src/lib/blogImages (astro:assets-optimized).
+const heroSrc = blogImageSrc(heroImage);
+const imageAbs = `${origin}${heroSrc}`;
+
+const schema: object[] = [
+  {
+    "@type": "BlogPosting",
+    "@id": `${origin}${path}#blogposting`,
+    headline: title,
+    description,
+    datePublished: pubISO,
+    dateModified: modISO,
+    image: imageAbs,
+    author: { "@type": "Person", name: author },
+    publisher: {
+      "@type": "Organization",
+      name: site.legalName,
+      url: `${origin}/`,
+    },
+    mainEntityOfPage: { "@type": "WebPage", "@id": `${origin}${path}` },
+    url: `${origin}${path}`,
+  },
+];
+
+if (faqs.length > 0) {
+  schema.push({
+    "@type": "FAQPage",
+    "@id": `${origin}${path}#faq`,
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  });
+}
+---
+
+<BaseLayout
+  title={seoTitle ?? title}
+  description={description}
+  path={path}
+  ogType="article"
+  ogImage={heroSrc}
+  schema={schema}
+  breadcrumb={[
+    { name: "Blog", item: `${origin}/blog` },
+    { name: title, item: `${origin}${path}` },
+  ]}
+>
+  <article class="post">
+    <div class="post__inner">
+      <header class="post__header">
+        <p class="post__kicker">River Birch Tree Service · High Country, NC</p>
+        <h1>{title}</h1>
+        <p class="post__byline">
+          By {author} <span aria-hidden="true">·</span>{" "}
+          <time datetime={pubISO}>{pubDisplay}</time>
+          {
+            updatedDate && (
+              <>
+                {" "}
+                <span aria-hidden="true">·</span> Updated{" "}
+                <time datetime={modISO}>{dateFmt.format(updatedDate)}</time>
+              </>
+            )
+          }
+        </p>
+      </header>
+
+      <img
+        class="post__hero"
+        src={heroSrc}
+        alt={heroAlt}
+        width="1200"
+        height="675"
+        loading="eager"
+        decoding="async"
+      />
+
+      {
+        takeaways.length > 0 && (
+          <aside class="post__takeaways" aria-label="Key takeaways">
+            <p class="post__takeaways-title">Key takeaways</p>
+            <ul>
+              {takeaways.map((t) => (
+                <li>{t}</li>
+              ))}
+            </ul>
+          </aside>
+        )
+      }
+
+      <div class="post__body">
+        <Content />
+      </div>
+
+      <aside class="post__author" aria-label="About the author">
+        <p class="post__author-name">About {author}</p>
+        <p>
+          {author} is the owner of River Birch Tree Service LLC, a locally owned,
+          fully-insured tree service based in Deep Gap, NC. Since 2020, {author ===
+          "Ezequiel Moreno" ? "Ezequiel" : author} and his crew have served Boone,
+          Blowing Rock, Banner Elk, West Jefferson, and the High Country across
+          Watauga, Ashe, and Avery Counties — tree removal, storm cleanup,
+          trimming, land clearing, and stump grinding. Free on-site estimates:{" "}
+          <a href={site.phoneHref}>{site.phoneDisplay}</a>, English y español.
+        </p>
+      </aside>
+    </div>
+  </article>
+
+  {
+    related.length > 0 && (
+      <section class="post__related" aria-label="More from the blog">
+        <div class="post__related-inner">
+          <h2>More from the blog</h2>
+          <div class="post__related-grid">
+            {related.map((r) => (
+              <a class="post-card" href={`/blog/${r.id}`}>
+                <img
+                  class="post-card__img"
+                  src={blogImageSrc(r.data.heroImage)}
+                  alt={r.data.heroAlt}
+                  width="600"
+                  height="338"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div class="post-card__body">
+                  <p class="post-card__date">
+                    <time datetime={r.data.pubDate.toISOString()}>
+                      {dateFmt.format(r.data.pubDate)}
+                    </time>
+                  </p>
+                  <h3 class="post-card__title">{r.data.title}</h3>
+                  <span class="post-card__more">Read more →</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  {
+    faqs.length > 0 && (
+      <Faq
+        title="Common questions"
+        sub={`Straight answers from ${author} — call ${site.phoneDisplay} if yours isn't here.`}
+        items={faqs}
+        ctaLabel={`Still have a question? Call ${site.phoneDisplay} — free estimates, English y español.`}
+      />
+    )
+  }
+
+  <FinalCta
+    heading="Have a tree you're unsure about? Let's take a look."
+    secondaryLabel="Request a Free Estimate"
+    secondaryHref="/contact"
+  />
+</BaseLayout>
+
+<style>
+  .post {
+    padding-block: clamp(2rem, 5vw, 3.5rem);
+  }
+  .post__inner {
+    max-width: 860px;
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 4vw, 2rem);
+  }
+  .post__kicker {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--cpr-green, #2f6b3a);
+    margin: 0 0 0.75rem;
+  }
+  .post__header h1 {
+    margin: 0 0 0.6rem;
+    line-height: 1.15;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+  }
+  .post__byline {
+    color: var(--cpr-muted, #5b6470);
+    font-size: 0.95rem;
+    margin: 0 0 1.6rem;
+  }
+  .post__byline time {
+    white-space: nowrap;
+  }
+  .post__hero {
+    width: 100%;
+    border-radius: 12px;
+    object-fit: cover;
+    aspect-ratio: 16 / 9;
+    margin: 0 0 2rem;
+  }
+  .post__body {
+    font-size: 1.05rem;
+    line-height: 1.75;
+  }
+  .post__body :global(h2) {
+    margin-top: 2.4rem;
+    margin-bottom: 0.8rem;
+    font-size: 1.5rem;
+    line-height: 1.25;
+  }
+  .post__body :global(h3) {
+    margin-top: 1.8rem;
+    margin-bottom: 0.6rem;
+    font-size: 1.2rem;
+  }
+  .post__body :global(p) {
+    margin: 0 0 1.2rem;
+  }
+  .post__body :global(ul),
+  .post__body :global(ol) {
+    margin: 0 0 1.2rem;
+    padding-left: 1.4rem;
+  }
+  .post__body :global(li) {
+    margin-bottom: 0.5rem;
+  }
+  .post__body :global(blockquote) {
+    margin: 0 0 1.6rem;
+    padding: 1.1rem 1.4rem;
+    border-left: 4px solid var(--cpr-green, #2f6b3a);
+    background: rgba(47, 107, 58, 0.07);
+    border-radius: 0 8px 8px 0;
+    font-size: 1.08rem;
+  }
+  .post__body :global(blockquote p) {
+    margin: 0;
+  }
+  .post__body :global(a) {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .post__body :global(strong) {
+    font-weight: 700;
+  }
+  .post__takeaways {
+    margin: 0 0 2rem;
+    padding: 1.25rem 1.5rem;
+    background: rgba(47, 107, 58, 0.07);
+    border: 1px solid rgba(47, 107, 58, 0.2);
+    border-radius: 12px;
+  }
+  .post__takeaways-title {
+    font-weight: 800;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--cpr-green, #2f6b3a);
+    margin: 0 0 0.6rem;
+  }
+  .post__takeaways ul {
+    margin: 0;
+    padding-left: 1.25rem;
+  }
+  .post__takeaways li {
+    margin-bottom: 0.45rem;
+    line-height: 1.6;
+  }
+  .post__takeaways li:last-child {
+    margin-bottom: 0;
+  }
+  .post__author {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid rgba(0, 0, 0, 0.08);
+    font-size: 0.98rem;
+    line-height: 1.7;
+    color: var(--cpr-muted, #5b6470);
+  }
+  .post__author-name {
+    font-weight: 800;
+    color: inherit;
+    margin: 0 0 0.5rem;
+    font-size: 1.05rem;
+  }
+  .post__author p:last-child {
+    margin-bottom: 0;
+  }
+  .post__related {
+    padding-block: 0 clamp(2rem, 5vw, 3.5rem);
+  }
+  .post__related-inner {
+    max-width: 1100px;
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 4vw, 2rem);
+  }
+  .post__related h2 {
+    font-size: 1.5rem;
+    margin: 0 0 1.25rem;
+  }
+  .post__related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+  .post-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    background: #fff;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .post-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+  }
+  .post-card__img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+  .post-card__body {
+    padding: 1.1rem 1.25rem 1.35rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    flex: 1;
+  }
+  .post-card__date {
+    font-size: 0.85rem;
+    color: var(--cpr-muted, #5b6470);
+    margin: 0;
+  }
+  .post-card__title {
+    font-size: 1.1rem;
+    line-height: 1.3;
+    margin: 0;
+    flex: 1;
+  }
+  .post-card__more {
+    font-weight: 700;
+    color: var(--cpr-green, #2f6b3a);
+  }
+</style>

@@ -1,0 +1,187 @@
+---
+// Blog hub — /blog. Cards link to /blog/[slug].
+import BaseLayout from "@layouts/BaseLayout.astro";
+import FinalCta from "@components/widgets/FinalCta.astro";
+import { site } from "@data/site";
+import { getPublishedPosts } from "@lib/posts";
+import { blogImageSrc } from "@lib/blogImages";
+
+const title = "Tree Care Tips for the High Country | River Birch Blog";
+const description =
+  "Practical tree advice from Ezequiel Moreno and the River Birch crew — removal costs, ice storm recovery, permits, pruning timing, and hiring tips for Boone, Blowing Rock, and the NC High Country.";
+const path = "/blog";
+const origin = Astro.site?.toString().replace(/\/$/, "") ?? "";
+
+const posts = await getPublishedPosts();
+
+const dateFmt = new Intl.DateTimeFormat("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+
+const schema: object[] = [
+  {
+    "@type": "CollectionPage",
+    "@id": `${origin}${path}#webpage`,
+    url: `${origin}${path}`,
+    name: title,
+    description,
+  },
+  {
+    "@type": "Blog",
+    "@id": `${origin}${path}#blog`,
+    name: title,
+    description,
+    publisher: { "@type": "Organization", name: site.legalName, url: `${origin}/` },
+    blogPost: posts.map((p) => ({
+      "@type": "BlogPosting",
+      "@id": `${origin}/blog/${p.id}#blogposting`,
+      headline: p.data.title,
+      description: p.data.description,
+      datePublished: p.data.pubDate.toISOString(),
+      dateModified: (p.data.updatedDate ?? p.data.pubDate).toISOString(),
+      url: `${origin}/blog/${p.id}`,
+      author: { "@type": "Person", name: p.data.author },
+    })),
+  },
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  path={path}
+  schema={schema}
+  breadcrumb={[{ name: "Blog", item: `${origin}/blog` }]}
+>
+  <section class="blog-hub">
+    <div class="blog-hub__inner">
+      <p class="blog-hub__kicker">River Birch Tree Service · High Country, NC</p>
+      <h1>Tree care tips, from our crew to your yard</h1>
+      <p class="blog-hub__lede">
+        Straight answers about tree removal, storm recovery, and pruning in Boone,
+        Blowing Rock, Banner Elk, and across Watauga, Ashe, and Avery Counties —
+        written by the people who do the work.
+      </p>
+
+      <div class="blog-hub__grid">
+        {
+          posts.map((p) => (
+            <a class="post-card" href={`/blog/${p.id}`}>
+              <img
+                class="post-card__img"
+                src={blogImageSrc(p.data.heroImage)}
+                alt={p.data.heroAlt}
+                width="600"
+                height="338"
+                loading="lazy"
+                decoding="async"
+              />
+              <div class="post-card__body">
+                <p class="post-card__date">
+                  <time datetime={p.data.pubDate.toISOString()}>
+                    {dateFmt.format(p.data.pubDate)}
+                  </time>
+                </p>
+                <h2 class="post-card__title">{p.data.title}</h2>
+                <p class="post-card__desc">{p.data.description}</p>
+                <span class="post-card__more">Read more →</span>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <FinalCta
+    heading="Have a tree you're unsure about? Let's take a look."
+    secondaryLabel="Request a Free Estimate"
+    secondaryHref="/contact"
+  />
+</BaseLayout>
+
+<style>
+  .blog-hub {
+    padding-block: clamp(2rem, 5vw, 3.5rem);
+  }
+  .blog-hub__inner {
+    max-width: 1100px;
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 4vw, 2rem);
+  }
+  .blog-hub__kicker {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--cpr-green, #2f6b3a);
+    margin: 0 0 0.75rem;
+  }
+  .blog-hub h1 {
+    margin: 0 0 0.75rem;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    line-height: 1.15;
+  }
+  .blog-hub__lede {
+    font-size: 1.08rem;
+    line-height: 1.7;
+    max-width: 720px;
+    margin: 0 0 2.5rem;
+    color: var(--cpr-muted, #5b6470);
+  }
+  .blog-hub__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  .post-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    background: #fff;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .post-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+  }
+  .post-card__img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+  .post-card__body {
+    padding: 1.25rem 1.35rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1;
+  }
+  .post-card__date {
+    font-size: 0.85rem;
+    color: var(--cpr-muted, #5b6470);
+    margin: 0;
+  }
+  .post-card__title {
+    font-size: 1.2rem;
+    line-height: 1.3;
+    margin: 0;
+  }
+  .post-card__desc {
+    font-size: 0.98rem;
+    line-height: 1.6;
+    color: var(--cpr-muted, #5b6470);
+    margin: 0;
+    flex: 1;
+  }
+  .post-card__more {
+    font-weight: 700;
+    color: var(--cpr-green, #2f6b3a);
+  }
+</style>
