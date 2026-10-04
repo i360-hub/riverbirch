@@ -4,7 +4,7 @@ Astro + Cloudflare Pages site for **River Birch Tree Service LLC** (Deep Gap, NC
 Built on the Impact 360 "Smart Site" stack.
 
 ## 🌐 Live status
-- **Production:** https://riverbirchtreeservice.com  *(apex is canonical; `www` also serves)*
+- **Production:** https://riverbirchtreeservice.com  *(apex is canonical; `www` 301s to it)*
 - **Valid SSL** (Google Trust Services), DNS on Cloudflare, domain registered in-account.
 - **Cloudflare Pages project:** `river-birch` (secondary URL: `river-birch.pages.dev`).
 - **Repo:** https://github.com/i360-hub/riverbirch (branch `main`).
@@ -44,9 +44,8 @@ Built on the Impact 360 "Smart Site" stack.
 1. **Test a live lead submission** — submit the contact form on the live site and confirm
    it lands in the GHL sub-account (Contacts/Conversations). If not, check the form's
    allowed domains / notification workflow in GHL.
-2. **`www` → apex 301 (optional polish)** — `www` currently serves rather than redirecting.
-   Harmless (both carry the apex canonical). To add: Cloudflare zone → Rules → Redirect Rules
-   → `www.riverbirchtreeservice.com` → 301 to `https://riverbirchtreeservice.com/${path}`.
+2. ~~`www` → apex 301~~ — **done** (Oct 2026) via `functions/_middleware.js`; the GBP
+   website link was switched to the apex at the same time.
 3. **Remaining 4 GBP services** — 6 of 10 are built. Add the other 4 to `src/data/services.ts`
    + `src/data/servicePages.ts` (and `schema.services` in `site.ts`) for full entity parity.
 4. **Google Maps embed** — no API key set (`.env` blank), so the ServiceArea section shows a

@@ -6,10 +6,9 @@
  *     so crawlers fetch the page, see "noindex", and drop any known preview URL.
  *  2. Never let the edge serve stale HTML (no-store on HTML responses).
  *
- * GO-LIVE TODO: once the client's real domain is set, add the canonical
- * apex -> www (and http -> https) 301s here, keyed off the production hostname —
- * see the CPR reference build for the pattern. Until then this stays
- * domain-agnostic so it works unchanged on the *.pages.dev preview.
+ * This Worker only serves the *.workers.dev preview host. The live domain is
+ * served by the Pages project, where the www -> apex 301 lives in
+ * functions/_middleware.js (apex is the canonical host).
  */
 export default {
   async fetch(request, env) {
