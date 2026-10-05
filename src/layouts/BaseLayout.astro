@@ -257,17 +257,12 @@ const jsonLd = {
       })();
     </script>
 
-    <!-- GoHighLevel A2P chat widget — REQUIRED for SMS compliance. This widget
-         is the SOLE SMS opt-in surface for the A2P 10DLC registration: it must
-         stay live and publicly reachable on every page, and no other form on
-         this site may collect SMS consent. Rendered as the vendor's plain tag
-         (not host-gated like the tracking script below) so the opt-in path is
-         identical everywhere and can be verified on previews before launch. -->
-    <script
-      src="https://widgets.leadconnectorhq.com/loader.js"
-      data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
-      data-widget-id="6a80d0c6421318e826ef1bc0"
-      data-source="WEB_USER"
-      is:inline></script>
+    {/* The GoHighLevel chat widget was removed here on 2026-10-05 at the
+        agency's direction. Note for anyone touching SMS compliance: the A2P
+        10DLC campaign was registered with that widget as the sole SMS opt-in
+        surface, and /privacy and /sms-terms-and-conditions still describe it.
+        To restore it, re-add the LeadConnector loader tag with
+        data-widget-id="6a80d0c6421318e826ef1bc0" (see git history for the
+        exact tag). This is a build-time comment and is not sent to browsers. */}
   </body>
 </html>
