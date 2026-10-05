@@ -100,7 +100,9 @@ const trustChips = [
     </div>
 
     <p class="site-footer__copy">
-      &copy; {site.copyrightYear} {site.copyright} &nbsp;·&nbsp;
+      {/* The (c) symbol is the staff shortcut to the review request page (/r).
+          Deliberately unstyled and skipped by keyboard and screen readers. */}
+      <a href="/r" class="site-footer__staff" rel="nofollow" tabindex="-1" aria-hidden="true">&copy;</a> {site.copyrightYear} {site.copyright} &nbsp;·&nbsp;
       <span class="site-footer__credit">Smart Site by <a href="https://www.impact360media.com" target="_blank" rel="noopener">Impact 360</a></span>
     </p>
   </div>
@@ -349,6 +351,17 @@ const trustChips = [
     margin-top: var(--cpr-space-md);
     font-size: 0.85rem;
     color: var(--cpr-slate-light);
+  }
+  /* Staff shortcut on the (c) symbol: looks like plain text, with a larger
+     invisible tap area so it is easy to hit on a phone. */
+  .site-footer__staff {
+    display: inline-block;
+    padding: 0.75em;
+    margin: -0.75em;
+    color: inherit;
+    text-decoration: none;
+    cursor: default;
+    -webkit-tap-highlight-color: transparent;
   }
   .site-footer__credit {
     color: rgba(255, 255, 255, 0.7);
