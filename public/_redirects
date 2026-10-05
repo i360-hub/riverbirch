@@ -27,3 +27,8 @@
 /tree-service-aho-nc               /service-areas                          301
 /tree-service-brownwood-nc         /service-areas                          301
 /tree-service-stony-fork-nc        /service-areas                          301
+
+# --- Staff shortcut: review request page (GHL survey "Review Ask") ---
+# Not in the nav or the sitemap. Reached by typing riverbirchtreeservice.com/r
+# or by tapping the (c) symbol in the footer. 302 so the target can change.
+/r                                 https://api.leadconnectorhq.com/widget/survey/0k5V7K9xoNKPk2YIDL5p   302
