@@ -17,13 +17,11 @@
   Cache-Control: public, max-age=604800
 
 # Baseline security headers for every HTML response.
-# Microphone is allowed for this site and the GoHighLevel widget host only:
-# the voice widget (Laurel) needs it. Geolocation and camera stay off.
 /*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   X-Frame-Options: SAMEORIGIN
-  Permissions-Policy: geolocation=(), microphone=(self "https://widgets.leadconnectorhq.com"), camera=()
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains
 
 # Keep the pages.dev alias (and per-deploy hash previews) out of search engines.
