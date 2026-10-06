@@ -257,12 +257,19 @@ const jsonLd = {
       })();
     </script>
 
-    {/* The GoHighLevel chat widget was removed here on 2026-10-05 at the
-        agency's direction. Note for anyone touching SMS compliance: the A2P
-        10DLC campaign was registered with that widget as the sole SMS opt-in
-        surface, and /privacy and /sms-terms-and-conditions still describe it.
-        To restore it, re-add the LeadConnector loader tag with
-        data-widget-id="6a80d0c6421318e826ef1bc0" (see git history for the
-        exact tag). This is a build-time comment and is not sent to browsers. */}
+    {/* GoHighLevel VOICE widget ("Voice - Laurel"). A visitor taps the bubble
+        and talks to the Laurel voice agent in the browser; she takes a message
+        and the staff cells are texted by the ALERT 6 workflow. No SMS goes to
+        the visitor and nothing here collects SMS consent.
+        History: the A2P SMS chat widget (data-widget-id
+        "6a80d0c6421318e826ef1bc0") was removed on 2026-10-05 at the agency's
+        direction. The A2P 10DLC campaign was registered with that widget as
+        the sole SMS opt-in surface, and /privacy and /sms-terms-and-conditions
+        still describe it. This is a build-time comment, not sent to browsers. */}
+    <script
+      src="https://widgets.leadconnectorhq.com/loader.js"
+      data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
+      data-widget-id="6ac43e60a323fc9a2eb82847"
+      is:inline></script>
   </body>
 </html>
