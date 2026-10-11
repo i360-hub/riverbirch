@@ -60,8 +60,8 @@ export const services: Service[] = [
     gridTitle: "Land & Lot Clearing",
     group: "removal",
     icon: "wind",
-    title: "Land, Lot & Driveway Clearing | High Country, NC | River Birch",
-    h1Lines: ["Land, Lot & Driveway Clearing", "Across the High Country"],
+    title: "Land, Lot & Driveway Clearing in Boone, NC | River Birch",
+    h1Lines: ["Land, Lot & Driveway Clearing", "in Boone & the High Country"],
     metaDescription:
       "Building, expanding, or opening up a mountain lot? River Birch clears land, lots, and driveways in Boone, Deep Gap & the High Country. Fully insured. Free estimates — (828) 818-8505.",
   },
@@ -93,8 +93,8 @@ export const services: Service[] = [
     gridTitle: "View Clearing",
     group: "care",
     icon: "wind",
-    title: "View Clearing & Enhancement | High Country, NC | River Birch",
-    h1Lines: ["View Clearing &", "Enhancement in the High Country"],
+    title: "View Clearing in Boone & Blowing Rock, NC | River Birch",
+    h1Lines: ["View Clearing in Boone,", "Blowing Rock & the High Country"],
     metaDescription:
       "Reclaim your mountain view without clear-cutting. River Birch does selective view clearing, view topping, and enhancement in Blowing Rock, Boone & across the High Country. Fully insured. Call (828) 818-8505.",
   },

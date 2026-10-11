@@ -34,7 +34,7 @@ const AREA = {
   areaTitle: "Serving Deep Gap, Boone & the High Country",
   areaSub: "Locally owned and based in Deep Gap, we cover Watauga County plus neighboring Ashe & Avery Counties and the surrounding High Country. Pick your town for local details.",
   areaInfoHeading: "Fast Response Across the High Country",
-  areaInfoBlurb: "From Deep Gap we reach Boone, Blowing Rock, Banner Elk, West Jefferson and the rest of Watauga, Ashe & Avery Counties quickly — and we travel for large jobs beyond.",
+  areaInfoBlurb: "From our Deep Gap base, with equipment staged in the Boone area, we reach Boone, Blowing Rock, Banner Elk, West Jefferson and the rest of Watauga, Ashe & Avery Counties quickly — and we travel for large jobs beyond.",
 };
 
 export const servicePages: Record<string, ServicePageData> = {
@@ -72,6 +72,7 @@ export const servicePages: Record<string, ServicePageData> = {
     faqCtaLabel: "Have a tree you're not sure about? Call River Birch — we'll take a look.",
     faq: [
       { q: "Can you remove a tree that's close to my house or a power line?", a: "Yes. Technical removals near homes and power lines are what we do best. Instead of felling the whole tree, we climb it and rope down limbs and trunk sections in controlled pieces so nothing hits the structure. River Birch is fully insured for exactly this kind of work." },
+      { q: "Can you remove a large tree that's leaning toward my house?", a: "Yes — it's one of the most common calls we get. With a house in the fall zone the tree can't simply be felled, so we climb it and take it down in sections, roping each piece away from the roof. At the free on-site estimate we look at the lean, the roots, the slope, and how close we can get equipment, then give you a firm written price. Treat it as urgent if the lean is new or getting worse, the soil is heaving or cracking at the base, roots are lifting, or the trunk has cracked — keep everyone out from under it and call (828) 818-8505 (Mon–Sat, 7:00 AM – 7:00 PM). If it's touching a power line, call your utility first." },
       { q: "Do you remove the stump too?", a: "We can. Removal and <a href=\"/stump-grinding\">stump grinding</a> are separate steps, so just let us know when we give the estimate and we'll grind the stump below grade and clean up the chips." },
       { q: "Is River Birch insured?", a: "Yes — River Birch Tree Service LLC is fully insured for tree work. Tree removal in North Carolina doesn't require a state arborist license, but insurance is what actually protects you and your property, and we carry it on every job." },
       { q: "How much does tree removal cost?", a: "It depends on the tree's size, its lean, and what's around it — a big pine leaning over the roof takes more rigging than an open-lot removal. We give a free on-site estimate with a firm written price before any work starts." },
@@ -130,7 +131,8 @@ export const servicePages: Record<string, ServicePageData> = {
       { q: "How quickly do you respond to a storm emergency?", a: "Storm and ice damage jumps the queue — it goes ahead of scheduled work. Call (828) 818-8505 during business hours (Mon–Sat, 7:00 AM – 7:00 PM) and you'll reach a local River Birch crew for emergency storm and ice-damage tree work. If a power line is down, call your utility and 911 first." },
       { q: "A tree fell on my house — what do I do first?", a: "Get everyone out of the affected area and call us right away. If a power line is involved, stay well clear and call your utility and 911 first. Then call River Birch — we'll secure the tree and get it off the structure safely." },
       { q: "Will my homeowner's insurance cover storm tree damage?", a: "Often, yes — when a tree hits a covered structure, many policies help with removal and repair. We document the scene with photos and provide an itemized invoice you can submit to your insurer. Coverage is between you and your carrier, but we make the paperwork easy." },
-      { q: "How fast can you get here?", a: "As fast as conditions safely allow. We're based right in Deep Gap, so we're already in the High Country — no waiting on a crew to drive up the mountain from out of the area." },
+      { q: "Can you clear a fallen tree that's blocking my driveway?", a: "Yes — a blocked drive goes to the front of the schedule. We cut the tree into sections and open the driveway first so you can get in and out, then chip the brush, haul off the debris, and deal with any hanging or leaning trees left along the drive. If the tree is on or near a power line, stay clear and call your utility first. Then call (828) 818-8505 during business hours (Mon–Sat, 7:00 AM – 7:00 PM)." },
+      { q: "How fast can you get here?", a: "As fast as conditions safely allow. We're based in Deep Gap and our equipment is staged in the Boone area, so we're already in the High Country — no waiting on a crew to drive up the mountain from out of the area, and no hauling equipment in before the work can start." },
       { q: "Do you handle ice-damage cleanup too?", a: "Yes. Ice loads snap limbs and split trunks all over the High Country — and hit hardest at elevation in places like Beech Mountain and Seven Devils. We clear ice-damaged trees and limbs, then can prune or remove what's left compromised so it doesn't come down on the next storm." },
     ],
     related: {
@@ -228,7 +230,7 @@ export const servicePages: Record<string, ServicePageData> = {
         { title: "Free Assessment", text: "We look at each tree's health, structure, and clearances — roof, drive, lines — and tell you honestly what actually needs to be done." },
         { title: "A Pruning Plan", text: "We plan cuts that improve health and safety: deadwood removal, canopy lifting, thinning, and shaping — without over-pruning." },
         { title: "Clean, Insured Pruning", text: "Our fully-insured crew climbs and makes proper cuts at the right points so the tree heals well and stays strong." },
-        { title: "Tidy Cleanup", text: "We chip the trimmings and rake up, leaving your yard clean and your trees looking sharp." },
+        { title: "Cleanup & Haul-Away", text: "We chip the trimmings, haul all of it away, and rake up — cleanup is included, leaving your yard clean and your trees looking sharp." },
       ],
     },
     differentiators: {
@@ -242,7 +244,7 @@ export const servicePages: Record<string, ServicePageData> = {
     faq: [
       { q: "When is the best time to prune my trees?", a: "For most High Country hardwoods, late winter through early spring — while the tree is dormant — is ideal. That said, broken, dead, or hazardous limbs should come off any time of year. We'll tell you what's urgent and what can wait." },
       { q: "Do you 'top' trees?", a: "It depends on your goal. For the trees you want to keep healthy, we prune properly instead of topping them — topping a healthy shade tree causes weak, hazardous regrowth. But when the goal is opening up a view, we do offer view topping; see our <a href=\"/view-clearing\">view clearing</a> page. Either way, we'll walk you through the trade-offs so you can choose." },
-      { q: "Can you get limbs off my roof and driveway?", a: "Yes. Lifting the canopy off your roof, gutters, and driveway is one of the most common jobs we do, and it helps protect your home from limb damage in the next storm." },
+      { q: "Can you trim branches over my roof and haul away the debris?", a: "Yes. Lifting the canopy off your roof, gutters, and driveway is one of the most common jobs we do, and it helps protect your home from limb damage in the next storm. We rope limbs down instead of dropping them on the roof, chip the brush on site, and haul all of it away — cleanup and haul-away are included." },
       { q: "Is pruning covered by insurance?", a: "We mean OUR insurance — River Birch is fully insured, so pruning near your house is done with your property protected. Whether tree work is covered on your homeowner's policy depends on your carrier." },
       { q: "Will pruning help save a struggling tree?", a: "Sometimes. Removing deadwood and improving structure can help a stressed tree recover. If a tree is too far gone or hazardous, we'll tell you honestly and talk through <a href=\"/tree-removal\">removal</a> instead." },
     ],
