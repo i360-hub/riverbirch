@@ -80,5 +80,10 @@ const {
     .stat-strip__item:nth-child(n + 3) {
       border-top: 1px solid rgba(255, 255, 255, 0.08);
     }
+    /* An odd count (e.g. Boone's five) leaves one item alone on the last row —
+       let it span both columns instead of leaving an empty cell. */
+    .stat-strip__item:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+    }
   }
 </style>

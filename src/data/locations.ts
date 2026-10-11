@@ -74,6 +74,12 @@ interface TownConfig {
    *  insurance one). Used on high-value pages to target intent the SERP rewards
    *  — e.g. Boone's cost-focused "People Also Ask" box and "…cost" long-tail. */
   extraFaqs?: { q: string; a: string }[];
+  /** Optional per-town overrides of the templated copy. Used on Boone, where
+   *  our equipment is staged (a Boone location is planned). Deep Gap is still
+   *  the published base, so these never state a Boone address or office. */
+  stats?: { number: string; label: string }[];
+  closing?: string;
+  areaInfoBlurb?: string;
 }
 
 /** Smaller service-area communities we cover but don't build dedicated pages
@@ -124,8 +130,17 @@ const townConfigs: TownConfig[] = [
       extra: "From the King Street core and the Appalachian State campus out to hillside neighborhoods and the ridges above Bamboo Road, Boone packs a lot of tree types into a small footprint. Student-rental turnover keeps hazard pruning steady, while the older established streets near downtown have big silver maples and oaks that need reduction before winter ice tests them.",
       faq: { q: "Can you work on a tight Boone lot or near campus?", a: "Yes. Most in-town Boone jobs have no room to fell a tree whole, so we climb and lower it in pieces. We're set up for tight access, parked cars, and neighbors close on both sides." },
       faq2: { q: "Do you work around Appalachian State and student rentals in Boone?", a: "Regularly. Rental lots near campus are tight and often have cars and foot traffic close by, so we schedule around it, rope everything down in pieces, and clean up fully. We can bill the owner or property manager directly." },
-      faq3: { q: "How quickly can you respond to a downed tree in Boone during a storm?", a: "Fast — Boone is a short run from our Deep Gap base and where we do the most emergency work. We prioritize trees on houses, blocked drives, and anything tangled in a service line." },
+      faq3: { q: "How quickly can you respond to a downed tree in Boone during a storm?", a: "Fast — our equipment is staged in the Boone area, so nothing has to be hauled in before the work can start, and Boone is where we do the most emergency work. Storm calls go to the front of the schedule, and we prioritize trees on houses, blocked drives, and anything tangled in a service line." },
     },
+    stats: [
+      { number: "Fast", label: "Storm & Ice Response" },
+      { number: "Staged", label: "Equipment in the Boone Area" },
+      { number: "5.0★", label: "Rated on Google" },
+      { number: "Insured", label: "On Every Job" },
+      { number: "Free", label: "On-Site Estimates" },
+    ],
+    closing: `Our equipment is staged right in the Boone area, so we reach Boone and nearby Deep Gap, Blowing Rock, and Meat Camp quickly — and we travel for larger jobs beyond Watauga County too. Call River Birch at ${PHONE} for a free estimate.`,
+    areaInfoBlurb: "With equipment staged in the Boone area, we reach Boone and neighboring Deep Gap, Blowing Rock, and Meat Camp quickly — and travel for large jobs beyond the county line.",
     extraFaqs: [
       { q: "How much does tree removal cost in Boone, NC?", a: "It depends far more on the tree than the town. A small tree in an open yard is a quick job; a large hardwood leaning over your house, driveway, or a power line takes climbing, rigging, and a bigger crew, so it costs more. Boone's tight in-town lots near campus and steep ridgetop driveways also take longer to work safely than an open field. Rather than quote a number that won't fit your tree, we come out and give you a free written estimate for the exact job — so the price you're quoted is the price for the work." },
       { q: "What makes one Boone tree job cost more than another?", a: "Four things, mostly: the tree's size and species (a big oak or silver maple takes longer than a slim pine); how close it is to your house, power lines, or a neighbor's property (tight targets mean roping every piece down instead of felling it whole); site access (whether we can get a truck and chipper near the tree, or it's a steep, wooded lot above Bamboo Road); and the extras you want — keeping the wood, stump grinding, and full haul-away. We walk the site, factor all of it in, and put the price in writing before any work starts." },
@@ -463,7 +478,7 @@ function makeTown(cfg: TownConfig): Town {
     heroTag: "🌲 Local, Fully-Insured & Fast",
     heroSub: `River Birch Tree Service brings safe, insured tree removal, storm & ice cleanup, trimming, stump grinding, and land clearing to ${name} and the surrounding High Country. ${isHomeCounty ? `Owner Ezequiel Moreno and crew are based right here in ${county}.` : `Owner Ezequiel Moreno and crew are based nearby in Deep Gap and cover ${name} throughout ${county}.`}`,
     heroTrust: ["5.0★ on Google", "Fully Insured", "Fast Storm Response", "Free Estimates"],
-    stats: [
+    stats: cfg.stats ?? [
       { number: "Fast", label: "Storm & Ice Response" },
       { number: "5.0★", label: "Rated on Google" },
       { number: "Insured", label: "On Every Job" },
@@ -484,7 +499,7 @@ function makeTown(cfg: TownConfig): Town {
       { tag: "li", html: `<a href="/tree-trimming-pruning">Tree trimming & pruning</a> to keep your trees healthy and safe` },
       { tag: "li", html: `<a href="/stump-grinding">Stump grinding</a> below grade, with cleanup` },
       { tag: "li", html: `<a href="/view-clearing">View clearing</a> to reclaim your long-range mountain views` },
-      { tag: "p", html: `We're close by in Deep Gap, so we reach ${name} and nearby ${nearbyProse} quickly — and we travel for larger jobs beyond ${county} too. Call River Birch at ${PHONE} for a free estimate.` },
+      { tag: "p", html: cfg.closing ?? `We're close by in Deep Gap, so we reach ${name} and nearby ${nearbyProse} quickly — and we travel for larger jobs beyond ${county} too. Call River Birch at ${PHONE} for a free estimate.` },
     ],
     faq: [
       cfg.local.faq,
@@ -501,13 +516,21 @@ function makeTown(cfg: TownConfig): Town {
     areaTitle: `River Birch Serves ${name} & All of ${county}`,
     areaSub: `Based in Deep Gap, we cover ${name} and the surrounding High Country. Explore nearby towns below.`,
     areaInfoHeading: `Covering ${name} & Nearby`,
-    areaInfoBlurb: `We reach ${name} and neighboring ${nearbyProse} quickly from our Deep Gap base — and travel for large jobs beyond the county line.`,
+    areaInfoBlurb: cfg.areaInfoBlurb ?? `We reach ${name} and neighboring ${nearbyProse} quickly from our Deep Gap base — and travel for large jobs beyond the county line.`,
     finalCta: `Need a Tree Handled in ${name}? Let's Talk.`,
     contactHeading: `Get a Free Estimate in ${name}`,
     contactDesc: `Tell us about your tree or project in ${name}, or call us — we'll come out and give you a clear, no-pressure price. For a tree that's down right now, call us and we'll move it to the front of the schedule.`,
   };
 }
 
+// Boone leads every town list built from this map (the /service-areas hub and
+// its ItemList); the rest keep their order above.
+const LEAD_TOWN = "boone-nc";
+const orderedConfigs = [
+  ...townConfigs.filter((t) => t.slug === LEAD_TOWN),
+  ...townConfigs.filter((t) => t.slug !== LEAD_TOWN),
+];
+
 export const locations: Record<string, Town> = Object.fromEntries(
-  townConfigs.map((cfg) => [cfg.slug, makeTown(cfg)]),
+  orderedConfigs.map((cfg) => [cfg.slug, makeTown(cfg)]),
 );

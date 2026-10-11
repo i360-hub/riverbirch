@@ -18,7 +18,17 @@ import { mapEmbed, mapsLink } from "@data/maps";
 import heroA from "@assets/images/high-country-tree-removal-climber-mountain.jpg";
 import heroB from "@assets/images/boone-nc-tree-climber-blue-sky.jpg";
 import heroC from "@assets/images/blowing-rock-nc-view-clearing-mountain-pond.jpg";
+import heroBoone from "@assets/images/boone-nc-tree-removal-near-cabin.jpg";
 const heroPool: ImageMetadata[] = [heroA, heroB, heroC];
+
+// Towns that get their own hero instead of one from the rotating pool.
+const heroOverrides: Record<string, { img: ImageMetadata; alt: string; focal: string }> = {
+  "boone-nc": {
+    img: heroBoone,
+    alt: "River Birch climber removing a large tree beside a cabin near Boone, NC",
+    focal: "50% 22%",
+  },
+};
 
 export function getStaticPaths() {
   return Object.keys(locations).map((town) => ({ params: { town } }));
@@ -28,7 +38,8 @@ const { town } = Astro.params;
 const loc = locations[town];
 
 // Vary the hero across towns without per-town image data (deterministic by slug).
-const heroImg = heroPool[loc.slug.length % heroPool.length];
+const heroOverride = heroOverrides[loc.slug];
+const heroImg = heroOverride?.img ?? heroPool[loc.slug.length % heroPool.length];
 
 const townMapSrc = mapEmbed(`${loc.name}, ${loc.state}`, 12);
 const townMapLink = mapsLink(`${loc.name}, ${loc.state}`);
@@ -75,8 +86,8 @@ const townServiceSchema = {
     subtitle={loc.heroSub}
     trustSignals={loc.heroTrust}
     image={heroImg}
-    imageAlt={`River Birch Tree Service serving ${loc.name}, ${loc.state}`}
-    focalPoint="50% 45%"
+    imageAlt={heroOverride?.alt ?? `River Birch Tree Service serving ${loc.name}, ${loc.state}`}
+    focalPoint={heroOverride?.focal ?? "50% 45%"}
   />
   <StatStrip stats={loc.stats} />
   <LocalContent blocks={loc.body} />

@@ -175,10 +175,12 @@ export const site = {
     { label: "Contact", href: "/contact" },
   ],
 
-  // Footer "Service Areas" mini-grid (8 featured towns + View All).
+  // Footer "Service Areas" mini-grid (featured towns + View All). Boone leads:
+  // it is the main market, equipment is staged in the Boone area, and a Boone
+  // location is planned. Deep Gap stays the published base until that opens.
   footerServiceAreas: [
-    { label: "Deep Gap, NC", href: "/tree-service-deep-gap-nc" },
     { label: "Boone, NC", href: "/tree-service-boone-nc" },
+    { label: "Deep Gap, NC", href: "/tree-service-deep-gap-nc" },
     { label: "Blowing Rock, NC", href: "/tree-service-blowing-rock-nc" },
     { label: "Vilas, NC", href: "/tree-service-vilas-nc" },
     { label: "Sugar Grove, NC", href: "/tree-service-sugar-grove-nc" },
@@ -214,8 +216,8 @@ export const nav: NavItem[] = [
   {
     label: "Service Areas",
     children: [
-      { label: "Deep Gap", href: "/tree-service-deep-gap-nc" },
       { label: "Boone", href: "/tree-service-boone-nc" },
+      { label: "Deep Gap", href: "/tree-service-deep-gap-nc" },
       { label: "Blowing Rock", href: "/tree-service-blowing-rock-nc" },
       { label: "Vilas", href: "/tree-service-vilas-nc" },
       { label: "Foscoe", href: "/tree-service-foscoe-nc" },
