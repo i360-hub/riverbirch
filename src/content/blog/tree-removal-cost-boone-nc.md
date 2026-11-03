@@ -60,7 +60,7 @@ A tree on your roof is not a scheduled job. [Emergency and storm-damage work](/s
 
 ## Do not forget the stump
 
-Most removal quotes do not include the stump unless you ask. [Stump grinding](/stump-grinding) is usually priced by stump diameter, and adding it while we are already on site costs less than a return trip. Ask for it in the same estimate.
+Most removal quotes do not include the stump unless you ask. [Stump grinding](/stump-grinding) is usually priced by stump diameter, and adding it while we are already on site costs less than a return trip. Ask for it in the same estimate. Our [stump grinding cost guide](/blog/stump-grinding-cost-high-country) covers what sets that price.
 
 ## How to keep the cost down
 

@@ -298,6 +298,7 @@ export const servicePages: Record<string, ServicePageData> = {
     faqSub: "What to know before we grind.",
     faqCtaLabel: "Ready to lose that stump? Call River Birch for a free price.",
     faq: [
+      { q: "How much does stump grinding cost?", a: "Most single stumps run roughly $100 to $400, priced mainly by diameter — big hardwood stumps, wide surface roots, and tight or steep access run higher. Our <a href=\"/blog/stump-grinding-cost-high-country\">stump grinding cost guide</a> breaks down what sets the price, and every estimate is free, on-site, and in writing." },
       { q: "How deep do you grind the stump?", a: "We grind several inches below grade — deep enough for you to fill with soil and plant grass, put in landscaping, or build over the spot." },
       { q: "Do you remove the wood chips?", a: "Your choice. The grindings can be raked into the hole as backfill, or we can haul them away and leave the area clean — just let us know when we give the estimate." },
       { q: "Can you grind stumps in a tight or sloped spot?", a: "Usually, yes. We'll confirm access when we look at the job. Most High Country yards and slopes are no problem for our equipment." },

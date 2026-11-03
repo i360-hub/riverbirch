@@ -7,11 +7,13 @@ import type { ImageMetadata } from "astro";
 import imgCost from "@assets/images/boone-nc-tree-removal-near-cabin.jpg";
 import imgStorm from "@assets/images/high-country-storm-ice-fallen-trees-snow.jpg";
 import imgPermit from "@assets/images/high-country-tree-removal-climber-mountain.jpg";
+import imgStump from "@assets/images/boone-nc-stump-grinding-lawn.jpg";
 
 export const blogImages: Record<string, ImageMetadata> = {
   "cost-boone": imgCost,
   "ice-storm": imgStorm,
   "permit-watauga": imgPermit,
+  "stump-grinding": imgStump,
 };
 
 export function blogImageSrc(key: string): string {
