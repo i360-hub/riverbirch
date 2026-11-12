@@ -8,12 +8,14 @@ import imgCost from "@assets/images/boone-nc-tree-removal-near-cabin.jpg";
 import imgStorm from "@assets/images/high-country-storm-ice-fallen-trees-snow.jpg";
 import imgPermit from "@assets/images/high-country-tree-removal-climber-mountain.jpg";
 import imgStump from "@assets/images/boone-nc-stump-grinding-lawn.jpg";
+import imgDeadRemoval from "@assets/images/deep-gap-nc-arborist-chainsaw-tree-removal-hero.webp";
 
 export const blogImages: Record<string, ImageMetadata> = {
   "cost-boone": imgCost,
   "ice-storm": imgStorm,
   "permit-watauga": imgPermit,
   "stump-grinding": imgStump,
+  "dead-tree-removal": imgDeadRemoval,
 };
 
 export function blogImageSrc(key: string): string {
