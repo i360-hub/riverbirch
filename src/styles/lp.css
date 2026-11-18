@@ -1,0 +1,266 @@
+/* src/styles/lp.css — shared LP design system (scope: body.lp) */
+/* Imported only by LandingLayout.astro, immediately after global.css.
+   Plain CSS: no Astro :global() wrappers (invalid outside component styles).
+   Design: Claude Opus via API route, 2026-11-18 LP visual unification. */
+
+:root {
+  --lp-font-display: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif;
+  --lp-hero-min: 520px;
+  --lp-hero-min-mobile: 440px;
+}
+
+/* ---- Display font application ---- */
+/* Condensed face renders smaller; bump headings and tighten tracking. */
+.lp h1,
+.lp h2,
+.lp h3,
+.lp .lp-header__name {
+  font-family: var(--lp-font-display);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.lp .lp-header__name {
+  font-weight: 600;
+}
+
+/* ================= HERO ================= */
+.lp .hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: var(--lp-hero-min);
+  display: flex;
+  align-items: center;
+  color: #fff;
+}
+
+.lp .hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+
+/* Explicit fill rules so the Boone overflow bug cannot recur on either page */
+.lp .hero-media picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.lp .hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---- Shared overlay: full-coverage layered gradient ---- */
+/* Horizontal: strong dark forest-green at left (text), easing right.
+   Vertical: top shade for safety + bottom fade for clean trust-bar handoff.
+   Guarantees white-H1 contrast over the brightest sky patch (Boone). */
+.lp .hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(
+      100deg,
+      rgba(12, 34, 20, 0.88) 0%,
+      rgba(12, 34, 20, 0.66) 50%,
+      rgba(12, 34, 20, 0.4) 100%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(12, 34, 20, 0.35) 0%,
+      rgba(12, 34, 20, 0) 35%,
+      rgba(12, 34, 20, 0) 70%,
+      rgba(12, 34, 20, 0.55) 100%
+    );
+}
+
+.lp .hero-inner {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 3.75rem 1.25rem;
+}
+
+.lp .hero-copy {
+  max-width: 640px;
+}
+
+.lp .hero h1 {
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  line-height: 1.05;
+  letter-spacing: 0.005em;
+  margin: 0 0 1rem;
+  max-width: 20ch;
+  color: #fff;
+}
+
+.lp .hero-sub {
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  line-height: 1.5;
+  max-width: 48ch;
+  margin: 0 0 1.75rem;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.lp .hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+/* ================= BUTTONS ================= */
+.lp .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--lp-font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  line-height: 1;
+  padding: 0.9rem 1.5rem;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  transition: transform 0.08s ease, filter 0.15s ease;
+}
+
+.lp .btn svg {
+  width: 1.1em;
+  height: 1.1em;
+}
+
+.lp .btn:hover {
+  filter: brightness(1.05);
+}
+
+.lp .btn:active {
+  transform: translateY(1px);
+}
+
+/* Primary action (green) */
+.lp .btn-call {
+  background: var(--cpr-red);
+  color: #fff;
+  border-color: var(--cpr-red);
+}
+
+.lp .btn-call:hover {
+  background: var(--cpr-red-dark);
+  border-color: var(--cpr-red-dark);
+}
+
+/* Secondary on DARK (photo/green) — solid white, stays visible */
+.lp .btn-estimate {
+  background: #fff;
+  color: var(--cpr-navy);
+  border-color: #fff;
+}
+
+/* Secondary on LIGHT sections — navy outline */
+.lp .btn-estimate-light {
+  background: transparent;
+  color: var(--cpr-navy);
+  border-color: var(--cpr-navy);
+}
+
+.lp .btn-estimate-light:hover {
+  background: var(--cpr-navy);
+  color: #fff;
+}
+
+/* Large size modifier */
+.lp .btn-lg {
+  font-size: 1.25rem;
+  padding: 1.05rem 1.8rem;
+}
+
+/* ================= TRUST BAR ================= */
+.lp .trust {
+  background: var(--cpr-navy);
+  color: #fff;
+  padding: 1rem 1.25rem;
+}
+
+.lp .trust-list {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 1120px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem 2rem;
+}
+
+.lp .trust-list li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.98rem;
+}
+
+.lp .trust-list svg {
+  width: 1.15em;
+  height: 1.15em;
+  /* Lightened action green: --cpr-red (#2f7a43) on navy is ~2:1 contrast;
+     #7fc98f gives ~4.5:1 so the icons stay legible on the trust bar
+     (Opus review fix, 2026-11-18). */
+  color: #7fc98f;
+}
+
+/* ================= CTA BAND (green) ================= */
+.lp .cta-band {
+  background: var(--cpr-red);
+  color: #fff;
+  padding: 2.5rem 0;
+}
+
+/* On the green band, the call button inverts to white fill / green text */
+.lp .cta-band .btn-call {
+  background: #fff;
+  color: var(--cpr-red);
+  border-color: #fff;
+}
+
+.lp .cta-band .btn-call:hover {
+  background: #fff;
+  color: var(--cpr-red-dark);
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 600px) {
+  .lp .hero {
+    min-height: var(--lp-hero-min-mobile);
+  }
+
+  .lp .hero-inner {
+    padding: 2.75rem 1.25rem;
+  }
+
+  /* Text spans full width on mobile — strengthen overlay for readability */
+  .lp .hero-overlay {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(12, 34, 20, 0.7) 0%,
+        rgba(12, 34, 20, 0.6) 45%,
+        rgba(12, 34, 20, 0.78) 100%
+      ),
+      linear-gradient(
+        100deg,
+        rgba(12, 34, 20, 0.6) 0%,
+        rgba(12, 34, 20, 0.45) 100%
+      );
+  }
+
+  .lp .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

@@ -13,6 +13,14 @@ const description =
 const path = "/lp/blowing-rock-tree-service";
 const town = "Blowing Rock";
 
+const trustItems = [
+  { icon: "shield", label: "Fully Insured" },
+  { icon: "check", label: "Free On-Site Estimates" },
+  { icon: "tree", label: "Owner-Operated — Ezequiel Moreno" },
+  { icon: "leaf", label: "Complete Cleanup & Haul-Away" },
+  { icon: "clock", label: "Mon–Sat 7 AM–7 PM" },
+];
+
 const lpReviewNames = ["Jacob Van Wynen", "William Ballinger", "Travis Pierce"];
 const lpReviews = lpReviewNames
   .map((n) => reviews.find((r) => r.name === n))
@@ -92,35 +100,36 @@ const faqs = [
       <ResponsivePicture
         src={heroImg}
         alt="Mountain pond and cleared long-range view near Blowing Rock, NC"
+        objectPosition="50% 35%"
         priority
       />
     </div>
     <div class="hero-overlay"></div>
     <div class="hero-inner">
-      <h1>Tree Service in Blowing Rock, NC</h1>
-      <p class="hero-sub">
-        Tree removal, trimming &amp; pruning, view clearing, and fast storm &amp;
-        ice cleanup at elevation. Fully insured, owner-operated, and free
-        on-site estimates.
-      </p>
-      <div class="hero-cta">
-        <a class="btn btn-call" href={landing.phoneHref}>
-          <Icon name="phone" />
-          Call {landing.phoneDisplay}
-        </a>
-        <a class="btn btn-ghost" href="#estimate">Get My Free Estimate</a>
+      <div class="hero-copy">
+        <h1>Tree Service in Blowing Rock, NC</h1>
+        <p class="hero-sub">
+          Tree removal, trimming &amp; pruning, view clearing, and fast storm &amp;
+          ice cleanup at elevation. Fully insured, owner-operated, and free
+          on-site estimates.
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-call" href={landing.phoneHref}>
+            <Icon name="phone" />
+            Call {landing.phoneDisplay}
+          </a>
+          <a class="btn btn-estimate" href="#estimate">Get My Free Estimate</a>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Trust strip -->
-  <section class="trust">
+  <section class="trust" aria-label="Why choose River Birch">
     <ul class="trust-list">
-      <li><Icon name="shield" /> Fully Insured</li>
-      <li><Icon name="check" /> Free On-Site Estimates</li>
-      <li><Icon name="tree" /> Owner-operated — Ezequiel Moreno</li>
-      <li><Icon name="leaf" /> Complete Cleanup &amp; Haul-Away</li>
-      <li><Icon name="clock" /> Mon–Sat 7 AM–7 PM</li>
+      {trustItems.map((item) => (
+        <li><Icon name={item.icon} /> {item.label}</li>
+      ))}
     </ul>
   </section>
 
@@ -171,7 +180,7 @@ const faqs = [
             <Icon name="phone" />
             Call {landing.phoneDisplay}
           </a>
-          <a class="btn btn-ghost" href="#estimate">Get My Free Estimate</a>
+          <a class="btn btn-estimate-light" href="#estimate">Get My Free Estimate</a>
         </div>
       </div>
     </div>
@@ -273,130 +282,14 @@ const faqs = [
     padding: 0 1.25rem;
   }
 
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-weight: 700;
-    border-radius: 10px;
-    padding: 0.85rem 1.4rem;
-    text-decoration: none;
-    line-height: 1;
-    transition: transform 0.08s ease, filter 0.15s ease;
-  }
-  .btn :global(svg) {
-    width: 1.1em;
-    height: 1.1em;
-  }
-  .btn:active {
-    transform: translateY(1px);
-  }
-  .btn-call {
-    background: var(--cpr-red);
-    color: #fff;
-  }
-  .btn-call:hover {
-    filter: brightness(1.07);
-  }
-  .btn-ghost {
-    background: rgba(255, 255, 255, 0.12);
-    color: #fff;
-    border: 2px solid rgba(255, 255, 255, 0.8);
-  }
-  .btn-ghost:hover {
-    background: rgba(255, 255, 255, 0.22);
-  }
-  .btn-lg {
-    padding: 1.05rem 1.8rem;
-    font-size: 1.1rem;
-  }
-
-  /* Hero */
-  .hero {
-    position: relative;
-    isolation: isolate;
-    min-height: 540px;
-    display: flex;
-    align-items: center;
-    color: #fff;
-  }
-  .hero-media {
-    position: absolute;
-    inset: 0;
-    z-index: -2;
-  }
-  .hero-media :global(picture) {
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
-  .hero-media :global(img) {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .hero-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background: linear-gradient(
-      100deg,
-      rgba(12, 34, 20, 0.82) 0%,
-      rgba(12, 34, 20, 0.55) 55%,
-      rgba(12, 34, 20, 0.3) 100%
-    );
-  }
-  .hero-inner {
-    max-width: 1120px;
-    margin: 0 auto;
-    padding: 4rem 1.25rem;
-    width: 100%;
-  }
-  .hero h1 {
-    font-size: clamp(2rem, 5vw, 3.2rem);
-    line-height: 1.08;
-    margin: 0 0 1rem;
-    max-width: 18ch;
-  }
-  .hero-sub {
-    font-size: clamp(1.05rem, 2.2vw, 1.3rem);
-    max-width: 48ch;
-    margin: 0 0 1.75rem;
-    color: rgba(255, 255, 255, 0.95);
-  }
-  .hero-cta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.9rem;
-  }
-
-  /* Trust strip */
-  .trust {
-    background: var(--cpr-navy);
-    color: #fff;
-  }
-  .trust-list {
-    list-style: none;
-    margin: 0 auto;
-    max-width: 1120px;
-    padding: 1rem 1.25rem;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem 2rem;
-    justify-content: center;
-  }
-  .trust-list li {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-weight: 600;
-    font-size: 0.98rem;
-  }
-  .trust-list :global(svg) {
-    width: 1.15em;
-    height: 1.15em;
-    color: var(--cpr-red);
-  }
+  
+  
+  
+  
+  
+  
+  
+  
 
   /* Services */
   .services {
@@ -477,21 +370,10 @@ const faqs = [
     gap: 0.9rem;
     margin-top: 1.5rem;
   }
-  .local-cta .btn-ghost {
-    color: var(--cpr-navy);
-    border-color: var(--cpr-navy);
-    background: transparent;
-  }
-  .local-cta .btn-ghost:hover {
-    background: rgba(18, 51, 30, 0.08);
-  }
+  
 
   /* CTA band */
-  .cta-band {
-    background: var(--cpr-red);
-    color: #fff;
-    padding: 2.5rem 0;
-  }
+  
   .cta-band-inner {
     display: flex;
     flex-wrap: wrap;
@@ -509,10 +391,7 @@ const faqs = [
     margin: 0;
     color: rgba(255, 255, 255, 0.95);
   }
-  .cta-band .btn-call {
-    background: #fff;
-    color: var(--cpr-red);
-  }
+  
 
   /* Reviews */
   .reviews {

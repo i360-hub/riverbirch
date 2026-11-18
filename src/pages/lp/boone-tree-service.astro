@@ -5,7 +5,7 @@ import ContactForm from "@components/widgets/ContactForm.astro";
 import Icon from "@components/ui/Icon.astro";
 import { landing } from "@data/landing";
 import { reviews } from "@data/reviews";
-import heroImg from "@assets/images/boone-nc-tree-climber-blue-sky.jpg";
+import heroImg from "@assets/images/deep-gap-nc-arborist-chainsaw-tree-removal-hero.webp";
 
 const pageTitle = "Tree Service in Boone, NC | Free Estimates — River Birch";
 const pageDescription =
@@ -17,11 +17,11 @@ const lpReviews = reviewNames
   .filter((r): r is (typeof reviews)[number] => Boolean(r));
 
 const trustItems = [
-  "Fully Insured",
-  "Free On-Site Estimates",
-  "Owner-Operated — Ezequiel Moreno",
-  "Complete Cleanup & Haul-Away",
-  "Mon–Sat 7 AM–7 PM",
+  { icon: "shield", label: "Fully Insured" },
+  { icon: "check", label: "Free On-Site Estimates" },
+  { icon: "tree", label: "Owner-Operated — Ezequiel Moreno" },
+  { icon: "leaf", label: "Complete Cleanup & Haul-Away" },
+  { icon: "clock", label: "Mon–Sat 7 AM–7 PM" },
 ];
 
 const services = [
@@ -111,9 +111,11 @@ const faqs = [
       <ResponsivePicture
         src={heroImg}
         alt="River Birch tree climber working against a blue sky in Boone, NC"
+        objectPosition="50% 42%"
         priority
       />
     </div>
+    <div class="hero-overlay"></div>
     <div class="hero-inner">
       <div class="hero-copy">
         <h1>Tree Service in Boone, NC</h1>
@@ -134,10 +136,10 @@ const faqs = [
   </section>
 
   <!-- Trust strip -->
-  <section class="trust-strip" aria-label="Why choose River Birch">
-    <ul>
+  <section class="trust" aria-label="Why choose River Birch">
+    <ul class="trust-list">
       {trustItems.map((item) => (
-        <li><Icon name="check" /> {item}</li>
+        <li><Icon name={item.icon} /> {item.label}</li>
       ))}
     </ul>
   </section>
@@ -192,7 +194,7 @@ const faqs = [
         <h2>Ready for a free estimate?</h2>
         <p>Talk to us directly — Mon–Sat 7 AM–7 PM.</p>
       </div>
-      <a class="btn btn-call btn-call-lg" href={landing.phoneHref}>
+      <a class="btn btn-call btn-lg" href={landing.phoneHref}>
         <Icon name="phone" />
         Call {landing.phoneDisplay}
       </a>
@@ -276,111 +278,6 @@ const faqs = [
     margin: 0 0 1.5rem;
   }
 
-  /* Hero */
-  .hero {
-    position: relative;
-    isolation: isolate;
-    color: #fff;
-    min-height: 480px;
-    display: flex;
-    align-items: center;
-  }
-  .hero-media {
-    position: absolute;
-    inset: 0;
-    z-index: -2;
-  }
-  .hero-media :global(img) {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .hero::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background: linear-gradient(
-      100deg,
-      rgba(12, 34, 20, 0.82) 0%,
-      rgba(12, 34, 20, 0.6) 55%,
-      rgba(12, 34, 20, 0.35) 100%
-    );
-  }
-  .hero-inner {
-    width: 100%;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 3.5rem 1.25rem;
-  }
-  .hero-copy {
-    max-width: 640px;
-  }
-  .hero h1 {
-    font-size: clamp(2rem, 5vw, 3.2rem);
-    line-height: 1.1;
-    margin: 0 0 1rem;
-  }
-  .hero-sub {
-    font-size: clamp(1.05rem, 2vw, 1.25rem);
-    line-height: 1.5;
-    margin: 0 0 1.75rem;
-    color: rgba(255, 255, 255, 0.95);
-  }
-  .hero-cta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-  }
-
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-weight: 700;
-    text-decoration: none;
-    padding: 0.85rem 1.4rem;
-    border-radius: 8px;
-    font-size: 1.05rem;
-    line-height: 1;
-  }
-  .btn-call {
-    background: var(--cpr-red);
-    color: #fff;
-  }
-  .btn-estimate {
-    background: #fff;
-    color: var(--cpr-navy);
-  }
-  .btn-call-lg {
-    font-size: 1.15rem;
-    padding: 1rem 1.6rem;
-  }
-
-  /* Trust strip */
-  .trust-strip {
-    background: var(--cpr-navy);
-    color: #fff;
-    padding: 1rem 1.25rem;
-  }
-  .trust-strip ul {
-    list-style: none;
-    margin: 0 auto;
-    padding: 0;
-    max-width: 1100px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.75rem 1.75rem;
-  }
-  .trust-strip li {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-weight: 600;
-    font-size: 0.95rem;
-  }
-
   /* Services */
   .services {
     padding: 3.5rem 0;
@@ -434,11 +331,7 @@ const faqs = [
   }
 
   /* CTA band */
-  .cta-band {
-    background: var(--cpr-red);
-    color: #fff;
-    padding: 2.5rem 0;
-  }
+  
   .cta-band-inner {
     display: flex;
     flex-wrap: wrap;
@@ -453,10 +346,7 @@ const faqs = [
   .cta-band p {
     margin: 0;
   }
-  .cta-band .btn-call {
-    background: #fff;
-    color: var(--cpr-navy);
-  }
+  
 
   /* Reviews */
   .reviews {
@@ -580,10 +470,7 @@ const faqs = [
   }
 
   @media (max-width: 600px) {
-    .btn {
-      width: 100%;
-      justify-content: center;
-    }
+    
     .cta-band-inner {
       flex-direction: column;
       align-items: stretch;
