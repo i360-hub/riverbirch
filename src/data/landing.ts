@@ -15,8 +15,8 @@ export const landing = {
   // GOOGLE ADS CONVERSION STUB: fill googleAdsId (AW-...) and
   // googleAdsFormLabel from the Google Ads account once it exists. Until both
   // are non-empty, NO Ads conversion fires and nothing breaks.
-  googleAdsId: "",
-  googleAdsFormLabel: "",
+  googleAdsId: "AW-18583174661",
+  googleAdsFormLabel: "HPqaCIrQiLsdEIX8kp1F",
   // googleAdsCallLabel is INTENTIONALLY unused for now (reserved, not dead
   // code): ad calls are tracked via Google Ads account-level call reporting on
   // the LC tracking number above, not a website call tag. Fill this only if a
