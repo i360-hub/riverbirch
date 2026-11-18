@@ -1,0 +1,138 @@
+---
+import LandingLayout from "@layouts/LandingLayout.astro";
+import Icon from "@components/ui/Icon.astro";
+import { landing } from "@data/landing";
+
+const { googleAdsId, googleAdsFormLabel } = landing;
+
+const title = "Thank You — Estimate Request Received | River Birch Tree Service";
+const description =
+  "Thanks for your estimate request. We'll reach out during business hours, Mon–Sat 7 AM–7 PM.";
+---
+
+<LandingLayout
+  title={title}
+  description={description}
+  path="/lp/estimate-submitted"
+  town="Boone & Blowing Rock"
+>
+  <section class="ty">
+    <div class="ty__inner">
+      <div class="ty__icon" aria-hidden="true">
+        <Icon name="check" />
+      </div>
+      <h1 class="ty__h1">Thank You — Your Estimate Request Is In</h1>
+      <p class="ty__p">
+        We'll reach out during business hours, Mon–Sat 7:00 AM – 7:00 PM. If the
+        tree is down or it's urgent, call us now so we can get you on the
+        schedule fast.
+      </p>
+      <a href={landing.phoneHref} class="ty__call">
+        <Icon name="phone" /> Call {landing.phoneDisplay}
+      </a>
+      <p class="ty__back">
+        <a href="/">← Back to the homepage</a>
+      </p>
+    </div>
+  </section>
+
+  <script
+    is:inline
+    define:vars={{ googleAdsId, googleAdsFormLabel }}
+  >
+    (function () {
+      try {
+        // Frame guard: if rendered inside an iframe (GHL redirect preview),
+        // break out to the top window and do NOT fire conversions here.
+        if (window.self !== window.top) {
+          window.top.location.href = window.self.location.href;
+          return;
+        }
+
+        if (!googleAdsId || !googleAdsFormLabel) return;
+
+        var fireConversion = function () {
+          if (sessionStorage.getItem("rb_conv_fired") !== "1") {
+            gtag("event", "conversion", {
+              send_to: googleAdsId + "/" + googleAdsFormLabel,
+            });
+            gtag("event", "generate_lead");
+            sessionStorage.setItem("rb_conv_fired", "1");
+          }
+        };
+
+        var s = document.createElement("script");
+        s.async = true;
+        s.src = "https://www.googletagmanager.com/gtag/js?id=" + googleAdsId;
+        document.head.appendChild(s);
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        gtag("js", new Date());
+        gtag("config", googleAdsId);
+        fireConversion();
+      } catch (e) {}
+    })();
+  </script>
+
+  <style>
+    .ty {
+      padding: 4rem 1rem 2rem;
+    }
+    .ty__inner {
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .ty__icon {
+      width: 84px;
+      height: 84px;
+      margin: 0 auto 1.25rem;
+      border-radius: 50%;
+      background: var(--cpr-red, #2f7a43);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .ty__icon :global(svg) {
+      width: 44px;
+      height: 44px;
+    }
+    .ty__h1 {
+      font-size: clamp(1.6rem, 4vw, 2.3rem);
+      color: var(--cpr-navy, #12331e);
+      margin: 0 0 1rem;
+    }
+    .ty__p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin: 0 0 1.75rem;
+    }
+    .ty__call {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--cpr-red, #2f7a43);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.15rem;
+      padding: 1rem 1.8rem;
+      border-radius: 10px;
+    }
+    .ty__call :global(svg) {
+      width: 22px;
+      height: 22px;
+    }
+    .ty__back {
+      margin-top: 1.75rem;
+    }
+    .ty__back a {
+      color: var(--cpr-navy, #12331e);
+      font-weight: 600;
+    }
+  </style>
+</LandingLayout>

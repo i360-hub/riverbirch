@@ -3,6 +3,7 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import Button from "@components/ui/Button.astro";
 import Icon from "@components/ui/Icon.astro";
+import LpConversionFire from "@components/lp/LpConversionFire.astro";
 import { site } from "@data/site";
 ---
 
@@ -12,6 +13,9 @@ import { site } from "@data/site";
   path="/thank-you"
   noindex={true}
 >
+  {/* Fires the Google Ads form conversion ONLY for PPC landing-page sessions
+      (rb_lp session flag set by /lp/* pages); renders nothing otherwise. */}
+  <LpConversionFire />
   <section class="thanks">
     <div class="thanks__inner">
       <span class="thanks__mark"><Icon name="check" /></span>

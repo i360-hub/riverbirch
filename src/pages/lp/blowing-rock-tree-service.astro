@@ -1,0 +1,643 @@
+---
+import LandingLayout from "@layouts/LandingLayout.astro";
+import ResponsivePicture from "@components/ui/ResponsivePicture.astro";
+import ContactForm from "@components/widgets/ContactForm.astro";
+import Icon from "@components/ui/Icon.astro";
+import { landing } from "@data/landing";
+import { reviews } from "@data/reviews";
+import heroImg from "@assets/images/blowing-rock-nc-view-clearing-mountain-pond.jpg";
+
+const title = "Tree Service in Blowing Rock, NC | Free Estimates — River Birch";
+const description =
+  "Tree removal, trimming, view clearing, and fast storm & ice cleanup in Blowing Rock, NC. Fully insured, owner-operated, free on-site estimates.";
+const path = "/lp/blowing-rock-tree-service";
+const town = "Blowing Rock";
+
+const lpReviewNames = ["Jacob Van Wynen", "William Ballinger", "Travis Pierce"];
+const lpReviews = lpReviewNames
+  .map((n) => reviews.find((r) => r.name === n))
+  .filter((r): r is NonNullable<typeof r> => Boolean(r));
+
+const services = [
+  {
+    icon: "tree",
+    title: "Tree Removal",
+    body: "Safe removal of hazardous, dead, or crowding trees on steep escarpment lots and tight second-home parcels — rope-and-lower work where heavy equipment can't reach.",
+  },
+  {
+    icon: "leaf",
+    title: "Tree Trimming & Pruning",
+    body: "Crown thinning, deadwood removal, and structural pruning to keep wind- and ice-exposed trees healthy and reduce storm risk at elevation.",
+  },
+  {
+    icon: "storm",
+    title: "Storm & Ice Cleanup",
+    body: "Fast storm cleanup with priority scheduling for storm & ice emergencies. We clear downed limbs and trees and get your drive and roofline safe again.",
+  },
+  {
+    icon: "mountain",
+    title: "View Clearing",
+    body: "Our most-requested job in Blowing Rock — selective clearing and limbing to open up long-range mountain and valley views without stripping your lot.",
+  },
+];
+
+const steps = [
+  {
+    icon: "phone",
+    title: "Call or send the form",
+    body: "Tell us what you need. We answer fast and schedule your visit.",
+  },
+  {
+    icon: "check",
+    title: "Free on-site written estimate",
+    body: "Owner Ezequiel looks at the trees and gives you a clear written price — no pressure.",
+  },
+  {
+    icon: "tree",
+    title: "We do the work & haul it away",
+    body: "Clean, careful crews with complete cleanup and haul-away when we're done.",
+  },
+];
+
+const faqs = [
+  {
+    q: "Can you clear my trees to open up the view?",
+    a: "Yes — view clearing is the most-requested job we do in Blowing Rock. We selectively remove and limb trees to open long-range mountain and valley views while keeping your lot healthy and natural-looking.",
+  },
+  {
+    q: "How do you open a view without stripping the whole lot?",
+    a: "We plan the cut with you first, thinning and limbing strategically rather than clear-cutting. You keep mature trees and privacy where you want them while still gaining the sightlines that matter most.",
+  },
+  {
+    q: "Do you handle cleanup for rentals and second homes?",
+    a: "Absolutely. Many Blowing Rock properties are second homes and rentals, so we provide complete cleanup and haul-away and can coordinate the work while you're away in Mayview Park, Green Hill, Chetola, and nearby areas.",
+  },
+  {
+    q: "Are your estimates really free?",
+    a: "Yes. Every estimate is free, written, and no pressure. We'll walk the property, explain your options, and give you a clear price with no obligation.",
+  },
+];
+---
+
+<LandingLayout title={title} description={description} path={path} town={town}>
+  <script is:inline>
+    try {
+      sessionStorage.setItem("rb_lp", "blowing-rock");
+    } catch (e) {}
+  </script>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-media">
+      <ResponsivePicture
+        src={heroImg}
+        alt="Mountain pond and cleared long-range view near Blowing Rock, NC"
+        priority
+      />
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-inner">
+      <h1>Tree Service in Blowing Rock, NC</h1>
+      <p class="hero-sub">
+        Tree removal, trimming &amp; pruning, view clearing, and fast storm &amp;
+        ice cleanup at elevation. Fully insured, owner-operated, and free
+        on-site estimates.
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn-call" href={landing.phoneHref}>
+          <Icon name="phone" />
+          Call {landing.phoneDisplay}
+        </a>
+        <a class="btn btn-ghost" href="#estimate">Get My Free Estimate</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust strip -->
+  <section class="trust">
+    <ul class="trust-list">
+      <li><Icon name="shield" /> Fully Insured</li>
+      <li><Icon name="check" /> Free On-Site Estimates</li>
+      <li><Icon name="tree" /> Owner-operated — Ezequiel Moreno</li>
+      <li><Icon name="leaf" /> Complete Cleanup &amp; Haul-Away</li>
+      <li><Icon name="clock" /> Mon–Sat 7 AM–7 PM</li>
+    </ul>
+  </section>
+
+  <!-- Services -->
+  <section class="services">
+    <div class="container">
+      <h2>What We Do in Blowing Rock</h2>
+      <div class="services-grid">
+        {
+          services.map((s) => (
+            <div class="service-card">
+              <div class="service-icon"><Icon name={s.icon} /></div>
+              <h3>{s.title}</h3>
+              <p>{s.body}</p>
+            </div>
+          ))
+        }
+      </div>
+      <p class="services-note">
+        We also offer stump grinding to finish the job — ask us when you call.
+      </p>
+    </div>
+  </section>
+
+  <!-- Local -->
+  <section class="local">
+    <div class="container local-grid">
+      <div>
+        <h2>Tree Work in Blowing Rock</h2>
+        <p>
+          Sitting right on the escarpment lip around 4,000 feet, Blowing Rock
+          gets more wind and ice than the valleys below. That exposure is hard
+          on trees — and it's exactly why so many homeowners here ask us for view
+          clearing, our most-requested job in town. We open up long-range
+          mountain and valley sightlines by thinning and limbing selectively, so
+          you gain the view without stripping the character from your lot.
+        </p>
+        <p>
+          A lot of properties around Mayview Park, Green Hill, and Chetola are
+          second homes, so we handle the whole job start to finish — including
+          complete cleanup and haul-away — and can coordinate while you're away.
+          From hazardous removals on steep lots to pruning wind- and
+          ice-stressed trees, we do careful work that holds up to the weather up
+          here.
+        </p>
+        <div class="local-cta">
+          <a class="btn btn-call" href={landing.phoneHref}>
+            <Icon name="phone" />
+            Call {landing.phoneDisplay}
+          </a>
+          <a class="btn btn-ghost" href="#estimate">Get My Free Estimate</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mid-page CTA band -->
+  <section class="cta-band">
+    <div class="container cta-band-inner">
+      <div>
+        <h2>Ready for your free estimate?</h2>
+        <p>
+          Talk to owner Ezequiel about your trees and your view. Free on-site
+          estimates, no pressure.
+        </p>
+      </div>
+      <a class="btn btn-call btn-lg" href={landing.phoneHref}>
+        <Icon name="phone" />
+        Call {landing.phoneDisplay}
+      </a>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section class="reviews">
+    <div class="container">
+      <h2>What Blowing Rock Homeowners Say</h2>
+      <div class="reviews-grid">
+        {
+          lpReviews.map((r) => (
+            <figure class="review-card">
+              <div class="stars" aria-label="5 out of 5 stars">
+                {[0, 1, 2, 3, 4].map(() => (
+                  <Icon name="star" />
+                ))}
+              </div>
+              <blockquote>{r.text}</blockquote>
+              <figcaption>{r.name}</figcaption>
+            </figure>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="how">
+    <div class="container">
+      <h2>How It Works</h2>
+      <div class="how-grid">
+        {
+          steps.map((s, i) => (
+            <div class="how-step">
+              <div class="how-num">{i + 1}</div>
+              <div class="how-icon"><Icon name={s.icon} /></div>
+              <h3>{s.title}</h3>
+              <p>{s.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <div class="container">
+      <h2>Blowing Rock Tree Service FAQ</h2>
+      <div class="faq-list">
+        {
+          faqs.map((f) => (
+            <details class="faq-item">
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Form -->
+  <section class="form-section">
+    <div class="container">
+      <ContactForm
+        id="estimate"
+        heading="Request Your Free Estimate"
+        formSrc={landing.formSrc}
+        formId={landing.formId}
+        formName={landing.formName}
+      />
+    </div>
+  </section>
+</LandingLayout>
+
+<style>
+  .container {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    border-radius: 10px;
+    padding: 0.85rem 1.4rem;
+    text-decoration: none;
+    line-height: 1;
+    transition: transform 0.08s ease, filter 0.15s ease;
+  }
+  .btn :global(svg) {
+    width: 1.1em;
+    height: 1.1em;
+  }
+  .btn:active {
+    transform: translateY(1px);
+  }
+  .btn-call {
+    background: var(--cpr-red);
+    color: #fff;
+  }
+  .btn-call:hover {
+    filter: brightness(1.07);
+  }
+  .btn-ghost {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+  }
+  .btn-ghost:hover {
+    background: rgba(255, 255, 255, 0.22);
+  }
+  .btn-lg {
+    padding: 1.05rem 1.8rem;
+    font-size: 1.1rem;
+  }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    isolation: isolate;
+    min-height: 540px;
+    display: flex;
+    align-items: center;
+    color: #fff;
+  }
+  .hero-media {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+  }
+  .hero-media :global(picture) {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .hero-media :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+      100deg,
+      rgba(12, 34, 20, 0.82) 0%,
+      rgba(12, 34, 20, 0.55) 55%,
+      rgba(12, 34, 20, 0.3) 100%
+    );
+  }
+  .hero-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 4rem 1.25rem;
+    width: 100%;
+  }
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    line-height: 1.08;
+    margin: 0 0 1rem;
+    max-width: 18ch;
+  }
+  .hero-sub {
+    font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+    max-width: 48ch;
+    margin: 0 0 1.75rem;
+    color: rgba(255, 255, 255, 0.95);
+  }
+  .hero-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+  }
+
+  /* Trust strip */
+  .trust {
+    background: var(--cpr-navy);
+    color: #fff;
+  }
+  .trust-list {
+    list-style: none;
+    margin: 0 auto;
+    max-width: 1120px;
+    padding: 1rem 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 2rem;
+    justify-content: center;
+  }
+  .trust-list li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    font-size: 0.98rem;
+  }
+  .trust-list :global(svg) {
+    width: 1.15em;
+    height: 1.15em;
+    color: var(--cpr-red);
+  }
+
+  /* Services */
+  .services {
+    padding: 4rem 0;
+  }
+  .services h2,
+  .local h2,
+  .reviews h2,
+  .how h2,
+  .faq h2 {
+    font-size: clamp(1.6rem, 3.5vw, 2.3rem);
+    color: var(--cpr-navy);
+    margin: 0 0 1.75rem;
+    text-align: center;
+  }
+  .services-grid {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  }
+  .service-card {
+    background: #fff;
+    border: 1px solid rgba(18, 51, 30, 0.12);
+    border-radius: 14px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 10px rgba(12, 34, 20, 0.05);
+  }
+  .service-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: rgba(47, 122, 67, 0.12);
+    margin-bottom: 0.9rem;
+  }
+  .service-icon :global(svg) {
+    width: 1.6rem;
+    height: 1.6rem;
+    color: var(--cpr-red);
+  }
+  .service-card h3 {
+    margin: 0 0 0.5rem;
+    color: var(--cpr-navy);
+    font-size: 1.2rem;
+  }
+  .service-card p {
+    margin: 0;
+    color: #3a4a40;
+    line-height: 1.55;
+  }
+  .services-note {
+    text-align: center;
+    margin: 1.75rem 0 0;
+    color: #3a4a40;
+    font-style: italic;
+  }
+
+  /* Local */
+  .local {
+    padding: 4rem 0;
+    background: #f4f7f4;
+  }
+  .local h2 {
+    text-align: left;
+  }
+  .local p {
+    color: #3a4a40;
+    line-height: 1.65;
+    font-size: 1.05rem;
+    margin: 0 0 1.1rem;
+    max-width: 68ch;
+  }
+  .local-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-top: 1.5rem;
+  }
+  .local-cta .btn-ghost {
+    color: var(--cpr-navy);
+    border-color: var(--cpr-navy);
+    background: transparent;
+  }
+  .local-cta .btn-ghost:hover {
+    background: rgba(18, 51, 30, 0.08);
+  }
+
+  /* CTA band */
+  .cta-band {
+    background: var(--cpr-red);
+    color: #fff;
+    padding: 2.5rem 0;
+  }
+  .cta-band-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+  .cta-band h2 {
+    margin: 0 0 0.4rem;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    color: #fff;
+    text-align: left;
+  }
+  .cta-band p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.95);
+  }
+  .cta-band .btn-call {
+    background: #fff;
+    color: var(--cpr-red);
+  }
+
+  /* Reviews */
+  .reviews {
+    padding: 4rem 0;
+  }
+  .reviews-grid {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+  .review-card {
+    margin: 0;
+    background: #fff;
+    border: 1px solid rgba(18, 51, 30, 0.12);
+    border-radius: 14px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 10px rgba(12, 34, 20, 0.05);
+  }
+  .stars {
+    display: inline-flex;
+    gap: 0.15rem;
+    margin-bottom: 0.75rem;
+  }
+  .stars :global(svg) {
+    width: 1.1rem;
+    height: 1.1rem;
+    color: #e6a817;
+  }
+  .review-card blockquote {
+    margin: 0 0 1rem;
+    color: #3a4a40;
+    line-height: 1.6;
+  }
+  .review-card figcaption {
+    font-weight: 700;
+    color: var(--cpr-navy);
+  }
+
+  /* How it works */
+  .how {
+    padding: 4rem 0;
+    background: #f4f7f4;
+  }
+  .how-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+  .how-step {
+    text-align: center;
+    padding: 1.5rem;
+  }
+  .how-num {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 0.75rem;
+    border-radius: 50%;
+    background: var(--cpr-navy);
+    color: #fff;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .how-icon :global(svg) {
+    width: 1.8rem;
+    height: 1.8rem;
+    color: var(--cpr-red);
+  }
+  .how-step h3 {
+    margin: 0.6rem 0 0.4rem;
+    color: var(--cpr-navy);
+  }
+  .how-step p {
+    margin: 0;
+    color: #3a4a40;
+    line-height: 1.55;
+  }
+
+  /* FAQ */
+  .faq {
+    padding: 4rem 0;
+  }
+  .faq-list {
+    max-width: 800px;
+    margin: 0 auto;
+    display: grid;
+    gap: 0.75rem;
+  }
+  .faq-item {
+    border: 1px solid rgba(18, 51, 30, 0.15);
+    border-radius: 12px;
+    background: #fff;
+    padding: 0 1.25rem;
+  }
+  .faq-item summary {
+    cursor: pointer;
+    font-weight: 700;
+    color: var(--cpr-navy);
+    padding: 1.1rem 0;
+    list-style: none;
+  }
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq-item[open] summary {
+    border-bottom: 1px solid rgba(18, 51, 30, 0.12);
+  }
+  .faq-item p {
+    color: #3a4a40;
+    line-height: 1.6;
+    padding: 1rem 0;
+    margin: 0;
+  }
+
+  /* Form */
+  .form-section {
+    padding: 4rem 0;
+    background: #f4f7f4;
+  }
+
+  @media (max-width: 960px) {
+    .cta-band-inner {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

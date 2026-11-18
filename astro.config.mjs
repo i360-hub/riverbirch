@@ -12,11 +12,14 @@ export default defineConfig({
   site: SITE,
   output: 'static',
   trailingSlash: 'never',
-  // Keep thank-you (form-redirect target) and privacy out of the sitemap —
-  // matches the live site's 63-URL sitemap (both pages exist but aren't listed).
+  // Keep thank-you (form-redirect target), privacy, and the noindex PPC
+  // landing pages (/lp/*) out of the sitemap.
   integrations: [
     sitemap({
-      filter: (page) => !page.includes("/thank-you") && !page.includes("/privacy"),
+      filter: (page) =>
+        !page.includes("/thank-you") &&
+        !page.includes("/privacy") &&
+        !page.includes("/lp/"),
     }),
   ],
   markdown: {

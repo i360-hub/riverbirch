@@ -1,0 +1,45 @@
+---
+// No visual output. Drop into the site's existing /thank-you page so LP-origin
+// form submissions convert, while organic submissions (no rb_lp flag) do not.
+import { landing } from "@data/landing";
+
+const { googleAdsId, googleAdsFormLabel } = landing;
+---
+
+{
+  googleAdsId && googleAdsFormLabel && (
+    <script is:inline define:vars={{ googleAdsId, googleAdsFormLabel }}>
+      (function () {
+        try {
+          var lpFlag = sessionStorage.getItem("rb_lp");
+          if (!lpFlag) return;
+          if (!googleAdsId || !googleAdsFormLabel) return;
+
+          var fireConversion = function () {
+            if (sessionStorage.getItem("rb_conv_fired") !== "1") {
+              gtag("event", "conversion", {
+                send_to: googleAdsId + "/" + googleAdsFormLabel,
+              });
+              gtag("event", "generate_lead");
+              sessionStorage.setItem("rb_conv_fired", "1");
+            }
+            sessionStorage.removeItem("rb_lp");
+          };
+
+          var s = document.createElement("script");
+          s.async = true;
+          s.src = "https://www.googletagmanager.com/gtag/js?id=" + googleAdsId;
+          document.head.appendChild(s);
+
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag("js", new Date());
+          gtag("config", googleAdsId);
+          fireConversion();
+        } catch (e) {}
+      })();
+    </script>
+  )
+}

@@ -1,0 +1,188 @@
+---
+import "@styles/global.css";
+import { Image } from "astro:assets";
+import logo from "@assets/images/logo.png";
+import { landing } from "@data/landing";
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  town: string;
+}
+
+const { title, description, path, town } = Astro.props;
+
+const canonical = new URL(path, Astro.site).toString();
+
+// GA4 only on the production host (mirrors Analytics.astro pattern).
+const host = Astro.url.hostname;
+const isProd = host === "riverbirchtreeservice.com" || host === "www.riverbirchtreeservice.com";
+const year = new Date().getFullYear();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content="noindex,nofollow" />
+
+    <!-- Open Graph basics -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL("/og-default.jpg", Astro.site).toString()} />
+
+    {
+      isProd && (
+        <>
+          <script
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${landing.ga4Id}`}
+          />
+          <script is:inline define:vars={{ ga4Id: landing.ga4Id }}>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+              dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
+            gtag("config", ga4Id);
+          </script>
+        </>
+      )
+    }
+  </head>
+  <body>
+    <header class="lp-header">
+      <div class="lp-header__inner">
+        <div class="lp-header__brand" aria-label="River Birch Tree Service">
+          <Image src={logo} alt="River Birch Tree Service" height={56} class="lp-header__logo" />
+          <span class="lp-header__name">River Birch Tree Service</span>
+        </div>
+        <a href={landing.phoneHref} class="lp-header__call">
+          Call {landing.phoneDisplay}
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="lp-footer">
+      <div class="lp-footer__inner">
+        <p class="lp-footer__name">River Birch Tree Service LLC</p>
+        <p class="lp-footer__line">{town}, NC</p>
+        <p class="lp-footer__line">
+          <a href={landing.phoneHref}>{landing.phoneDisplay}</a>
+        </p>
+        <p class="lp-footer__line">Mon–Sat 7:00 AM – 7:00 PM</p>
+        <p class="lp-footer__line"><a href="/privacy">Privacy Policy</a></p>
+        <p class="lp-footer__copy">© {year} River Birch Tree Service LLC</p>
+      </div>
+    </footer>
+
+    <a href={landing.phoneHref} class="lp-callbar">
+      Call Now — {landing.phoneDisplay}
+    </a>
+
+    <style>
+      .lp-header {
+        background: var(--cpr-navy, #12331e);
+        color: #fff;
+        position: sticky;
+        top: 0;
+        z-index: 50;
+      }
+      .lp-header__inner {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0.5rem 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+      .lp-header__brand {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        color: #fff;
+        text-decoration: none;
+      }
+      .lp-header__logo {
+        width: auto;
+        height: 56px;
+      }
+      .lp-header__name {
+        font-weight: 700;
+        font-size: 1rem;
+        line-height: 1.1;
+      }
+      .lp-header__call {
+        background: var(--cpr-red, #2f7a43);
+        color: #fff;
+        text-decoration: none;
+        font-weight: 700;
+        padding: 0.65rem 1.1rem;
+        border-radius: 8px;
+        white-space: nowrap;
+      }
+      .lp-footer {
+        background: var(--cpr-dark, #0c2214);
+        color: #e8efe9;
+        padding: 2rem 1rem;
+        margin-top: 3rem;
+      }
+      .lp-footer__inner {
+        max-width: 1100px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      .lp-footer__name {
+        font-weight: 700;
+        margin: 0 0 0.3rem;
+      }
+      .lp-footer__line {
+        margin: 0.2rem 0;
+        font-size: 0.95rem;
+      }
+      .lp-footer a {
+        color: #fff;
+      }
+      .lp-footer__copy {
+        margin-top: 0.8rem;
+        font-size: 0.8rem;
+        opacity: 0.75;
+      }
+      .lp-callbar {
+        display: none;
+      }
+      @media (max-width: 960px) {
+        .lp-callbar {
+          display: block;
+          position: fixed;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          z-index: 60;
+          background: var(--cpr-red, #2f7a43);
+          color: #fff;
+          text-align: center;
+          font-weight: 700;
+          padding: 0.95rem 1rem;
+          text-decoration: none;
+          box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.25);
+        }
+        body {
+          padding-bottom: 3.5rem;
+        }
+      }
+    </style>
+  </body>
+</html>
