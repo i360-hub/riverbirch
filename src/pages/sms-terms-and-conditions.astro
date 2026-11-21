@@ -7,7 +7,9 @@ import { site } from "@data/site";
 
 // A2P 10DLC (customer care) terms. Three things here are load-bearing for the
 // carrier review and must not drift:
-//   • the ONLY opt-in surface is the SMS consent chat widget — never a form;
+//   • opt-in surfaces are the SMS consent box on the website estimate form
+//     and customer-initiated phone/text contact (updated 2026-11-20 for the
+//     Low Volume Mixed re-registration — the chat widget has no consent box);
 //   • no marketing/promotional language anywhere on the page;
 //   • the carrier liability disclaimer (section 7) is present.
 // Phone/email cite napPhone + the business inbox, not the call-tracking line.
@@ -18,7 +20,7 @@ const blocks = [
   { tag: "p", html: `River Birch Tree Service LLC operates a customer care text messaging program. We send messages about estimate follow-ups, appointment confirmations, scheduling changes, crew arrival times, and job status updates. We do not send marketing or promotional messages through this program.` },
 
   { tag: "h2", html: "2. How you opt in" },
-  { tag: "p", html: `You are enrolled only when you provide your phone number and check the SMS consent box in the chat widget on riverbirchtreeservice.com. Consent is not a condition of purchase. Submitting a contact or estimate request form on this site does not enroll you in text messages.` },
+  { tag: "p", html: `You are enrolled when you provide your phone number and check the SMS consent box on the estimate form at riverbirchtreeservice.com, or when you contact us by phone or text. Consent is not a condition of purchase. You must be 18 years of age or older to consent to receive text messages.` },
 
   { tag: "h2", html: "3. Message frequency" },
   { tag: "p", html: `Message frequency varies based on your interactions with us.` },
@@ -33,7 +35,7 @@ const blocks = [
   { tag: "p", html: `Reply <strong>HELP</strong> to any message for help, or contact us at <a href="${site.napPhoneHref}">${site.napPhoneDisplay}</a> or <a href="mailto:${site.email}">${site.email}</a>.` },
 
   { tag: "h2", html: "7. Carriers" },
-  { tag: "p", html: `Carriers are not liable for delayed or undelivered messages.` },
+  { tag: "p", html: `Mobile carriers are not liable for delayed or undelivered messages.` },
 
   { tag: "h2", html: "8. Privacy" },
   { tag: "p", html: `See our <a href="/privacy">Privacy Policy</a> for how we handle your information: <a href="https://riverbirchtreeservice.com/privacy">https://riverbirchtreeservice.com/privacy</a>` },
