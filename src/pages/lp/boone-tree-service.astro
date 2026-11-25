@@ -125,9 +125,9 @@ const faqs = [
           owner-operated, and backed by free on-site estimates.
         </p>
         <div class="hero-cta">
-          <a class="btn btn-call" href={landing.phoneHref}>
+          <a class="btn btn-call" href="tel:+18288188505">
             <Icon name="phone" />
-            Call {landing.phoneDisplay}
+            Call Now — Free Estimate
           </a>
           <a class="btn btn-estimate" href="#estimate">Get My Free Estimate</a>
         </div>
@@ -208,9 +208,8 @@ const faqs = [
       <div class="reviews-grid">
         {lpReviews.map((r) => (
           <article class="review-card">
-            <div class="stars" aria-label="5 out of 5 stars">
-              {[0, 1, 2, 3, 4].map(() => <Icon name="star" />)}
-            </div>
+            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p class="review-source">Google review</p>
             <p class="review-text">{r.text}</p>
             <p class="review-name">— {r.name}</p>
           </article>
@@ -219,11 +218,22 @@ const faqs = [
     </div>
   </section>
 
+  <!-- Post-reviews CTA band -->
+  <section class="cta-band cta-band-compact">
+    <div class="wrap cta-band-inner">
+      <a class="btn btn-call" href="tel:+18288188505">
+        <Icon name="phone" />
+        Call Now — Free Estimate
+      </a>
+      <a class="btn btn-estimate" href="#estimate">Get My Free Estimate</a>
+    </div>
+  </section>
+
   <!-- How it works -->
   <section class="how">
     <div class="wrap">
       <h2>How It Works</h2>
-      <ol class="how-grid">
+      <ul class="how-grid">
         {steps.map((step, i) => (
           <li class="how-step">
             <span class="how-num">{i + 1}</span>
@@ -232,7 +242,7 @@ const faqs = [
             <p>{step.body}</p>
           </li>
         ))}
-      </ol>
+      </ul>
     </div>
   </section>
 
@@ -261,6 +271,9 @@ const faqs = [
         formId={landing.formId}
         formName={landing.formName}
       />
+      <p class="form-microcopy">
+        Free on-site estimate · No obligation · We never sell your information.
+      </p>
     </div>
   </section>
 </LandingLayout>
@@ -346,6 +359,12 @@ const faqs = [
   .cta-band p {
     margin: 0;
   }
+  .cta-band-compact {
+    padding: 1.75rem 0;
+  }
+  .cta-band-compact .cta-band-inner {
+    justify-content: center;
+  }
   
 
   /* Reviews */
@@ -368,7 +387,15 @@ const faqs = [
     display: inline-flex;
     gap: 2px;
     color: #f5a623;
-    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    margin-bottom: 0.25rem;
+  }
+  .review-source {
+    margin: 0 0 0.75rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #475a4e;
   }
   .review-text {
     line-height: 1.55;
@@ -467,6 +494,12 @@ const faqs = [
   .form-section {
     padding: 3.5rem 0;
     background: #f3f6f3;
+  }
+  .form-microcopy {
+    margin: 1rem 0 0;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #475a4e;
   }
 
   @media (max-width: 600px) {

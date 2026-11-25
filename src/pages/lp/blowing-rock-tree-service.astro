@@ -114,9 +114,9 @@ const faqs = [
           on-site estimates.
         </p>
         <div class="hero-cta">
-          <a class="btn btn-call" href={landing.phoneHref}>
+          <a class="btn btn-call" href="tel:+18288188505">
             <Icon name="phone" />
-            Call {landing.phoneDisplay}
+            Call Now — Free Estimate
           </a>
           <a class="btn btn-estimate" href="#estimate">Get My Free Estimate</a>
         </div>
@@ -176,9 +176,9 @@ const faqs = [
           here.
         </p>
         <div class="local-cta">
-          <a class="btn btn-call" href={landing.phoneHref}>
+          <a class="btn btn-call" href="tel:+18288188505">
             <Icon name="phone" />
-            Call {landing.phoneDisplay}
+            Call Now — Free Estimate
           </a>
           <a class="btn btn-estimate-light" href="#estimate">Get My Free Estimate</a>
         </div>
@@ -196,9 +196,9 @@ const faqs = [
           estimates, no pressure.
         </p>
       </div>
-      <a class="btn btn-call btn-lg" href={landing.phoneHref}>
+      <a class="btn btn-call btn-lg" href="tel:+18288188505">
         <Icon name="phone" />
-        Call {landing.phoneDisplay}
+        Call Now — Free Estimate
       </a>
     </div>
   </section>
@@ -216,11 +216,32 @@ const faqs = [
                   <Icon name="star" />
                 ))}
               </div>
+              <div class="review-source">Google review</div>
               <blockquote>{r.text}</blockquote>
               <figcaption>{r.name}</figcaption>
             </figure>
           ))
         }
+      </div>
+    </div>
+  </section>
+
+  <!-- Post-reviews CTA band -->
+  <section class="cta-band">
+    <div class="container cta-band-inner">
+      <div>
+        <h2>Ready for your free estimate?</h2>
+        <p>
+          Talk to owner Ezequiel about your trees and your view. Free on-site
+          estimates, no pressure.
+        </p>
+      </div>
+      <div class="cta-band-actions">
+        <a class="btn btn-call btn-lg" href="tel:+18288188505">
+          <Icon name="phone" />
+          Call Now — Free Estimate
+        </a>
+        <a class="btn btn-estimate" href="#estimate">Get My Free Estimate</a>
       </div>
     </div>
   </section>
@@ -271,6 +292,9 @@ const faqs = [
         formId={landing.formId}
         formName={landing.formName}
       />
+      <p class="form-microcopy">
+        Free on-site estimate · No obligation · We never sell your information.
+      </p>
     </div>
   </section>
 </LandingLayout>
@@ -391,6 +415,12 @@ const faqs = [
     margin: 0;
     color: rgba(255, 255, 255, 0.95);
   }
+  .cta-band-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    align-items: center;
+  }
   
 
   /* Reviews */
@@ -419,6 +449,13 @@ const faqs = [
     width: 1.1rem;
     height: 1.1rem;
     color: #e6a817;
+  }
+  .review-source {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #5a6b60;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.02em;
   }
   .review-card blockquote {
     margin: 0 0 1rem;
@@ -511,6 +548,12 @@ const faqs = [
   .form-section {
     padding: 4rem 0;
     background: #f4f7f4;
+  }
+  .form-microcopy {
+    text-align: center;
+    margin: 1rem 0 0;
+    color: #5a6b60;
+    font-size: 0.9rem;
   }
 
   @media (max-width: 960px) {
